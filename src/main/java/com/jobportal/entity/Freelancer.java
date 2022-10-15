@@ -17,7 +17,7 @@ public class Freelancer
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
-	private Long id;
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String password;
@@ -43,7 +43,7 @@ public class Freelancer
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Freelancer(Long id, String firstName, String lastName, String password, List<JobApplication> appliedJobs,
+	public Freelancer(int id, String firstName, String lastName, String password, List<JobApplication> appliedJobs,
 			List<Feedback> feedbacks, List<SkillExperience> skills, List<BookmarkedJob> bookmarkedJobs) {
 		super();
 		this.id = id;
@@ -57,10 +57,10 @@ public class Freelancer
 	}
 
 	// defining the getter and setter methods
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getFirstName() {

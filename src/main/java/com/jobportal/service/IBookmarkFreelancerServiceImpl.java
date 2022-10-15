@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.jobportal.dto.BookmarkedFreelancerDTO;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.RecruiterDTO;
+import com.jobportal.dto.SkillDTO;
 import com.jobportal.entity.BookmarkedFreelancer;
 import com.jobportal.entity.Skill;
 import com.jobportal.exception.JobPortalException;
@@ -21,13 +22,14 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 	
 	@Override
 	public BookmarkedFreelancerDTO bookmarkFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO,
-			RecruiterDTO recruiterDTO) throws Exception {
+			RecruiterDTO recruiterDTO) throws JobPortalException {
+				return null;
 		
 	}
 
 	@Override
 	public List<BookmarkedFreelancerDTO> findBookmarkedFreelancerBySkill(SkillDTO skillDTO, RecruiterDTO recruiterDTO)
-			throws Exception {
+			throws JobPortalException {
 		
 		for(BookmarkedFreelancer)
 	}
