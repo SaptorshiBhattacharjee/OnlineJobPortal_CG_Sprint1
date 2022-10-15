@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.entity.Admin;
+import com.jobportal.exception.JobPortalException;
 import com.jobportal.repository.IAdminDao;
 import com.jobportal.service.IAdminService;
 @Service(value="iAdminService")
@@ -23,7 +24,7 @@ public class IAdminServiceImpl implements IAdminService{
 	
 	
 	@Override
-	public AdminDTO save(AdminDTO adminDTO) throws Exception {
+	public AdminDTO save(AdminDTO adminDTO) throws JobPortalException {
 		
 		Admin admin = new Admin();
 		admin.setFirstName(adminDTO.getFirstName());
@@ -36,7 +37,7 @@ public class IAdminServiceImpl implements IAdminService{
 	@Override
 	public AdminDTO update(AdminDTO adminDTO) throws Exception{
 		Optional<Admin> optional = iAdminDao.findById(adminDTO.getId());
-		Admin admin1 = optional.orElseThrow(() -> new Exception("Service.ADMIN_NOT_FOUND"));
+		Admin admin1 = optional.orElseThrow(() -> new JobPortalException("Service.ADMIN_NOT_FOUND"));
 		admin1.setFirstName(adminDTO.getFirstName());
 		admin1.setLastName(adminDTO.getLastName());
 		admin1.setPassword(adminDTO.getPassword());
@@ -46,7 +47,7 @@ public class IAdminServiceImpl implements IAdminService{
 	@Override
 	public AdminDTO findById(int Id) throws Exception{
 		Optional<Admin> optional = iAdminDao.findById(Id);
-		Admin admin = optional.orElseThrow(() -> new Exception("Service.ADMIN_NOT_FOUND"));
+		Admin admin = optional.orElseThrow(() -> new JobPortalException("Service.ADMIN_NOT_FOUND"));
 		AdminDTO adminDTO = new AdminDTO();
 		adminDTO.setId(admin.getId());
 		adminDTO.setFirstName(admin.getFirstName());
