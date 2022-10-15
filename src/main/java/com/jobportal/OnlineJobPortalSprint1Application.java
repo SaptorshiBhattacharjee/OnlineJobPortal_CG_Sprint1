@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class OnlineJobPortalSprint1Application {
 
+	// Comment from Karthik
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineJobPortalSprint1Application.class, args);
 	}
