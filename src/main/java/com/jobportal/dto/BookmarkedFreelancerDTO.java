@@ -1,6 +1,7 @@
 package com.jobportal.dto;
 
 import com.jobportal.entity.Freelancer;
+
 import com.jobportal.entity.Recruiter;
 import com.jobportal.entity.Skill;
 
