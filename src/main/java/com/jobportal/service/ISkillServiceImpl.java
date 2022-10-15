@@ -36,8 +36,7 @@ public class ISkillServiceImpl implements ISkillService{
 		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
 		Skill skill1 = optional.orElseThrow(() -> new JobPortalException("Service.ADMIN_NOT_FOUND"));
 		skill1.setName(skillDTO.getName());
-		skill1.setDescription(skillDTO.getDescription());
-		
+		skill1.setDescription(skillDTO.getDescription());		
 		return skillDTO;
 	}
 		
