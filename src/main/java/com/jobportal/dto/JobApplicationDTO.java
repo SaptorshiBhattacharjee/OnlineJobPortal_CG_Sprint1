@@ -28,7 +28,7 @@ public class JobApplicationDTO {
 		return id;
 	}
 	public void setId(int id) {
-		id = id;
+		this.id = id;
 	}
 	public Job getJob() {
 		return job;
