@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobApplicationDTO;
+import com.jobportal.dto.JobDTO;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IJobApplicationService;
