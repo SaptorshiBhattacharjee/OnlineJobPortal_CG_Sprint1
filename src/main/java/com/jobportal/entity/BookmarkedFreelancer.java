@@ -24,6 +24,10 @@ public class BookmarkedFreelancer {
 	@JoinColumn(name = "recruiter_id", unique = true)
 	private Recruiter bookmarkedBy;
 	
+	public BookmarkedFreelancer() {
+		super();
+	}
+	
 	public BookmarkedFreelancer(long id, Recruiter bookmarkedBy, Skill skill, Freelancer freelancer) {
 		super();
 		this.id = id;
