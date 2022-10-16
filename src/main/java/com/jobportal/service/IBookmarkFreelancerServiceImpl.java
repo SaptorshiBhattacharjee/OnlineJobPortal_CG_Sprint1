@@ -36,6 +36,7 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 	public void removeBookmarkedFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO)
 			throws JobPortalException {
 		
+		
 		Integer count = iBookmarkedFreelancerDao.removeBookmarkedFreelancer(freelancerDTO.getId(), skillDTO.getId(), recruiterDTO.getId());
 		if(count == 0) {
 			throw new JobPortalException("Service.NOT_FOUND");

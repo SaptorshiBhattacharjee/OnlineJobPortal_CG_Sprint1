@@ -21,6 +21,11 @@ public interface IBookmarkedFreelancerDao extends CrudRepository<BookmarkedFreel
 	@Modifying
 	@Transactional
 	Integer removeBookmarkedFreelancer(@Param("freelancer") Freelancer freelancer,@Param("skill") Skill skill, @Param("recruiter") Recruiter recruiter);
+
+	@Query("SELECT bf FROM BookmarkedFreelancer bf WHERE bf.skill = :skill")
+	String findBookmarkedFreelancerBySkill(@Param("skill") String skill);
+	
+	
 }
 
 
