@@ -5,6 +5,7 @@ import java.util.List;
 import com.jobportal.dto.BookmarkedFreelancerDTO;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.RecruiterDTO;
+import com.jobportal.dto.SkillDTO;
 import com.jobportal.exception.JobPortalException;
 
 
