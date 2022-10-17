@@ -62,17 +62,14 @@ public class JobDTO {
 		this.active = active;
 	}
 	
-	@Override
+	
+	
+    @Override
 	public String toString() {
-<<<<<<< HEAD
 		return "JobDTO [id=" + id + ", skill=" + skill + ", postedBy=" + postedBy + ", postedDate=" + postedDate
-=======
-		return "job [id=" + id + ", skill=" + skill + ", postedBy=" + postedBy + ", postedDate=" + postedDate
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 				+ ", awardedTo=" + awardedTo + ", jobApplications=" + jobApplications + ", active=" + active + "]";
 	}
-	
-//	public Job toJob() {
+	//	public Job toJob() {
 //		Job j = new Job();
 //		
 //		return j;
