@@ -2,6 +2,7 @@ package com.jobportal.utility;
 
 import java.time.LocalDateTime;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.jobportal.exception.JobPortalException;
+import com.jobportal.exception.InvalidAdminException;
+import com.jobportal.exception.InvalidBookmarkedFreelancerException;
+import com.jobportal.exception.InvalidJobApplicationException;
+
 
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
@@ -26,8 +30,25 @@ public class ExceptionControllerAdvice {
 		return new ResponseEntity<ErrorInfo>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ExceptionHandler(JobPortalException.class)
-	public ResponseEntity<ErrorInfo> infyBankExceptionHandler(JobPortalException exception) {
+	@ExceptionHandler(InvalidAdminException.class)
+	public ResponseEntity<ErrorInfo> JobPortalExceptionHandler(InvalidAdminException exception) {
+		ErrorInfo error = new ErrorInfo();
+		error.setErrorMessage(environment.getProperty(exception.getMessage()));
+		error.setTimestamp(LocalDateTime.now());
+		error.setErrorCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ErrorInfo>(error, HttpStatus.NOT_FOUND); 
+	}
+		
+	@ExceptionHandler(InvalidJobApplicationException.class)
+	public ResponseEntity<ErrorInfo> JobPortalExceptionHandler(InvalidJobApplicationException exception) {
+		ErrorInfo error = new ErrorInfo();
+		error.setErrorMessage(environment.getProperty(exception.getMessage()));
+		error.setTimestamp(LocalDateTime.now());
+		error.setErrorCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ErrorInfo>(error, HttpStatus.NOT_FOUND);
+	}		
+	@ExceptionHandler(InvalidBookmarkedFreelancerException.class)
+	public ResponseEntity<ErrorInfo> JobPortalExceptionHandler(InvalidBookmarkedFreelancerException exception) {
 		ErrorInfo error = new ErrorInfo();
 		error.setErrorMessage(environment.getProperty(exception.getMessage()));
 		error.setTimestamp(LocalDateTime.now());
