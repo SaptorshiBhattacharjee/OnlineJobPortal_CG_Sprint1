@@ -24,17 +24,17 @@ public class ISkillServiceImpl implements ISkillService{
 	
 	@Override
 	public SkillDTO save(SkillDTO skillDTO) throws Exception {
-		Skill skill = new Skill();
-		skill.setName(skillDTO.getName());
-		skill.setDescription(skillDTO.getDescription());		
+		Skill skill = new Skill();		
+		skillDTO.setName(skillDTO.getName());
+		skillDTO.setDescription(skillDTO.getDescription());		
 		iSkillDao.save(skill);
 		return skillDTO;
 	}
 	
 	@Override
-	public SkillDTO update(SkillDTO skillDTO) throws Exception{
+	public SkillDTO update(SkillDTO skillDTO) throws Exception{	
 		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
-		Skill skill1 = optional.orElseThrow(() -> new JobPortalException("Service.ADMIN_NOT_FOUND"));
+		Skill skill1 = optional.orElseThrow(() -> new JobPortalException("Service.ADMIN_NOT_FOUND"));	
 		skill1.setName(skillDTO.getName());
 		skill1.setDescription(skillDTO.getDescription());		
 		return skillDTO;

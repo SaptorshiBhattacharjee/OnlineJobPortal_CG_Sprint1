@@ -52,7 +52,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		if(count > 0) {
 			throw new JobPortalException("Service.ALREADY_APPLIED");
 		}
-		
+			
 		JobApplication jobApplication = new JobApplication();
 		jobApplication.setCoverLetter(coverletter);
 		jobApplication.setJob(job);
@@ -142,8 +142,6 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		iJobApplicationDao.delete(jobApplication);
 	}
 	
-	
-
 	@Override
 	public JobApplicationDTO findById(int id) throws JobPortalException {
 		Optional<JobApplication> optional = iJobApplicationDao.findById(id);
@@ -157,11 +155,6 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		return jobApplicationDTO;
 		
 	}
-
-	
-
-
-
 }
 
 
