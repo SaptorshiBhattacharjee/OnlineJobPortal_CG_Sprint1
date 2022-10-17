@@ -35,23 +35,12 @@ public class IJobServiceImpl implements IJobService{
 		skill.setId(skillDTO.getId());
 		Recruiter recruit = new Recruiter();
 		recruit.setId(recruiterDTO.getId());
-		
 		Job job = new Job();
-		Freelancer freelancer = new Freelancer ();
-		JobApplication jobapplication = new JobApplication ();
-		
-//		job.setSkill(skill);
-//		job.setPostedBy(recruit);
-//		job.setPostedDate(LocalDate.now());
-//        job.setAwardedTo(freelancer);
-//        job.setActive(true);
-//        job.setJobApplications();
-        
-        JobDTO jobdto = new JobDTO();
+		JobDTO jobdto = new JobDTO();
         List<JobApplication> jobApplications = jobdto.getJobApplications();
         FreelancerDTO freelancerdto = new FreelancerDTO ();
         jobdto.setId(job.getId());
-        jobdto.setSkill(skill);//
+        jobdto.setSkill(skill);
 		jobdto.setPostedBy(recruiterDTO);
 		jobdto.setPostedDate(LocalDate.now());
         jobdto.setAwardedTo(freelancerdto);
@@ -59,13 +48,7 @@ public class IJobServiceImpl implements IJobService{
         jobdto.setJobApplications(jobApplications);
         return jobdto;
         
-//	SkillDTO sk =	jobDto.getSkill();
-//	Skill sc =new Skill(); 
-//	sc.setDescription(sk.getDescription());
-//	sc.setId(sk.getId());
-//	sc.setName(sk.getName());
-//	j.setSkill(sc);
-	
+
 	
 	
 		
@@ -79,9 +62,8 @@ public class IJobServiceImpl implements IJobService{
 		Job job = optional.orElseThrow(() -> new JobPortalException("Service.NO_SUCH_JOB"));
 		
 		JobDTO jobDto = new JobDTO();
-		
 		jobDto.setId(job.getId());
-		jobDto.setSkill(job.getSkill()); // which we need to use skilldto or skill
+		jobDto.setSkill(job.getSkill()); 
 		jobDto.setActive(job.getActive());
 		jobDto.setAwardedTo(jobDto.getAwardedTo());
 		jobDto.setPostedDate(job.getPostedDate());
@@ -95,13 +77,9 @@ public class IJobServiceImpl implements IJobService{
 	public List<JobDTO> findJobsBySkill(SkillDTO skillDTO) throws JobPortalException {
 		Skill skill = new Skill();
 		Recruiter recruiter = new Recruiter();
-
-		skill.setId(skillDTO.getId());
+        skill.setId(skillDTO.getId());
 		skill.setName(skillDTO.getName());
 		skill.setDescription(skillDTO.getDescription());
-		
-		
-		
 		List<Job> JobBySkill = iJobDao.findJobBySkill(skill);
 		List<JobDTO> JobDTOBySkill = new ArrayList<>();
 		
@@ -118,15 +96,7 @@ public class IJobServiceImpl implements IJobService{
 			JobDTOBySkill.add(jobDTO);
 		}
 		return JobDTOBySkill;
-		
-		
-		
-		
-
-		
-		
-		
-		
+	
 	}
 
 	@Override
