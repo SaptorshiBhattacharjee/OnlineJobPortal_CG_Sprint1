@@ -15,6 +15,7 @@ import com.jobportal.dto.RecruiterDTO;
 import com.jobportal.entity.Feedback;
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Recruiter;
+import com.jobportal.exception.InvalidFeedbackException;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.repository.IFeedbackDao;
 import com.jobportal.repository.IFreelancerDao;
@@ -34,7 +35,7 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 
 	@Override
 	public FeedbackDTO createFeedback(RecruiterDTO recruiterDTO, FreelancerDTO freelancerDTO, int rating, String review)
-			throws JobPortalException {	
+			throws InvalidFeedbackException {	
 		Feedback feedback = new Feedback();
 		FeedbackDTO feedbackDTO = new FeedbackDTO();
 		Recruiter recruiter = new Recruiter();
@@ -59,10 +60,10 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 	}
 
 	@Override
-	public int averageRating(FreelancerDTO freelancerDTO) throws JobPortalException {
+	public int averageRating(FreelancerDTO freelancerDTO) throws InvalidFeedbackException {
 		Optional<Feedback> optional = ifeedbackDao.findById(freelancerDTO.getId());
 		List<Integer> ratings= new ArrayList<Integer>();
-		Feedback feedback = optional.orElseThrow(()->new JobPortalException("Service.NO_RATINGS_AVAILABLE"));
+		Feedback feedback = optional.orElseThrow(()->new InvalidFeedbackException("Service.NO_RATINGS_AVAILABLE"));
 		ratings.add(feedback.getRating());
 		int sum = 0;
 		for(int i=0;i<ratings.size();i++) {
@@ -73,9 +74,9 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 }
 
 	@Override
-	public List<FeedbackDTO> findFeedbacksByFreelancer(FreelancerDTO freelancerDTO) throws JobPortalException {
+	public List<FeedbackDTO> findFeedbacksByFreelancer(FreelancerDTO freelancerDTO) throws InvalidFeedbackException {
 		Optional<Freelancer> optional = ifreelancerDao.findById(freelancerDTO.getId());
-		Freelancer freelancer = optional.orElseThrow(()->new JobPortalException("Service.NO_FEEDBACKS_FOR_THIS_FREELANCER"));
+		Freelancer freelancer = optional.orElseThrow(()->new InvalidFeedbackException("Service.NO_FEEDBACKS_FOR_THIS_FREELANCER"));
 		freelancer.setId(freelancerDTO.getId());
 		List<Feedback> feedbackByFreelancer = ifeedbackDao.findFeedbacksByFreelancer(freelancer);
 		List<FeedbackDTO> feedbackByFreelancerDTO = new ArrayList<>();
