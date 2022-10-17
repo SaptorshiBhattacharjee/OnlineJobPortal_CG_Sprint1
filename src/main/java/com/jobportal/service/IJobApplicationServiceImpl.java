@@ -137,7 +137,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 	@Override
 	public JobApplicationDTO findById(int id) throws InvalidJobApplicationException {
 		Optional<JobApplication> optional = iJobApplicationDao.findById(id);
-		JobApplication jobApplication = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NO_SUCH_JOB_APPLICATION"));
+		JobApplication jobApplication = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NOTAPPLIED"));
 		
 		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
 		return jobApplicationDTO;
