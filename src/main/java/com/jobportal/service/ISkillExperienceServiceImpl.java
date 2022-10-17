@@ -25,7 +25,7 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 
 	
 	@Override			
-	public SkillExperienceDTO addSkillExperience(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception{
+	public SkillExperienceDTO addSkill(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception{
 		Skill skill = new Skill();
 		skill.setId(skillDTO.getId());	
 		Freelancer freelancer = new Freelancer();
@@ -59,11 +59,11 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 	}
 	
 	@Override
-	public SkillExperienceDTO updateSkillExperience(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception{		
+	public SkillExperienceDTO updateSkillYears(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception{		
 		Skill skill = new Skill();
-		skill.setId(skillDTO.getId());	
-		Freelancer freelancer = new Freelancer();
-		freelancer.setId(freelancerDTO.getId());
+	skill.setId(skillDTO.getId());	
+	Freelancer freelancer = new Freelancer();
+	freelancer.setId(freelancerDTO.getId());
 		List<SkillExperience> skills=freelancerDTO.getSkills();
 		
 		int idskill = 0;;
@@ -89,7 +89,22 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 		skillExperienceDTO.setSkill(skill);
 		skillExperienceDTO.setYears(skillExperience.getYears());	
 		skillExperienceDTO.setFreelancer(freelancer);
-
 		return skillExperienceDTO;
-	}	
-}
+	}
+		
+}		
+		
+		
+		
+//		if (iSkillExperienceDao.existsById(skillDTO.getId())) {
+//		SkillExperience skillExperience = iSkillExperienceDao.findBySkillIdAndFreelancerId(skillDTO.getId(), freelancerDTO.getId());
+//		skillExperience.setYears(ExperienceYears);
+//		iSkillExperienceDao.save(skillExperience);
+//		
+//		SkillExperienceDTO skillExperienceDTO;
+//		skillExperienceDTO.setYears(ExperienceYears);
+//		iSkillExperienceDao.save(skillExperience);
+//		return skillExperienceDTO;
+//	} else
+//		throw new Exception("Service.ALREADY_UPDATED");		
+
