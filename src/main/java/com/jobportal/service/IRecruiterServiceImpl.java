@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.jobportal.dto.RecruiterDTO;
 import com.jobportal.entity.Recruiter;
+import com.jobportal.exception.InvalidRecruiterException;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.repository.IRecruiterDao;
 
@@ -21,7 +22,7 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 	IRecruiterDao irecruiterDao;
 	
 	@Override
-	public RecruiterDTO save(RecruiterDTO recruiterDTO) throws JobPortalException {
+	public RecruiterDTO save(RecruiterDTO recruiterDTO) throws InvalidRecruiterException {
 		Recruiter recruiter = new Recruiter();
 		recruiter.setFirstName(recruiterDTO.getFirstName());
 		recruiter.setLastName(recruiterDTO.getLastName());
@@ -33,15 +34,15 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 			return recruiterDTO;
 		}
 		else {
-			throw new JobPortalException("Service.RECRUITER_ALREADY_EXISTS");
+			throw new InvalidRecruiterException("Service.RECRUITER_ALREADY_EXISTS");
 		}
 		
 		
 	}
 	@Override
-	public RecruiterDTO findById(Integer id) throws JobPortalException{
+	public RecruiterDTO findById(Integer id) throws InvalidRecruiterException{
 		Optional<Recruiter> optional = irecruiterDao.findById(id);
-		Recruiter recruiter = optional.orElseThrow(() -> new JobPortalException("Service.RECRUITER_NOT_FOUND"));
+		Recruiter recruiter = optional.orElseThrow(() -> new InvalidRecruiterException("Service.RECRUITER_NOT_FOUND_WITH_ID"));
 		RecruiterDTO recruiterDTO = new RecruiterDTO();
 		recruiterDTO.setId(recruiter.getId());
 		recruiterDTO.setFirstName(recruiter.getFirstName());
@@ -53,9 +54,9 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 		
 	}
 	@Override
-	public RecruiterDTO update(RecruiterDTO recruiterDTO) throws JobPortalException{
+	public RecruiterDTO update(RecruiterDTO recruiterDTO) throws InvalidRecruiterException{
 		Optional<Recruiter> optional = irecruiterDao.findById(recruiterDTO.getId());
-		Recruiter recruiter1 = optional.orElseThrow(() -> new JobPortalException("Service.RECRUITER_NOT_FOUND"));
+		Recruiter recruiter1 = optional.orElseThrow(() -> new InvalidRecruiterException("Service.RECRUITER_NOT_FOUND"));
 		recruiter1.setFirstName(recruiterDTO.getFirstName());
 		recruiter1.setLastName(recruiterDTO.getLastName());
 		recruiter1.setFeedbacks(recruiterDTO.getFeedbacks());
