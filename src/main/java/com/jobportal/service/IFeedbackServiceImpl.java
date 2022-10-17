@@ -74,7 +74,8 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 
 	@Override
 	public List<FeedbackDTO> findFeedbacksByFreelancer(FreelancerDTO freelancerDTO) throws JobPortalException {
-		Freelancer freelancer = new Freelancer();
+		Optional<Freelancer> optional = ifreelancerDao.findById(freelancerDTO.getId());
+		Freelancer freelancer = optional.orElseThrow(()->new JobPortalException("Service.NO_FEEDBACKS_FOR_THIS_FREELANCER"));
 		freelancer.setId(freelancerDTO.getId());
 		List<Feedback> feedbackByFreelancer = ifeedbackDao.findFeedbacksByFreelancer(freelancer);
 		List<FeedbackDTO> feedbackByFreelancerDTO = new ArrayList<>();

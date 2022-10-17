@@ -18,6 +18,7 @@ import com.jobportal.dto.AdminDTO;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobApplicationDTO;
 import com.jobportal.dto.JobDTO;
+import com.jobportal.exception.InvalidJobApplicationException;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IJobApplicationService;
@@ -33,21 +34,21 @@ public class JobApplicationAPI {
 	Environment environment;
 	
 	@PostMapping(value="/applytojob")
-	public ResponseEntity<String> applyToJob(@RequestBody JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws JobPortalException{
+	public ResponseEntity<String> applyToJob(@RequestBody JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws JobPortalException, InvalidJobApplicationException{
 		JobApplicationDTO Applied = iJobApplicationService.applyToJob(jobDTO, coverLetter, freelancerDTO);
 		String successMessage = environment.getProperty("API.APPLIED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 
 	@PutMapping(value="/updatejobapplication")
-	public ResponseEntity<String> updateJobApplication(@RequestBody JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws JobPortalException{
+	public ResponseEntity<String> updateJobApplication(@RequestBody JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws JobPortalException, InvalidJobApplicationException{
 		JobApplicationDTO updateTo = iJobApplicationService.updateJobApplication(jobDTO, coverLetter, freelancerDTO);
 		String successMessage = environment.getProperty("API.UPDATED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value="/delete")
-	public ResponseEntity<String> remove(@RequestBody JobDTO jobDTO, FreelancerDTO freelancerDTO) throws JobPortalException{
+	public ResponseEntity<String> remove(@RequestBody JobDTO jobDTO, FreelancerDTO freelancerDTO) throws JobPortalException, InvalidJobApplicationException{
 		iJobApplicationService.remove(jobDTO, freelancerDTO);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);

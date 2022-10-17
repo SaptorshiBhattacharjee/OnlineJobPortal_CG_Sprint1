@@ -14,8 +14,7 @@ import com.jobportal.repository.IFreelancerDao;
 
 @Service(value = "iFreelancerService")
 @Transactional
-public class IFreelancerServiceImpl implements IFreelancerService
-{
+public class IFreelancerServiceImpl implements IFreelancerService{
 	@Autowired
 	IFreelancerDao ifreelancerDao;
 	
