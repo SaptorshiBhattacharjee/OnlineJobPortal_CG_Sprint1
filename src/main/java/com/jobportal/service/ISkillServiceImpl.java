@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.jobportal.dto.SkillDTO;
 import com.jobportal.entity.Skill;
-import com.jobportal.exception.JobPortalException;
+import com.jobportal.exception.InvalidSkillException;
 import com.jobportal.repository.ISkillDao;
 
 @Service(value="iSkillService")
@@ -22,7 +22,7 @@ public class ISkillServiceImpl implements ISkillService{
 	SkillDTO skillDTO;
 	
 	@Override
-	public SkillDTO save(SkillDTO skillDTO) throws Exception {
+	public SkillDTO save(SkillDTO skillDTO) throws InvalidSkillException {
 		Skill skill = new Skill();		
 		skillDTO.setName(skillDTO.getName());
 		skillDTO.setDescription(skillDTO.getDescription());		
@@ -31,21 +31,22 @@ public class ISkillServiceImpl implements ISkillService{
 	}
 	
 	@Override
-	public SkillDTO update(SkillDTO skillDTO) throws Exception{	
+	public SkillDTO update(SkillDTO skillDTO) throws InvalidSkillException{	
 		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
-		Skill skill1 = optional.orElseThrow(() -> new JobPortalException("Service.ADMIN_NOT_FOUND"));	
+		Skill skill1 = optional.orElseThrow(() -> new InvalidSkillException("CANNOT BE UPDATED:INVALID SKILLID"));	
 		skill1.setName(skillDTO.getName());
 		skill1.setDescription(skillDTO.getDescription());		
 		return skillDTO;
 	}
 		
 	@Override
-	public void remove(SkillDTO skillDTO) throws Exception{
+	public void remove(SkillDTO skillDTO) throws InvalidSkillException{
 		Skill skill = new Skill();
 		skill.setId(skill.getId());
 		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
-		Skill skill1 = optional.orElseThrow(() -> new Exception("Service.ADMIN_NOT_FOUND"));
+		Skill skill1 = optional.orElseThrow(() -> new InvalidSkillException("INVALID SKILLID"));
 		iSkillDao.delete(skill1);
+		
 		
 //		if (iSkillDao.existsById(skillDTO.getId()))
 //		{
