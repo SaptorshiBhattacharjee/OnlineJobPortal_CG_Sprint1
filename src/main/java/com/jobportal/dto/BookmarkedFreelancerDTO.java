@@ -1,12 +1,13 @@
 package com.jobportal.dto;
 
+import com.jobportal.entity.BookmarkedFreelancer;
 import com.jobportal.entity.Freelancer;
 
 import com.jobportal.entity.Recruiter;
 import com.jobportal.entity.Skill;
 
 public class BookmarkedFreelancerDTO {
-	private long id;
+	private int id;
 	private Skill skill;
 	private Freelancer freelancer;
 	private Recruiter bookmarkedBy;
@@ -19,7 +20,7 @@ public class BookmarkedFreelancerDTO {
 	}
 	
 	
-	public BookmarkedFreelancerDTO(long id, Skill skill, Freelancer freelancer, Recruiter bookmarkedBy) {
+	public BookmarkedFreelancerDTO(int id, Skill skill, Freelancer freelancer, Recruiter bookmarkedBy) {
 		super();
 		this.id = id;
 		this.skill = skill;
@@ -28,10 +29,10 @@ public class BookmarkedFreelancerDTO {
 	}
 
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public Skill getSkill() {
@@ -60,7 +61,14 @@ public class BookmarkedFreelancerDTO {
 				+ ", bookmarkedBy=" + bookmarkedBy + "]";
 	}
 	
-	
+	public BookmarkedFreelancer toBookmarkedFreelancer() {
+		BookmarkedFreelancer bookmarkedFreelancer = new BookmarkedFreelancer();
+		bookmarkedFreelancer.setId(this.getId());
+		bookmarkedFreelancer.setBookmarkedBy(this.bookmarkedBy);
+		bookmarkedFreelancer.setFreelancer(this.freelancer);
+		bookmarkedFreelancer.setSkill(this.getSkill());
+		return bookmarkedFreelancer;
+	}
 	
 
 }

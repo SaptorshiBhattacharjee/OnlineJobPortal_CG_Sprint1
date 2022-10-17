@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.jobportal.dto.JobApplicationDTO;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -84,6 +87,13 @@ public class JobApplication {
 				+ coverLetter + "]";
 	}
 	
-	
+	public JobApplicationDTO toJobApplicationDTO() {
+		JobApplicationDTO jobApplicationDTO = new JobApplicationDTO();
+		jobApplicationDTO.setId(this.id);
+		jobApplicationDTO.setJob(this.job);
+		jobApplicationDTO.setAppliedDate(this.appliedDate);
+		jobApplicationDTO.setCoverLetter(this.coverLetter);
+		return jobApplicationDTO;
+	}
 	
 }

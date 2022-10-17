@@ -6,14 +6,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import com.jobportal.dto.AdminDTO;
 
 @Entity
 public class Admin {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@NotNull(message = "Firstname should not be empty")
 	private String firstName;
+	@NotNull(message ="Lastname should not be empty")
 	private String lastName;
+	@NotNull(message ="Entering password is mandatory")
 	private String password;
 	
 	public Admin() {
@@ -72,5 +78,12 @@ public class Admin {
 		Admin other = (Admin) obj;
 		return Objects.equals(id, other.id) && Objects.equals(firstName, other.firstName)
 				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password);
+	}
+	public AdminDTO toAdminDTO() {
+		AdminDTO adminDTO = new AdminDTO();
+		adminDTO.setFirstName(this.firstName);
+		adminDTO.setLastName(this.lastName);
+		adminDTO.setPassword(this.password);
+		return adminDTO;
 	}
 }

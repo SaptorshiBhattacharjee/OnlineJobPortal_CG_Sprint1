@@ -1,6 +1,7 @@
 package com.jobportal.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ import com.jobportal.entity.BookmarkedFreelancer;
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Recruiter;
 import com.jobportal.entity.Skill;
-import com.jobportal.exception.JobPortalException;
+import com.jobportal.exception.InvalidBookmarkedFreelancerException;
 import com.jobportal.repository.IBookmarkedFreelancerDao;
 
 @Service(value="iBookmarkFreelancerService")
@@ -29,7 +30,7 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 	
 	@Override
 	public BookmarkedFreelancerDTO bookmarkFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO,
-			RecruiterDTO recruiterDTO) throws JobPortalException {
+			RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException {
 		BookmarkedFreelancer bookmarkedFreelancer = new BookmarkedFreelancer();
 		Freelancer freelancer = new Freelancer();
 		Skill skill = new Skill();
@@ -69,7 +70,7 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 
 	@Override
 	public List<BookmarkedFreelancerDTO> findBookmarkedFreelancerBySkill(SkillDTO skillDTO, RecruiterDTO recruiterDTO)
-			throws JobPortalException {
+			throws InvalidBookmarkedFreelancerException {
 		Skill skill = new Skill();
 		Recruiter recruiter = new Recruiter();
 
@@ -102,7 +103,7 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 
 	@Override
 	public void removeBookmarkedFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO)
-			throws JobPortalException {
+			throws InvalidBookmarkedFreelancerException {
 		Freelancer freelancer = new Freelancer();
 		Skill skill = new Skill();
 		Recruiter recruiter = new Recruiter();
@@ -130,7 +131,7 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 		
 		Integer count = iBookmarkedFreelancerDao.removeBookmarkedFreelancer(freelancer, skill, recruiter);
 		if(count == 0) {
-			throw new JobPortalException("Service.NOT_FOUND");
+			throw new InvalidBookmarkedFreelancerException("Service.NOT_FOUND");
 		}
 		else {
 			
@@ -139,9 +140,9 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 	}
 
 	@Override
-	public BookmarkedFreelancerDTO findById(int id) throws JobPortalException {
+	public BookmarkedFreelancerDTO findById(int id) throws InvalidBookmarkedFreelancerException {
 		Optional<BookmarkedFreelancer> optional = iBookmarkedFreelancerDao.findById(id);
-		BookmarkedFreelancer bookmarkedFreelancer = optional.orElseThrow(() -> new JobPortalException("Service.NOT_FOUND") );
+		BookmarkedFreelancer bookmarkedFreelancer = optional.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NOT_FOUND") );
 		
 		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = new BookmarkedFreelancerDTO();
 		bookmarkedFreelancerDTO.setBookmarkedBy(bookmarkedFreelancerDTO.getBookmarkedBy());

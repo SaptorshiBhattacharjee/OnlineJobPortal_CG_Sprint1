@@ -8,11 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.jobportal.dto.BookmarkedFreelancerDTO;
+
 @Entity
 public class BookmarkedFreelancer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private int id;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "skill_id", unique = true)
 	private Skill skill;
@@ -28,17 +30,17 @@ public class BookmarkedFreelancer {
 		super();
 	}
 	
-	public BookmarkedFreelancer(long id, Recruiter bookmarkedBy, Skill skill, Freelancer freelancer) {
+	public BookmarkedFreelancer(int id, Recruiter bookmarkedBy, Skill skill, Freelancer freelancer) {
 		super();
 		this.id = id;
 		this.skill = skill;
 		this.freelancer = freelancer;
 		this.bookmarkedBy = bookmarkedBy;
 	}
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public Skill getSkill() {
@@ -60,6 +62,14 @@ public class BookmarkedFreelancer {
 		this.bookmarkedBy = bookmarkedBy;
 	}
 	
+	public BookmarkedFreelancerDTO toBookmarkedFreelancer() {
+		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = new BookmarkedFreelancerDTO();
+		bookmarkedFreelancerDTO.setId(this.getId());
+		bookmarkedFreelancerDTO.setBookmarkedBy(this.bookmarkedBy);
+		bookmarkedFreelancerDTO.setFreelancer(this.freelancer);
+		bookmarkedFreelancerDTO.setSkill(this.getSkill());
+		return bookmarkedFreelancerDTO;
+	}
 
 }
 
