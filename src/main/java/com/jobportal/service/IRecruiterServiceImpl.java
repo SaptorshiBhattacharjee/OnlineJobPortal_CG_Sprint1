@@ -21,20 +21,25 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 	IRecruiterDao irecruiterDao;
 	
 	@Override
-	public RecruiterDTO save(RecruiterDTO recruiterDTO) throws JobPortalException{
-		
+	public RecruiterDTO save(RecruiterDTO recruiterDTO) throws JobPortalException {
 		Recruiter recruiter = new Recruiter();
 		recruiter.setFirstName(recruiterDTO.getFirstName());
 		recruiter.setLastName(recruiterDTO.getLastName());
 		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
 		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
 		recruiter.setFreelancers(recruiterDTO.getFreelancers());
-		irecruiterDao.save(recruiter);
-		return recruiterDTO;
+		if(!(recruiterDTO.getFirstName()==null || recruiterDTO.getLastName()==null ||recruiterDTO.getFeedbacks()==null ||recruiterDTO.getFreelancers()==null || recruiterDTO.getPostedJobs()==null)) {
+			irecruiterDao.save(recruiter);
+			return recruiterDTO;
+		}
+		else {
+			throw new JobPortalException("Service.RECRUITER_ALREADY_EXISTS");
+		}
+		
 		
 	}
 	@Override
-	public RecruiterDTO findById(Integer id) throws Exception{
+	public RecruiterDTO findById(Integer id) throws JobPortalException{
 		Optional<Recruiter> optional = irecruiterDao.findById(id);
 		Recruiter recruiter = optional.orElseThrow(() -> new JobPortalException("Service.RECRUITER_NOT_FOUND"));
 		RecruiterDTO recruiterDTO = new RecruiterDTO();
@@ -48,7 +53,7 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 		
 	}
 	@Override
-	public RecruiterDTO update(RecruiterDTO recruiterDTO) throws Exception{
+	public RecruiterDTO update(RecruiterDTO recruiterDTO) throws JobPortalException{
 		Optional<Recruiter> optional = irecruiterDao.findById(recruiterDTO.getId());
 		Recruiter recruiter1 = optional.orElseThrow(() -> new JobPortalException("Service.RECRUITER_NOT_FOUND"));
 		recruiter1.setFirstName(recruiterDTO.getFirstName());

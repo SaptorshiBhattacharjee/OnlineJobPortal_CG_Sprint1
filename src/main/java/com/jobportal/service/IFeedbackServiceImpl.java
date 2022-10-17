@@ -17,6 +17,7 @@ import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Recruiter;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.repository.IFeedbackDao;
+import com.jobportal.repository.IFreelancerDao;
 import com.jobportal.repository.IRecruiterDao;
 
 @Service
@@ -25,6 +26,11 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 	
 	@Autowired
 	IFeedbackDao ifeedbackDao;
+	@Autowired
+	IRecruiterDao irecruiterDao;
+
+	@Autowired
+	IFreelancerDao ifreelancerDao;
 
 	@Override
 	public FeedbackDTO createFeedback(RecruiterDTO recruiterDTO, FreelancerDTO freelancerDTO, int rating, String review)
@@ -54,24 +60,37 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 
 	@Override
 	public int averageRating(FreelancerDTO freelancerDTO) throws JobPortalException {
-		//need to add optional if require and throw exception
+		Optional<Feedback> optional = ifeedbackDao.findById(freelancerDTO.getId());
 		List<Integer> ratings= new ArrayList<Integer>();
-		Feedback feedback = new Feedback();
+		Feedback feedback = optional.orElseThrow(()->new JobPortalException("Service.NO_RATINGS_AVAILABLE"));
 		ratings.add(feedback.getRating());
 		int sum = 0;
 		for(int i=0;i<ratings.size();i++) {
 			sum=sum+i;
 		}
 		return sum/ratings.size() ;
-	}
+
+}
 
 	@Override
 	public List<FeedbackDTO> findFeedbacksByFreelancer(FreelancerDTO freelancerDTO) throws JobPortalException {
-		Optional<Feedback> optional = ifeedbackDao.findById(freelancerDTO.getId());
-		Feedback feedback = optional.orElseThrow(()->new JobPortalException("Service.NO_FEEDBACKS_AVAILABLE"));
-		List<FeedbackDTO> list = new ArrayList<FeedbackDTO>();
-		//to be complete this logic 
-		return null;
+		Freelancer freelancer = new Freelancer();
+		freelancer.setId(freelancerDTO.getId());
+		List<Feedback> feedbackByFreelancer = ifeedbackDao.findFeedbacksByFreelancer(freelancer);
+		List<FeedbackDTO> feedbackByFreelancerDTO = new ArrayList<>();
+		for(Feedback feedback : feedbackByFreelancer) {
+			FeedbackDTO feedbackDTO = new FeedbackDTO();
+			feedbackDTO.setId(feedback.getId());
+			feedbackDTO.setComment(feedback.getComment());
+			feedbackDTO.setCreatedBy(feedback.getCreatedBy());
+			feedbackDTO.setCreatedFor(feedback.getCreatedFor());
+			feedbackDTO.setRating(feedback.getRating());
+			
+			
+			feedbackByFreelancerDTO.add(feedbackDTO);
+		}
+		return feedbackByFreelancerDTO;
+		
 	}
 
 }

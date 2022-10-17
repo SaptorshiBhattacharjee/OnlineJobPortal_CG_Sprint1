@@ -1,17 +1,23 @@
 package com.jobportal.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
+import com.jobportal.dto.BookmarkedFreelancerDTO;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobApplicationDTO;
 import com.jobportal.dto.JobDTO;
 import com.jobportal.dto.RecruiterDTO;
 import com.jobportal.dto.SkillDTO;
+import com.jobportal.entity.BookmarkedFreelancer;
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Job;
 import com.jobportal.entity.JobApplication;
@@ -21,6 +27,8 @@ import com.jobportal.exception.JobPortalException;
 import com.jobportal.repository.IJobDao;
 import com.jobportal.repository.ISkillDao;
 
+@Service(value="iJobsService")
+@Transactional
 public class IJobServiceImpl implements IJobService{
 	
     @Autowired
@@ -32,23 +40,20 @@ public class IJobServiceImpl implements IJobService{
 		skill.setId(skillDTO.getId());
 		Recruiter recruit = new Recruiter();
 		recruit.setId(recruiterDTO.getId());
-		
 		Job job = new Job();
-		Freelancer freelancer = new Freelancer ();
-		JobApplication jobapplication = new JobApplication ();
-		
-//		job.setSkill(skill);
-//		job.setPostedBy(recruit);
-//		job.setPostedDate(LocalDate.now());
-//        job.setAwardedTo(freelancer);
-//        job.setActive(true);
-//        job.setJobApplications();
-        
-        JobDTO jobdto = new JobDTO();
+		JobDTO jobdto = new JobDTO();
         List<JobApplication> jobApplications = jobdto.getJobApplications();
         FreelancerDTO freelancerdto = new FreelancerDTO ();
+
         jobdto.setId(jobdto.getId());
-        jobdto.setSkill(skillDTO);
+        jobdto.setSkill(skill);
+
+        jobdto.setId(job.getId());
+
+        jobdto.setSkill(skill);
+
+        jobdto.setSkill(skill);
+
 		jobdto.setPostedBy(recruiterDTO);
 		jobdto.setPostedDate(LocalDate.now());
         jobdto.setAwardedTo(freelancerdto);
@@ -56,13 +61,7 @@ public class IJobServiceImpl implements IJobService{
         jobdto.setJobApplications(jobApplications);
         return jobdto;
         
-//	SkillDTO sk =	jobDto.getSkill();
-//	Skill sc =new Skill(); 
-//	sc.setDescription(sk.getDescription());
-//	sc.setId(sk.getId());
-//	sc.setName(sk.getName());
-//	j.setSkill(sc);
-	
+
 	
 	
 		
@@ -76,9 +75,8 @@ public class IJobServiceImpl implements IJobService{
 		Job job = optional.orElseThrow(() -> new JobPortalException("Service.NO_SUCH_JOB"));
 		
 		JobDTO jobDto = new JobDTO();
-		
 		jobDto.setId(job.getId());
-		jobDto.setSkill(job.getSkill()); // which we need to use skilldto or skill
+		jobDto.setSkill(job.getSkill()); 
 		jobDto.setActive(job.getActive());
 		jobDto.setAwardedTo(jobDto.getAwardedTo());
 		jobDto.setPostedDate(job.getPostedDate());
@@ -90,28 +88,28 @@ public class IJobServiceImpl implements IJobService{
 
 	@Override
 	public List<JobDTO> findJobsBySkill(SkillDTO skillDTO) throws JobPortalException {
+		Skill skill = new Skill();
+		Recruiter recruiter = new Recruiter();
+        skill.setId(skillDTO.getId());
+		skill.setName(skillDTO.getName());
+		skill.setDescription(skillDTO.getDescription());
+		List<Job> JobBySkill = iJobDao.findJobBySkill(skill);
+		List<JobDTO> JobDTOBySkill = new ArrayList<>();
 		
-		Optional<Job> optional = iJobDao.findById(id);
-		Job job = optional.orElseThrow(() -> new JobPortalException("Service.NO_SUCH_JOB"));
-		
-		JobDTO jobDto = new JobDTO();
-		
-		jobDto.setId(job.getId());
-		jobDto.setSkill(job.getSkill()); // which we need to use skilldto or skill
-		jobDto.setActive(job.getActive());
-		jobDto.setAwardedTo(jobDto.getAwardedTo());
-		jobDto.setPostedDate(job.getPostedDate());
-		jobDto.setJobApplications(job.getJobApplications());
-		jobDto.setPostedBy(jobDto.getPostedBy());
-		
-		
-		
-		
-		return jobDto;
-		
-		
-		
-		
+		for(Job job : JobBySkill) {
+			JobDTO jobDTO = new JobDTO();
+			jobDTO.setId(job.getId());
+			//jobDTO.setAwardedTo(job.getAwardedTo());
+			jobDTO.setJobApplications(job.getJobApplications());
+			//jobDTO.setPostedBy(job.getPostedBy()); which we need to use dto or normal
+			jobDTO.setPostedDate(job.getPostedDate());
+			jobDTO.setActive(job.getActive());
+			jobDTO.setSkill(job.getSkill());
+			
+			JobDTOBySkill.add(jobDTO);
+		}
+		return JobDTOBySkill;
+	
 	}
 
 	@Override
@@ -121,7 +119,7 @@ public class IJobServiceImpl implements IJobService{
 		if (iJobDao.existsById(id)) {
 			Job job = iJobDao.findById(id).get();
 			job.setActive(false);
-			iJobDao.save(job);
+			//iJobDao.save(job);
 		} else {
 			throw new JobPortalException("Service.NO_SUCH_JOB");
 		}

@@ -2,14 +2,13 @@ package com.jobportal.service;
 
 import java.util.Optional;
 
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jobportal.dto.JobApplicationDTO;
 import com.jobportal.dto.SkillDTO;
-import com.jobportal.entity.Admin;
 import com.jobportal.entity.Skill;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.repository.ISkillDao;
@@ -44,9 +43,17 @@ public class ISkillServiceImpl implements ISkillService{
 	public void remove(SkillDTO skillDTO) throws Exception{
 		Skill skill = new Skill();
 		skill.setId(skill.getId());
-		Optional<Skill> optional = iSkillDao.findById(skill.getId());
+		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
 		Skill skill1 = optional.orElseThrow(() -> new Exception("Service.ADMIN_NOT_FOUND"));
 		iSkillDao.delete(skill1);
+		
+//		if (iSkillDao.existsById(skillDTO.getId()))
+//		{
+//		iSkillDao.deleteById(skillDTO.getId());
+//		}else {
+//			throw new Exception("InvalidskillId");
+//		}		
+		
 	}
 	
 }
