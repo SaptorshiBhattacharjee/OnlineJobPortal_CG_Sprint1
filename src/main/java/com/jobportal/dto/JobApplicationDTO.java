@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 
 import com.jobportal.entity.Job;
+import com.jobportal.entity.JobApplication;
 
 public class JobApplicationDTO {
 
@@ -54,6 +55,13 @@ public class JobApplicationDTO {
 				+ coverLetter + "]";
 	}
 	
-	
+	public JobApplication toJobApplication() {
+		JobApplication jobApplication = new JobApplication();
+		jobApplication.setId(this.id);
+		jobApplication.setJob(this.job);
+		jobApplication.setAppliedDate(this.appliedDate);
+		jobApplication.setCoverLetter(this.coverLetter);
+		return jobApplication;
+	}
 
 }

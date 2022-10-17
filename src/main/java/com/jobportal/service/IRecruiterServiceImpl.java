@@ -41,7 +41,7 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 	@Override
 	public RecruiterDTO findById(Integer id) throws JobPortalException{
 		Optional<Recruiter> optional = irecruiterDao.findById(id);
-		Recruiter recruiter = optional.orElseThrow(() -> new JobPortalException("Service.RECRUITER_NOT_FOUND"));
+		Recruiter recruiter = optional.orElseThrow(() -> new JobPortalException("Service.RECRUITER_NOT_FOUND_WITH_ID"));
 		RecruiterDTO recruiterDTO = new RecruiterDTO();
 		recruiterDTO.setId(recruiter.getId());
 		recruiterDTO.setFirstName(recruiter.getFirstName());

@@ -22,6 +22,7 @@ import com.jobportal.dto.JobDTO;
 import com.jobportal.dto.RecruiterDTO;
 import com.jobportal.dto.SkillDTO;
 import com.jobportal.entity.BookmarkedFreelancer;
+import com.jobportal.exception.InvalidBookmarkedFreelancerException;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.service.IBookmarkFreelancerService;
 import com.jobportal.service.IJobApplicationService;
@@ -38,20 +39,22 @@ public class BookmarkedFreelancerAPI {
 	
 	
 	@PostMapping(value="/bookmarkfreelancer")
-	public ResponseEntity<String> applyToJob(@RequestBody FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws JobPortalException{
+	public ResponseEntity<String> applyToJob(@RequestBody FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException{
 		BookmarkedFreelancerDTO bookmarked = iBookmarkFreelancerService.bookmarkFreelancer(freelancerDTO, skillDTO, recruiterDTO);
 		String successMessage = environment.getProperty("API.APPLIED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 
 	@GetMapping(value="/findbookmarkedfreelancerbyskill")
-	public ResponseEntity<List<BookmarkedFreelancerDTO>> findBookmarkedFreelancerBySkill(@RequestBody SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws JobPortalException{
+
+	public ResponseEntity<List<BookmarkedFreelancerDTO>> findBookmarkedFreelancerBySkill(@RequestBody SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException{
 		List<BookmarkedFreelancerDTO> list = iBookmarkFreelancerService.findBookmarkedFreelancerBySkill(skillDTO, recruiterDTO);
 		return new ResponseEntity<List<BookmarkedFreelancerDTO>>(list, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value="/removeBookmarkedFreelancer")
-	public ResponseEntity<String> remove(@RequestBody FreelancerDTO freelancerDTO,SkillDTO skillDTO,RecruiterDTO recruiterDTO) throws JobPortalException{
+
+	public ResponseEntity<String> remove(@RequestBody FreelancerDTO freelancerDTO,SkillDTO skillDTO,RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException{
 		iBookmarkFreelancerService.removeBookmarkedFreelancer(freelancerDTO, skillDTO, recruiterDTO);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
@@ -59,7 +62,8 @@ public class BookmarkedFreelancerAPI {
 	}
 	
 	@GetMapping(value="/findbyid/{bookmarkedFreelancerId}")
-	public ResponseEntity<BookmarkedFreelancerDTO> findById(@PathVariable int bookmarkedFreelancerId) throws JobPortalException{
+
+	public ResponseEntity<BookmarkedFreelancerDTO> findById(@PathVariable int bookmarkedFreelancerId) throws InvalidBookmarkedFreelancerException{
 		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = iBookmarkFreelancerService.findById(bookmarkedFreelancerId);
 		return new ResponseEntity<BookmarkedFreelancerDTO>(bookmarkedFreelancerDTO, HttpStatus.OK);
 	}

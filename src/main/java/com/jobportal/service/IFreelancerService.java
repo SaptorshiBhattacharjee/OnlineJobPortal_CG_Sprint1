@@ -6,7 +6,7 @@ import com.jobportal.exception.JobPortalException;
 
 public interface IFreelancerService 
 {
-	public FreelancerDTO save(Freelancer freelancer)throws JobPortalException;
-	public FreelancerDTO findById(Long id)throws JobPortalException;
-	public FreelancerDTO update(Freelancer freelancer)throws JobPortalException;
+	public FreelancerDTO save(FreelancerDTO freelancerDTO)throws JobPortalException;
+	public FreelancerDTO findById(Integer id)throws JobPortalException;
+	public FreelancerDTO update(FreelancerDTO freelancerDTO)throws JobPortalException;
 }

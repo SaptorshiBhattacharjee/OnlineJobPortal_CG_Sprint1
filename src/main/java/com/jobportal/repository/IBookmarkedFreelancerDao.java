@@ -34,4 +34,3 @@ public interface IBookmarkedFreelancerDao extends CrudRepository<BookmarkedFreel
 }
 
 
-//FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO

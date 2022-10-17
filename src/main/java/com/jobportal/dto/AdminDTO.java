@@ -1,6 +1,8 @@
 
 package com.jobportal.dto;
 
+import com.jobportal.entity.Admin;
+
 public class AdminDTO {
 	private Integer id;
 	private String firstName;
@@ -49,5 +51,12 @@ public class AdminDTO {
 				+ "]";
 	}
 	
+	public Admin toAdmin() {
+		Admin admin = new Admin();
+		admin.setFirstName(this.firstName);
+		admin.setLastName(this.lastName);
+		admin.setPassword(this.password);
+		return admin;
+	}
 	
 }

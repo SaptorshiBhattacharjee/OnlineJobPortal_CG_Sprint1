@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.jobportal.dto.FreelancerDTO;
+import com.jobportal.dto.JobDTO;
 @Entity
 public class Job {
 @Id
@@ -132,7 +135,18 @@ public boolean equals(Object obj) {
 			&& Objects.equals(postedDate, other.postedDate) && Objects.equals(skill, other.skill);
 }
 
-
+	public JobDTO toJobDTO() {
+		JobDTO jobdto = new JobDTO();
+	jobdto.setId(this.id);
+	jobdto.setAwardedTo(this.awardedTo);
+	jobdto.setActive(this.active);
+	jobdto.setJobApplications(this.jobApplications);
+	jobdto.setPostedBy(this.postedBy);
+	jobdto.setPostedDate(this.postedDate);
+	jobdto.setSkill(this.skill);
+	return jobdto;
+ 
+    }
 }
 
 

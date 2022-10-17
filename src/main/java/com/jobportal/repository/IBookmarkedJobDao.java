@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.jobportal.entity.BookmarkedJob;
 
-public interface IBookmarkedJobDao extends CrudRepository<BookmarkedJob, Long>
+public interface IBookmarkedJobDao extends CrudRepository<BookmarkedJob, Integer>
 {
 }

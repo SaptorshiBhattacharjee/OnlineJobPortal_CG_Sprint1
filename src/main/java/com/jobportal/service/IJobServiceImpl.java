@@ -3,7 +3,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+
+import javax.transaction.Transactional;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.jobportal.dto.JobDTO;
 import com.jobportal.dto.RecruiterDTO;
 import com.jobportal.dto.SkillDTO;
@@ -15,6 +21,8 @@ import com.jobportal.entity.Skill;
 import com.jobportal.exception.InvalidJobException;
 import com.jobportal.repository.IJobDao;
 
+@Service(value="iJobsService")
+@Transactional
 public class IJobServiceImpl implements IJobService{
 	
     @Autowired
@@ -28,7 +36,7 @@ public class IJobServiceImpl implements IJobService{
 		recruit.setId(recruiterDTO.getId());
 		JobDTO jobdto = new JobDTO();
         List<JobApplication> jobApplications = jobdto.getJobApplications();
-       
+        
         Freelancer freelancer = new Freelancer();
         Recruiter recruiter = new Recruiter();
         jobdto.setId(jobdto.getId());
@@ -38,6 +46,7 @@ public class IJobServiceImpl implements IJobService{
         jobdto.setAwardedTo(freelancer);
         jobdto.setActive(true);
         jobdto.setJobApplications(jobApplications);
+        
         return jobdto;
     }
 
