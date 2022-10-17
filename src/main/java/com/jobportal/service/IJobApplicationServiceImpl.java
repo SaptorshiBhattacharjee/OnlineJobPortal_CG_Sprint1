@@ -2,6 +2,7 @@
 package com.jobportal.service;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +14,9 @@ import org.springframework.stereotype.Service;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobApplicationDTO;
 import com.jobportal.dto.JobDTO;
-//import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Job;
 import com.jobportal.entity.JobApplication;
-import com.jobportal.exception.JobPortalException;
+import com.jobportal.exception.InvalidJobApplicationException;
 import com.jobportal.repository.IJobApplicationDao;
 
 @Service
@@ -27,7 +27,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 	IJobApplicationDao iJobApplicationDao;
 	
 	@Override
-	public JobApplicationDTO applyToJob(JobDTO jobDTO, String coverletter, FreelancerDTO freelancerDTO) throws JobPortalException{
+	public JobApplicationDTO applyToJob(JobDTO jobDTO, String coverletter, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
 		Job job = new Job();
 		job.setId(jobDTO.getId());
 		/*
@@ -50,7 +50,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 			}
 		}
 		if(count > 0) {
-			throw new JobPortalException("Service.ALREADY_APPLIED");
+			throw new InvalidJobApplicationException("Service.ALREADY_APPLIED");
 		}
 			
 		JobApplication jobApplication = new JobApplication();
@@ -59,11 +59,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		jobApplication.setAppliedDate(LocalDateTime.now());
 		iJobApplicationDao.save(jobApplication);
 		
-		JobApplicationDTO jobApplicationDTO = new JobApplicationDTO();
-		jobApplicationDTO.setId(jobApplication.getId());
-		jobApplicationDTO.setCoverLetter(coverletter);
-		jobApplicationDTO.setJob(job);
-		jobApplicationDTO.setAppliedDate(jobApplication.getAppliedDate());
+		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
 		
 		return jobApplicationDTO;
 		
@@ -73,7 +69,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 	}
 
 	@Override
-	public JobApplicationDTO updateJobApplication(JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws JobPortalException{
+	public JobApplicationDTO updateJobApplication(JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
 		Job job = new Job();
 		job.setId(jobDTO.getId());
 		/*
@@ -96,23 +92,19 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 			}
 		}
 		if(count == 0) {
-			throw new JobPortalException("Service.NOT_APPLIED");
+			throw new InvalidJobApplicationException("Service.NOT_APPLIED");
 		}
 		
 		Optional<JobApplication> optional = iJobApplicationDao.findById(idAppliedJob);
-		JobApplication jobApplication = optional.orElseThrow(() -> new JobPortalException("Service.NOT_APPLIED"));
+		JobApplication jobApplication = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NOT_APPLIED"));
 		jobApplication.setCoverLetter(coverLetter);
 		
-		JobApplicationDTO jobApplicationDTO = new JobApplicationDTO();
-		jobApplicationDTO.setId(jobApplication.getId());
-		jobApplicationDTO.setCoverLetter(jobApplication.getCoverLetter());
-		jobApplicationDTO.setJob(job);
-		jobApplicationDTO.setAppliedDate(jobApplication.getAppliedDate());
+		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
 		return jobApplicationDTO;
 	}
 
 	@Override
-	public void remove(JobDTO jobDTO, FreelancerDTO freelancerDTO) throws JobPortalException{
+	public void remove(JobDTO jobDTO, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
 		Job job = new Job();
 		job.setId(jobDTO.getId());
 		/*
@@ -135,23 +127,19 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 			}
 		}
 		if(count == 0) {
-			throw new JobPortalException("Service.NOT_APPLIED");
+			throw new InvalidJobApplicationException("Service.NOT_APPLIED");
 		}
 		Optional<JobApplication> optional = iJobApplicationDao.findById(idAppliedJob);
-		JobApplication jobApplication = optional.orElseThrow(() -> new JobPortalException("Service.NOT_APPLIED"));
+		JobApplication jobApplication = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NOT_APPLIED"));
 		iJobApplicationDao.delete(jobApplication);
 	}
 	
 	@Override
-	public JobApplicationDTO findById(int id) throws JobPortalException {
+	public JobApplicationDTO findById(int id) throws InvalidJobApplicationException {
 		Optional<JobApplication> optional = iJobApplicationDao.findById(id);
-		JobApplication jobApplication = optional.orElseThrow(() -> new JobPortalException("Service.NO_SUCH_JOB_APPLICATION"));
+		JobApplication jobApplication = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NO_SUCH_JOB_APPLICATION"));
 		
-		JobApplicationDTO jobApplicationDTO = new JobApplicationDTO();
-		jobApplicationDTO.setId(jobApplication.getId());
-		jobApplicationDTO.setCoverLetter(jobApplication.getCoverLetter());
-		jobApplicationDTO.setJob(jobApplication.getJob());
-		jobApplicationDTO.setAppliedDate(jobApplication.getAppliedDate());
+		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
 		return jobApplicationDTO;
 		
 	}
