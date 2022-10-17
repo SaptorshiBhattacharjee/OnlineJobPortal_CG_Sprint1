@@ -24,6 +24,7 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 	@Override
 	public RecruiterDTO save(RecruiterDTO recruiterDTO) throws InvalidRecruiterException {
 		Recruiter recruiter = new Recruiter();
+		recruiter.setId(recruiterDTO.getId());
 		recruiter.setFirstName(recruiterDTO.getFirstName());
 		recruiter.setLastName(recruiterDTO.getLastName());
 		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
