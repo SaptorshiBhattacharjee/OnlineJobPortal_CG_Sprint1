@@ -2,6 +2,7 @@ package com.jobportal.dto;
 
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Skill;
+import com.jobportal.entity.SkillExperience;
 
 public class SkillExperienceDTO {
 	private int id;
@@ -37,5 +38,13 @@ public class SkillExperienceDTO {
 	public String toString() {
 		return "SkillExperience [id=" + id + ", skill=" + skill + ", years=" + years + ", freelancer=" + freelancer
 				+ "]";
+	}
+	
+	public SkillExperience toSkillExperience() {
+		SkillExperience skillExperience = new SkillExperience();
+		skillExperience.setSkill(this.skill);
+		skillExperience.setYears(this.years);
+		skillExperience.setFreelancer(this.freelancer);
+		return skillExperience;
 	}
 }
