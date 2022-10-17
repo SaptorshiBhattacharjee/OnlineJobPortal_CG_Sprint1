@@ -46,12 +46,14 @@ public class BookmarkedFreelancerAPI {
 	}
 
 	@GetMapping(value="/findbookmarkedfreelancerbyskill")
+
 	public ResponseEntity<List<BookmarkedFreelancerDTO>> findBookmarkedFreelancerBySkill(@RequestBody SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException{
 		List<BookmarkedFreelancerDTO> list = iBookmarkFreelancerService.findBookmarkedFreelancerBySkill(skillDTO, recruiterDTO);
 		return new ResponseEntity<List<BookmarkedFreelancerDTO>>(list, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value="/removeBookmarkedFreelancer")
+
 	public ResponseEntity<String> remove(@RequestBody FreelancerDTO freelancerDTO,SkillDTO skillDTO,RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException{
 		iBookmarkFreelancerService.removeBookmarkedFreelancer(freelancerDTO, skillDTO, recruiterDTO);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");
@@ -60,6 +62,7 @@ public class BookmarkedFreelancerAPI {
 	}
 	
 	@GetMapping(value="/findbyid/{bookmarkedFreelancerId}")
+
 	public ResponseEntity<BookmarkedFreelancerDTO> findById(@PathVariable int bookmarkedFreelancerId) throws InvalidBookmarkedFreelancerException{
 		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = iBookmarkFreelancerService.findById(bookmarkedFreelancerId);
 		return new ResponseEntity<BookmarkedFreelancerDTO>(bookmarkedFreelancerDTO, HttpStatus.OK);
