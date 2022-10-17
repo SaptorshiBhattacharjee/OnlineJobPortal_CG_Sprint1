@@ -16,7 +16,7 @@ public class BookmarkedJob
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Long id;
+	private Integer id;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="skill_id")	//one book-mark job is mapped to one skill
@@ -35,7 +35,7 @@ public class BookmarkedJob
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BookmarkedJob(Long id, Skill skill, Job job, Freelancer freelancer) {
+	public BookmarkedJob(Integer id, Skill skill, Job job, Freelancer freelancer) {
 		super();
 		this.id = id;
 		this.skill = skill;
@@ -44,10 +44,10 @@ public class BookmarkedJob
 	}
 	
 	// defining the getter and setter methods
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Skill getSkill() {
