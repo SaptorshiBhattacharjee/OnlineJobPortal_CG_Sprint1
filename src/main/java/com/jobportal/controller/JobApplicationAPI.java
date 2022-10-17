@@ -19,7 +19,6 @@ import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobApplicationDTO;
 import com.jobportal.dto.JobDTO;
 import com.jobportal.exception.InvalidJobApplicationException;
-import com.jobportal.exception.JobPortalException;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IJobApplicationService;
 
@@ -34,6 +33,7 @@ public class JobApplicationAPI {
 	Environment environment;
 	
 	@PostMapping(value="/applytojob")
+
 	public ResponseEntity<String> applyToJob(@RequestBody JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
 		JobApplicationDTO Applied = iJobApplicationService.applyToJob(jobDTO, coverLetter, freelancerDTO);
 		String successMessage = environment.getProperty("API.APPLIED_SUCCESSFULLY");
@@ -48,6 +48,7 @@ public class JobApplicationAPI {
 	}
 	
 	@DeleteMapping(value="/delete")
+
 	public ResponseEntity<String> remove(@RequestBody JobDTO jobDTO, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
 		iJobApplicationService.remove(jobDTO, freelancerDTO);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");

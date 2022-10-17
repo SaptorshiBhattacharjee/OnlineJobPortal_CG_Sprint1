@@ -131,7 +131,7 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 		
 		Integer count = iBookmarkedFreelancerDao.removeBookmarkedFreelancer(freelancer, skill, recruiter);
 		if(count == 0) {
-			throw new InvalidBookmarkedFreelancerException("Service.NOT_FOUND");
+			throw new InvalidBookmarkedFreelancerException("Service.BOOKMARK_NOT_FOUND");
 		}
 		else {
 			
@@ -142,7 +142,7 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 	@Override
 	public BookmarkedFreelancerDTO findById(int id) throws InvalidBookmarkedFreelancerException {
 		Optional<BookmarkedFreelancer> optional = iBookmarkedFreelancerDao.findById(id);
-		BookmarkedFreelancer bookmarkedFreelancer = optional.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NOT_FOUND") );
+		BookmarkedFreelancer bookmarkedFreelancer = optional.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.BOOKMARK_NOT_FOUND") );
 		
 		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = new BookmarkedFreelancerDTO();
 		bookmarkedFreelancerDTO.setBookmarkedBy(bookmarkedFreelancerDTO.getBookmarkedBy());
