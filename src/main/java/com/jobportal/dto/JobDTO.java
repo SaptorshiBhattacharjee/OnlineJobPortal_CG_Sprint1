@@ -61,11 +61,13 @@ public class JobDTO {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
+	
 	@Override
 	public String toString() {
-		return "job [id=" + id + ", skill=" + skillDTO + ", postedBy=" + postedBy + ", postedDate=" + postedDate
+		return "JobDTO [id=" + id + ", skill=" + skill + ", postedBy=" + postedBy + ", postedDate=" + postedDate
 				+ ", awardedTo=" + awardedTo + ", jobApplications=" + jobApplications + ", active=" + active + "]";
 	}
+	
 //	public Job toJob() {
 //		Job j = new Job();
 //		
@@ -76,5 +78,6 @@ public class JobDTO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 	
 }

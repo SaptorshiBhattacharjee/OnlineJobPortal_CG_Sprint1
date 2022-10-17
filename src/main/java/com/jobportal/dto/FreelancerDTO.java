@@ -9,7 +9,7 @@ import com.jobportal.entity.SkillExperience;
 
 public class FreelancerDTO 
 {
-	private Integer id;
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String password;
@@ -19,10 +19,10 @@ public class FreelancerDTO
 	private List<BookmarkedJob> bookmarkedJobs;
 	
 	// defining the getter and setter methods
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getFirstName() {
