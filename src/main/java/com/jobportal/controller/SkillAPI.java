@@ -23,7 +23,6 @@ public class SkillAPI {
 	
 	@Autowired
 	private ISkillService iSkillService;
-	
 	@Autowired
 	Environment environment;
 	

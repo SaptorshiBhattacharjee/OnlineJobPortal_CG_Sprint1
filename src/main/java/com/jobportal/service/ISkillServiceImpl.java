@@ -47,7 +47,6 @@ public class ISkillServiceImpl implements ISkillService{
 		Skill skill1 = optional.orElseThrow(() -> new Exception("Service.ADMIN_NOT_FOUND"));
 		iSkillDao.delete(skill1);
 		
-		
 //		if (iSkillDao.existsById(skillDTO.getId()))
 //		{
 //		iSkillDao.deleteById(skillDTO.getId());

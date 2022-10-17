@@ -41,4 +41,5 @@ public class SkillExperienceAPI {
 		String successMessage = environment.getProperty("API.UPDATED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
+	
 }

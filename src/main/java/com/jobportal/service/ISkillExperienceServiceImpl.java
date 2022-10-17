@@ -95,7 +95,6 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 }		
 		
 		
-		
 //		if (iSkillExperienceDao.existsById(skillDTO.getId())) {
 //		SkillExperience skillExperience = iSkillExperienceDao.findBySkillIdAndFreelancerId(skillDTO.getId(), freelancerDTO.getId());
 //		skillExperience.setYears(ExperienceYears);

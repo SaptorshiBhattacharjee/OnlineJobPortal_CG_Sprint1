@@ -12,5 +12,4 @@ public interface ISkillExperienceService {
 	public SkillExperienceDTO addSkill(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception;
 	
 	public SkillExperienceDTO updateSkillYears(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception;
-
 }
