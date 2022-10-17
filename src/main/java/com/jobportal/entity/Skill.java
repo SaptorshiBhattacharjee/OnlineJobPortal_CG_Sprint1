@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.jobportal.dto.SkillDTO;
+
 @Entity
 public class Skill 
 {
@@ -46,6 +48,13 @@ public class Skill
 	@Override
 	public String toString() {
 		return "Skill [id=" + id + ", name=" + name + ", description=" + description + "]";
+	}
+	
+	public SkillDTO toSkillDTO() {
+		SkillDTO skillDTO = new SkillDTO();
+		skillDTO.setName(this.name);
+		skillDTO.setDescription(this.description);
+		return skillDTO;
 	}
 }
 
