@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 public class Recruiter {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private int id;
 	private String firstName;
 	private String lastName;
 	@OneToMany(cascade=CascadeType.ALL)
@@ -27,10 +27,10 @@ public class Recruiter {
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="recruiter_id")
 	private List<BookmarkedFreelancer> freelancers;
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getFirstName() {

@@ -9,7 +9,7 @@ import com.jobportal.entity.Job;
 
 public class RecruiterDTO {
 	
-	private long id;
+	private int id;
 	private String firstName;
 	private String lastName;
 	private List<Job> postedJobs;
@@ -23,7 +23,7 @@ public class RecruiterDTO {
 	}
 	
 	
-	public RecruiterDTO(long id, String firstName, String lastName, List<Job> postedJobs, List<Feedback> feedbacks,
+	public RecruiterDTO(int id, String firstName, String lastName, List<Job> postedJobs, List<Feedback> feedbacks,
 			List<BookmarkedFreelancer> freelancers) {
 		super();
 		this.id = id;
@@ -35,10 +35,10 @@ public class RecruiterDTO {
 	}
 
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getFirstName() {

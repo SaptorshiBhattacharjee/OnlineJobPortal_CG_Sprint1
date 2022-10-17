@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 public class Job {
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
-private long id ;
+private int id ;
 @OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "skill_id", unique = true)
 private Skill skill;
@@ -40,7 +40,7 @@ public Job() {
 }
 
 
-public Job(long id, Skill skill, Recruiter postedBy, LocalDate postedDate, Freelancer awardedTo,
+public Job(int id, Skill skill, Recruiter postedBy, LocalDate postedDate, Freelancer awardedTo,
 		List<JobApplication> jobApplications, Boolean active) {
 	super();
 	this.id = id;
@@ -53,10 +53,10 @@ public Job(long id, Skill skill, Recruiter postedBy, LocalDate postedDate, Freel
 }
 
 
-public long getId() {
+public int getId() {
 	return id;
 }
-public void setId(long id) {
+public void setId(int id) {
 	this.id = id;
 }
 public Skill getSkill() {

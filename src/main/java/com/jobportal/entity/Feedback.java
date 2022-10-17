@@ -31,6 +31,12 @@ public class Feedback {
 		this.createdFor = createdFor;
 	}
 	
+	
+	public Feedback() {
+		super();
+	}
+
+
 	public long getId() {
 		return id;
 	}

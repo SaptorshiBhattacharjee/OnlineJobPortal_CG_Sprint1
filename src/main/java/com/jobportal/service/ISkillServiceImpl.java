@@ -7,8 +7,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jobportal.dto.JobApplicationDTO;
 import com.jobportal.dto.SkillDTO;
+import com.jobportal.entity.Admin;
 import com.jobportal.entity.Skill;
+import com.jobportal.exception.JobPortalException;
 import com.jobportal.repository.ISkillDao;
 
 @Service(value="iSkillService")
@@ -21,27 +24,29 @@ public class ISkillServiceImpl implements ISkillService{
 	
 	@Override
 	public SkillDTO save(SkillDTO skillDTO) throws Exception {
+		Skill skill = new Skill();		
 		skillDTO.setName(skillDTO.getName());
-		skillDTO.setDescription(skillDTO.getDescription());	
-		iSkillDao.save(skillDTO);
+		skillDTO.setDescription(skillDTO.getDescription());		
+		iSkillDao.save(skill);
 		return skillDTO;
 	}
 	
 	@Override
-	public SkillDTO update(SkillDTO skillDTO) throws Exception{
+	public SkillDTO update(SkillDTO skillDTO) throws Exception{	
 		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
-		Skill skill = optional.orElseThrow(() -> new Exception("Service.ADMIN_NOT_FOUND"));
-		skill.setName(skillDTO.getName());
-		skill.setDescription(skillDTO.getDescription());
+		Skill skill1 = optional.orElseThrow(() -> new JobPortalException("Service.ADMIN_NOT_FOUND"));	
+		skill1.setName(skillDTO.getName());
+		skill1.setDescription(skillDTO.getDescription());		
 		return skillDTO;
 	}
-	
-	
+		
 	@Override
 	public void remove(SkillDTO skillDTO) throws Exception{
-		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
-		Skill skill = optional.orElseThrow(() -> new Exception("Service.ADMIN_NOT_FOUND"));
-		iSkillDao.delete(skill);
+		Skill skill = new Skill();
+		skill.setId(skill.getId());
+		Optional<Skill> optional = iSkillDao.findById(skill.getId());
+		Skill skill1 = optional.orElseThrow(() -> new Exception("Service.ADMIN_NOT_FOUND"));
+		iSkillDao.delete(skill1);
 	}
-
+	
 }

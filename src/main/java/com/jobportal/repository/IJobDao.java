@@ -7,5 +7,5 @@ import com.jobportal.entity.Job;
 
 public interface IJobDao extends CrudRepository<Job, Integer>{
  
-
+  
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobApplicationDTO;
+import com.jobportal.dto.JobDTO;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IJobApplicationService;
@@ -46,7 +47,7 @@ public class JobApplicationAPI {
 	}
 	
 	@DeleteMapping(value="/delete")
-	public ResponseEntity<String> remove(@RequestBody JobDTO jobDTO, FreelancerDTO freelancerDTO){
+	public ResponseEntity<String> remove(@RequestBody JobDTO jobDTO, FreelancerDTO freelancerDTO) throws JobPortalException{
 		iJobApplicationService.remove(jobDTO, freelancerDTO);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
