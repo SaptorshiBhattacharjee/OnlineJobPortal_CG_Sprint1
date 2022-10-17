@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.jobportal.dto.SkillExperienceDTO;
+
 @Entity
 public class SkillExperience {
 	@Id
@@ -83,4 +85,12 @@ public String toString() {
 	return "SkillExperience [id=" + id + ", skill=" + skill + ", years=" + years + ", freelancer=" + freelancer
 			+ "]";
 }		
+
+public SkillExperienceDTO toSkillExperienceDTO() {
+	SkillExperienceDTO skillExperienceDTO = new SkillExperienceDTO();
+	skillExperienceDTO.setSkill(this.skill);
+	skillExperienceDTO.setYears(this.years);
+	skillExperienceDTO.setFreelancer(this.freelancer);
+	return skillExperienceDTO;
+}
 }

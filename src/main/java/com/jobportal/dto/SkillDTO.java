@@ -1,5 +1,8 @@
 package com.jobportal.dto;
 
+import com.jobportal.entity.Admin;
+import com.jobportal.entity.Skill;
+
 public class SkillDTO {
 
 	private int id;
@@ -26,6 +29,13 @@ public class SkillDTO {
 	@Override
 	public String toString() {
 		return "Skill [id=" + id + ", name=" + name + ", description=" + description + "]";
+	}
+	
+	public Skill toSkill() {
+		Skill skill = new Skill();
+		skill.setName(this.name);
+		skill.setDescription(this.description);
+		return skill;
 	}
 
 
