@@ -4,35 +4,37 @@ package com.jobportal.dto;
 import java.time.LocalDate;
 import java.util.List;
 import com.jobportal.entity.Freelancer;
+import com.jobportal.entity.Job;
 import com.jobportal.entity.Recruiter;
 import com.jobportal.entity.Skill;
 import com.jobportal.entity.JobApplication;
 
 public class JobDTO {
-	private long id ;
+	private int id;
 	private Skill skill;
-	private  Recruiter postedBy;
+	private  RecruiterDTO postedBy;
 	private  LocalDate postedDate;
-	private Freelancer awardedTo;
+	private FreelancerDTO awardedTo;
 	private  List<JobApplication> jobApplications;
 	private Boolean active;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
+		
 	}
 	public Skill getSkill() {
 		return skill;
 	}
 	public void setSkill(Skill skill) {
-		this.skill = skill;
+		this.skill = skill; // which we need to use skilldto or skill
 	}
-	public Recruiter getPostedBy() {
+	public RecruiterDTO getPostedBy() {
 		return postedBy;
 	}
-	public void setPostedBy(Recruiter postedBy) {
+	public void setPostedBy(RecruiterDTO postedBy) {
 		this.postedBy = postedBy;
 	}
 	public LocalDate getPostedDate() {
@@ -41,10 +43,10 @@ public class JobDTO {
 	public void setPostedDate(LocalDate postedDate) {
 		this.postedDate = postedDate;
 	}
-	public Freelancer getAwardedTo() {
+	public FreelancerDTO getAwardedTo() {
 		return awardedTo;
 	}
-	public void setAwardedTo(Freelancer awardedTo) {
+	public void setAwardedTo(FreelancerDTO awardedTo) {
 		this.awardedTo = awardedTo;
 	}
 	public List<JobApplication> getJobApplications() {
@@ -59,10 +61,24 @@ public class JobDTO {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
-	@Override
+	
+	
+	
+    @Override
 	public String toString() {
-		return "job [id=" + id + ", skill=" + skill + ", postedBy=" + postedBy + ", postedDate=" + postedDate
+		return "JobDTO [id=" + id + ", skill=" + skill + ", postedBy=" + postedBy + ", postedDate=" + postedDate
 				+ ", awardedTo=" + awardedTo + ", jobApplications=" + jobApplications + ", active=" + active + "]";
 	}
+	//	public Job toJob() {
+//		Job j = new Job();
+//		
+//		return j;
+//		
+//	}
+	public static boolean existsById(int id2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	
 }

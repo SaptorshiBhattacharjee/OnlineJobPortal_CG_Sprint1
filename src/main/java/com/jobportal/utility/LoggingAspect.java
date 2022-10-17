@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 	Logger logger = LogManager.getLogger(this.getClass());
 
-	@AfterThrowing(pointcut = "execution(* com.infy.service.*Impl.*(..))", throwing = "exception")
+	@AfterThrowing(pointcut = "execution(* com.jobportal.service.*Impl.*(..))", throwing = "exception")
 	public void logServiceException(Exception exception)
 			throws Exception {
 		logger.error(exception.getMessage(), exception);

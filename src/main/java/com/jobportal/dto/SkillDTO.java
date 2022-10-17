@@ -28,4 +28,5 @@ public class SkillDTO {
 		return "Skill [id=" + id + ", name=" + name + ", description=" + description + "]";
 	}
 
+
 }
