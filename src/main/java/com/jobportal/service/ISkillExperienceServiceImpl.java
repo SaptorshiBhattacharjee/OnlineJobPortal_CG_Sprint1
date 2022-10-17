@@ -14,6 +14,7 @@ import com.jobportal.dto.SkillExperienceDTO;
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Skill;
 import com.jobportal.entity.SkillExperience;
+import com.jobportal.exception.InvalidSkillExperienceException;
 import com.jobportal.repository.ISkillExperienceDao;
 
 @Service
@@ -25,7 +26,7 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 
 	
 	@Override			
-	public SkillExperienceDTO addSkill(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception{
+	public SkillExperienceDTO addSkill(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws InvalidSkillExperienceException{
 		Skill skill = new Skill();
 		skill.setId(skillDTO.getId());	
 		Freelancer freelancer = new Freelancer();
@@ -42,7 +43,7 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 			}
 		}
 		if(count > 0) {
-			throw new Exception("Service.ALREADY_APPLIED");
+			throw new InvalidSkillExperienceException("Service.ALREADY_APPLIED");
 		}
 		SkillExperience skillExperience = new SkillExperience();
 		skillExperience.setSkill(skill);
@@ -59,7 +60,7 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 	}
 	
 	@Override
-	public SkillExperienceDTO updateSkillYears(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception{		
+	public SkillExperienceDTO updateSkillYears(SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws InvalidSkillExperienceException{		
 		Skill skill = new Skill();
 	skill.setId(skillDTO.getId());	
 	Freelancer freelancer = new Freelancer();
@@ -77,11 +78,11 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 			}
 		}
 		if(count == 0) {
-			throw new Exception("Service.NOT_Found");
+			throw new InvalidSkillExperienceException("Service.NOT_Found");
 		}
 				
 		Optional<SkillExperience> optional = iSkillExperienceDao.findById(idskill);
-		SkillExperience skillExperience = optional.orElseThrow(() -> new Exception());
+		SkillExperience skillExperience = optional.orElseThrow(() -> new InvalidSkillExperienceException("NOT UPDATED"));
 		skillExperience.setYears(ExperienceYears);
 		
 		SkillExperienceDTO skillExperienceDTO = new SkillExperienceDTO();
