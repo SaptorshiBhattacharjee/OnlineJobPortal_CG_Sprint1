@@ -39,8 +39,16 @@ public class IJobServiceImpl implements IJobService{
 		JobDTO jobdto = new JobDTO();
         List<JobApplication> jobApplications = jobdto.getJobApplications();
         FreelancerDTO freelancerdto = new FreelancerDTO ();
-        jobdto.setId(job.getId());
+
+        jobdto.setId(jobdto.getId());
         jobdto.setSkill(skill);
+
+        jobdto.setId(job.getId());
+
+        jobdto.setSkill(skill);
+
+        jobdto.setSkill(skill);
+
 		jobdto.setPostedBy(recruiterDTO);
 		jobdto.setPostedDate(LocalDate.now());
         jobdto.setAwardedTo(freelancerdto);
