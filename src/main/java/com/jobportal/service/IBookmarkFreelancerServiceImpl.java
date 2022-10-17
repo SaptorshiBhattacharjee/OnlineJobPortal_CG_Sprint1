@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jobportal.dto.BookmarkedFreelancerDTO;
 import com.jobportal.dto.FreelancerDTO;
@@ -17,10 +20,12 @@ import com.jobportal.entity.Skill;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.repository.IBookmarkedFreelancerDao;
 
+@Service(value="iBookmarkFreelancerService")
+@Transactional
 public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerService {
 	
 	@Autowired
-	IBookmarkedFreelancerDao iBookmarkedFreelancerDao;
+	private IBookmarkedFreelancerDao iBookmarkedFreelancerDao;
 	
 	@Override
 	public BookmarkedFreelancerDTO bookmarkFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO,

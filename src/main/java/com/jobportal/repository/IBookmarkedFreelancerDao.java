@@ -22,10 +22,10 @@ import com.jobportal.dto.SkillDTO;
 
 public interface IBookmarkedFreelancerDao extends CrudRepository<BookmarkedFreelancer, Integer>{
 
-	@Query("SELECT bf FROM BookmarkedFreelancer bf WHERE bf.skill = :skill AND bf.recruiter = :recruiter")
+	@Query("SELECT bf FROM BookmarkedFreelancer bf WHERE bf.skill = :skill AND bf.bookmarkedBy = :recruiter")
 	List<BookmarkedFreelancer> findBookmarkedFreelancerBySkill(@Param("skill") Skill skill, @Param("recruiter") Recruiter recruiter );
 	
-	@Query("DELETE FROM BookmarkedFreelancer bf WHERE bf.freelancer = :freelancer AND bf.bookmarkedby = :recruiter AND bf.skill = skill")
+	@Query("DELETE FROM BookmarkedFreelancer bf WHERE bf.freelancer = :freelancer AND bf.bookmarkedBy = :recruiter AND bf.skill = :skill")
 	@Modifying
 	@Transactional
 	Integer removeBookmarkedFreelancer(@Param("freelancer") Freelancer freelancer,@Param("skill") Skill skill, @Param("recruiter") Recruiter recruiter);

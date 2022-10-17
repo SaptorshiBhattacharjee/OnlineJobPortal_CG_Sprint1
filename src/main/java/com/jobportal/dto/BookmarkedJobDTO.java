@@ -6,8 +6,7 @@ import com.jobportal.entity.Skill;
 
 public class BookmarkedJobDTO 
 {
-	//test comment for git push
-	//comment from srikar
+	
 	private Long id;
 	private Skill skill;
 	private Job job;
