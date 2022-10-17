@@ -12,9 +12,9 @@ import com.jobportal.entity.JobApplication;
 public class JobDTO {
 	private int id;
 	private Skill skill;
-	private  RecruiterDTO postedBy;
+	private  Recruiter postedBy;
 	private  LocalDate postedDate;
-	private FreelancerDTO awardedTo;
+	private Freelancer awardedTo;
 	private  List<JobApplication> jobApplications;
 	private Boolean active;
 
@@ -31,10 +31,10 @@ public class JobDTO {
 	public void setSkill(Skill skill) {
 		this.skill = skill; // which we need to use skilldto or skill
 	}
-	public RecruiterDTO getPostedBy() {
+	public Recruiter getPostedBy() {
 		return postedBy;
 	}
-	public void setPostedBy(RecruiterDTO postedBy) {
+	public void setPostedBy(Recruiter postedBy) {
 		this.postedBy = postedBy;
 	}
 	public LocalDate getPostedDate() {
@@ -43,10 +43,10 @@ public class JobDTO {
 	public void setPostedDate(LocalDate postedDate) {
 		this.postedDate = postedDate;
 	}
-	public FreelancerDTO getAwardedTo() {
+	public Freelancer getAwardedTo() {
 		return awardedTo;
 	}
-	public void setAwardedTo(FreelancerDTO awardedTo) {
+	public void setAwardedTo(Freelancer awardedTo) {
 		this.awardedTo = awardedTo;
 	}
 	public List<JobApplication> getJobApplications() {
@@ -62,15 +62,8 @@ public class JobDTO {
 		this.active = active;
 	}
 	
-	@Override
-	public String toString() {
-<<<<<<< HEAD
-		return "JobDTO [id=" + id + ", skill=" + skill + ", postedBy=" + postedBy + ", postedDate=" + postedDate
-=======
-		return "job [id=" + id + ", skill=" + skill + ", postedBy=" + postedBy + ", postedDate=" + postedDate
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
-				+ ", awardedTo=" + awardedTo + ", jobApplications=" + jobApplications + ", active=" + active + "]";
-	}
+	
+	
 	
 //	public Job toJob() {
 //		Job j = new Job();
@@ -78,9 +71,11 @@ public class JobDTO {
 //		return j;
 //		
 //	}
-	public static boolean existsById(int id2) {
-		// TODO Auto-generated method stub
-		return false;
+	
+	@Override
+	public String toString() {
+		return "JobDTO [id=" + id + ", skill=" + skill + ", postedBy=" + postedBy + ", postedDate=" + postedDate
+				+ ", awardedTo=" + awardedTo + ", jobApplications=" + jobApplications + ", active=" + active + "]";
 	}
 	
 	
