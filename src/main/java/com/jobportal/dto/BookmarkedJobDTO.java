@@ -7,16 +7,16 @@ import com.jobportal.entity.Skill;
 public class BookmarkedJobDTO 
 {
 	
-	private Long id;
+	private Integer id;
 	private Skill skill;
 	private Job job;
 	private Freelancer freelancer;
 	
 	// defining the getter and setter methods
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Skill getSkill() {
