@@ -28,15 +28,14 @@ public class SkillAPI {
 	
 	@PostMapping(value="/save")
 	public ResponseEntity<String> save(@RequestBody SkillDTO skillDTO) throws Exception{
-		SkillDTO addedAdmin = iSkillService.save(skillDTO);
+		SkillDTO addedSkill = iSkillService.save(skillDTO);
 		String successMessage = environment.getProperty("API.INSERT_SUCCESS");
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
-	
-	
+		
 	@PutMapping(value="/update")
 	public ResponseEntity<String> update(@RequestBody SkillDTO skillDTO) throws Exception{
-		SkillDTO updatedAdmin = iSkillService.update(skillDTO);
+		SkillDTO updatedSkill = iSkillService.update(skillDTO);
 		String successMessage = environment.getProperty("API.UPDATE_SUCCESS");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
@@ -44,7 +43,7 @@ public class SkillAPI {
 	@DeleteMapping(value="/remove")
 	public ResponseEntity<String> remove(@RequestBody SkillDTO skillDTO) throws Exception{
 		iSkillService.remove(skillDTO);
-		String successMessage = environment.getProperty("API.UPDATE_SUCCESS");
+		String successMessage = environment.getProperty("API.REMOVE_SUCCESS");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
 		

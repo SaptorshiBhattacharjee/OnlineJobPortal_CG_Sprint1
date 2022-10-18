@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.jobportal.dto.AdminDTO;
+import com.jobportal.dto.RecruiterDTO;
+
 @Entity
 public class Recruiter {
 	@Id
@@ -83,6 +86,15 @@ public class Recruiter {
 		Recruiter other = (Recruiter) obj;
 		return Objects.equals(Feedbacks, other.Feedbacks) && Objects.equals(firstName, other.firstName)
 				&& id == other.id && Objects.equals(lastName, other.lastName);
+	}
+	public RecruiterDTO toRecruiterDTO() {
+		RecruiterDTO recruiterDTO = new RecruiterDTO();
+		recruiterDTO.setFirstName(this.firstName);
+		recruiterDTO.setLastName(this.lastName);
+		recruiterDTO.setFeedbacks(this.Feedbacks);
+		recruiterDTO.setFreelancers(this.freelancers);
+		recruiterDTO.setPostedJobs(this.postedJobs);
+		return recruiterDTO;
 	}
 	
 	
