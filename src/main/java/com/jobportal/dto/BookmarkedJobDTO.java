@@ -1,5 +1,6 @@
 package com.jobportal.dto;
 
+import com.jobportal.entity.BookmarkedJob;
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Job;
 import com.jobportal.entity.Skill;
@@ -42,5 +43,16 @@ public class BookmarkedJobDTO
 	@Override
 	public String toString() {
 		return "BookmarkedJobDTO [id=" + id + ", skill=" + skill + ", job=" + job + ", freelancer=" + freelancer + "]";
+	}
+	
+	public BookmarkedJob toBookmarkedJobEntity()
+	{
+		BookmarkedJob bookmarkedJob = new BookmarkedJob();
+		bookmarkedJob.setId(this.getId());
+		bookmarkedJob.setSkill(this.getSkill());
+		bookmarkedJob.setJob(this.getJob());
+		bookmarkedJob.setFreelancer(this.getFreelancer());
+		
+		return(bookmarkedJob);
 	}
 }

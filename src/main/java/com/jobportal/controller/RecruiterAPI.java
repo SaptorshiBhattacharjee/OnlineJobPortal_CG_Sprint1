@@ -18,7 +18,7 @@ import com.jobportal.service.IAdminService;
 import com.jobportal.service.IRecruiterService;
 
 @RestController
-@RequestMapping("value=/jobportal/recruiter")
+@RequestMapping("/jobportal/recruiter")
 public class RecruiterAPI {
 	
 	@Autowired

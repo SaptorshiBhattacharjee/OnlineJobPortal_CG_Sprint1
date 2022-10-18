@@ -15,6 +15,7 @@ import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.exception.InvalidBookmarkedFreelancerException;
 import com.jobportal.exception.InvalidFeedbackException;
 import com.jobportal.exception.InvalidJobApplicationException;
+import com.jobportal.exception.InvalidJobException;
 import com.jobportal.exception.InvalidRecruiterException;
 
 
@@ -70,6 +71,14 @@ public class ExceptionControllerAdvice {
 	
 	@ExceptionHandler(InvalidFeedbackException.class)
 	public ResponseEntity<ErrorInfo> FeedbackExceptionHandler(InvalidFeedbackException exception) {
+		ErrorInfo error = new ErrorInfo();
+		error.setErrorMessage(environment.getProperty(exception.getMessage()));
+		error.setTimestamp(LocalDateTime.now());
+		error.setErrorCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ErrorInfo>(error, HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler(InvalidJobException.class)
+	public ResponseEntity<ErrorInfo> JobPortalExceptionHandler(InvalidJobException exception) {
 		ErrorInfo error = new ErrorInfo();
 		error.setErrorMessage(environment.getProperty(exception.getMessage()));
 		error.setTimestamp(LocalDateTime.now());
