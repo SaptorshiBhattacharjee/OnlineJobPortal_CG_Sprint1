@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.jobportal.OnlineJobPortalSprint1Application;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.entity.Freelancer;
 import com.jobportal.exception.InvalidFreelancerException;
@@ -19,7 +20,7 @@ import com.jobportal.repository.IFreelancerDao;
 import com.jobportal.service.IFreelancerService;
 import com.jobportal.service.IFreelancerServiceImpl;
 
-@SpringBootTest
+@SpringBootTest(classes = OnlineJobPortalSprint1Application.class)
 public class FreelancerServiceTest 
 {
 	@InjectMocks
