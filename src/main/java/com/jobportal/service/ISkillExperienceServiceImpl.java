@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jobportal.dto.FreelancerDTO;
+import com.jobportal.dto.JobApplicationDTO;
 import com.jobportal.dto.SkillDTO;
 import com.jobportal.dto.SkillExperienceDTO;
 import com.jobportal.entity.Freelancer;
@@ -51,11 +52,8 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 		skillExperience.setYears(ExperienceYears);
 		iSkillExperienceDao.save(skillExperience);
 		
-		SkillExperienceDTO skillExperienceDTO = new SkillExperienceDTO();
-		skillExperienceDTO.setId(skillExperience.getId());
-		skillExperienceDTO.setSkill(skill);
-		skillExperienceDTO.setYears(skillExperience.getYears());	
-		skillExperienceDTO.setFreelancer(freelancer);		
+		SkillExperienceDTO skillExperienceDTO = skillExperience.toSkillExperienceDTO();	
+		
 		return skillExperienceDTO;
 	}
 	
@@ -82,14 +80,12 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 		}
 				
 		Optional<SkillExperience> optional = iSkillExperienceDao.findById(idskill);
-		SkillExperience skillExperience = optional.orElseThrow(() -> new InvalidSkillExperienceException("NOT UPDATED"));
+		SkillExperience skillExperience = optional.orElseThrow(() -> new InvalidSkillExperienceException("ID NOT_FOUND"));
 		skillExperience.setYears(ExperienceYears);
+		iSkillExperienceDao.save(skillExperience);
 		
-		SkillExperienceDTO skillExperienceDTO = new SkillExperienceDTO();
-		skillExperienceDTO.setId(skillExperience.getId());
-		skillExperienceDTO.setSkill(skill);
-		skillExperienceDTO.setYears(skillExperience.getYears());	
-		skillExperienceDTO.setFreelancer(freelancer);
+		SkillExperienceDTO skillExperienceDTO = skillExperience.toSkillExperienceDTO();	
+		
 		return skillExperienceDTO;
 	}
 		
