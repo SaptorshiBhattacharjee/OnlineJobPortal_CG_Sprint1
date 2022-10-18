@@ -16,8 +16,8 @@ public interface IBookmarkedFreelancerDao extends CrudRepository<BookmarkedFreel
 
 //	@Query("SELECT bf FROM BookmarkedFreelancer bf WHERE bf.skillId = :skill_id AND bf.recruiterId = :recruiter_Id")
 //	List<BookmarkedFreelancer> findBookmarkedFreelancerBySkill(@Param("skill_id") int skillId, @Param("recruiter_Id") int recruiterId );
-	List<BookmarkedFreelancer>  findBySkillIdAndBookmarkedById(int skillId, int recruiterId);
-	
+	List<BookmarkedFreelancer>  findBySkillIdAndBookmarkedById(int skillId, int bookmarkedById);
+	Integer removeByFreelancerIdAndSkillIdAndRecruiterId(int freelancerId, int skillId, int bookmarkedById);
 //	@Query("DELETE FROM BookmarkedFreelancer bf WHERE bf.freelancer_id = :freelancer_id AND bf.recruiter_id = :recruiter_id AND bf.skill_id = :skill_id")
 //	@Modifying
 //	@Transactional
