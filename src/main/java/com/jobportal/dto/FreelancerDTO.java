@@ -68,6 +68,26 @@ public class FreelancerDTO
 		this.bookmarkedJobs = bookmarkedJobs;
 	}
 	
+	
+	// constructors with parameters
+	public FreelancerDTO(int id, String firstName, String lastName, String password, List<JobApplication> appliedJobs,
+			List<Feedback> feedbacks, List<SkillExperience> skills, List<BookmarkedJob> bookmarkedJobs) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.appliedJobs = appliedJobs;
+		this.feedbacks = feedbacks;
+		this.skills = skills;
+		this.bookmarkedJobs = bookmarkedJobs;
+	}
+	
+	// default constructor
+	public FreelancerDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	//defining toString method
 	@Override
 	public String toString() {

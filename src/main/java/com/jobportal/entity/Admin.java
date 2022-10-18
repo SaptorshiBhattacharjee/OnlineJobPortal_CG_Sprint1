@@ -84,6 +84,7 @@ public class Admin {
 	}
 	public AdminDTO toAdminDTO() {
 		AdminDTO adminDTO = new AdminDTO();
+		adminDTO.setId(this.id);
 		adminDTO.setFirstName(this.firstName);
 		adminDTO.setLastName(this.lastName);
 		adminDTO.setPassword(this.password);
