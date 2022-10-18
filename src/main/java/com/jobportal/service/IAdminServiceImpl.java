@@ -26,10 +26,7 @@ public class IAdminServiceImpl implements IAdminService{
 	
 	@Override
 	public AdminDTO save(AdminDTO adminDTO) throws InvalidAdminException {
-		Optional<Admin> optional = iAdminDao.findById(adminDTO.getId());
-		if(optional.isPresent()) {
-			throw new InvalidAdminException("Service.ADMIN_NOT_FOUND");
-		}
+		
 		Admin admin = adminDTO.toAdmin();
 		iAdminDao.save(admin);
 		return adminDTO;
