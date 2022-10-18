@@ -90,7 +90,7 @@ class JobApplicationTests {
 	}
 	
 	@Test
-	void applyToJobTest() throws InvalidJobApplicationException{
+	void applyToJobTest2() throws InvalidJobApplicationException{
 		JobApplication jobApplication = new JobApplication(3, job.toJobDTO(), LocalDateTime.now(),"Applicant 4");
 		Mockito.when(iJobApplicationDao.save(jobApplication)).thenReturn(jobApplication);
 		JobApplicationDTO actual =iJobApplicationService.applyToJob(job.toJobDTO(), "Applicant 4",freelancer.toFreelancerDTO());
