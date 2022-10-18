@@ -7,8 +7,6 @@ import com.jobportal.dto.RecruiterDTO;
 import com.jobportal.dto.SkillDTO;
 import com.jobportal.exception.InvalidJobException;
 
-
-
 public interface IJobService {
 	public JobDTO postjob(SkillDTO skillDTO,RecruiterDTO recruiterDTO)throws InvalidJobException;
 	public JobDTO findById(int id) throws InvalidJobException;

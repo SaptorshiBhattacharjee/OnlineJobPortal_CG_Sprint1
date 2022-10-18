@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobDTO;
@@ -18,6 +19,7 @@ import com.jobportal.dto.JobDTO;
 public class Job {
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
+@NotNull
 private int id ;
 @OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "skill_id", unique = true)
@@ -25,6 +27,7 @@ private Skill skill;
 @OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "recruiter_id", unique = true)
 private  Recruiter postedBy;
+
 private  LocalDate postedDate;
 
 @OneToOne(cascade = CascadeType.ALL)

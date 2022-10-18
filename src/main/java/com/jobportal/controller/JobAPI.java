@@ -34,8 +34,8 @@ public class JobAPI {
     	 return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
      }
      
-     @GetMapping(value="/findbyid/{jobid}")
-     public ResponseEntity <JobDTO>findById(@PathVariable int id) throws JobPortalException{
+     @GetMapping(value="/findbyid/{id}")
+     public ResponseEntity <JobDTO>findById(@PathVariable Integer id) throws JobPortalException{
     	 JobDTO job = ijobservice.findById(id);
     	 return new ResponseEntity<>(job, HttpStatus.OK);
     }
