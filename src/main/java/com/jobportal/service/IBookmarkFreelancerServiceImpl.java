@@ -29,13 +29,12 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 	private IBookmarkedFreelancerDao iBookmarkedFreelancerDao;
 	
 	@Override
-	public BookmarkedFreelancerDTO bookmarkFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO,
-			RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException {
+	public BookmarkedFreelancerDTO bookmarkFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException {
 		BookmarkedFreelancer bookmarkedFreelancer = new BookmarkedFreelancer();
 		Freelancer freelancer = new Freelancer();
-		Skill skill = new Skill();
+		Skill skill = skillDTO.toSkill();
 		Recruiter recruiter = new Recruiter();
-		
+
 		freelancer.setId(freelancerDTO.getId());
 		freelancer.setFirstName(freelancerDTO.getFirstName());
 		freelancer.setLastName(freelancerDTO.getLastName());
@@ -44,11 +43,6 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 		freelancer.setBookmarkedJobs(freelancerDTO.getBookmarkedJobs());
 		freelancer.setFeedbacks(freelancerDTO.getFeedbacks());
 		freelancer.setSkills(freelancerDTO.getSkills());
-		
-		skill.setId(skillDTO.getId());
-		skill.setName(skillDTO.getName());
-		skill.setDescription(skillDTO.getDescription());
-		
 		recruiter.setId(recruiterDTO.getId());
 		recruiter.setFirstName(recruiterDTO.getFirstName());
 		recruiter.setLastName(recruiterDTO.getLastName());
@@ -69,15 +63,10 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 	}
 
 	@Override
-	public List<BookmarkedFreelancerDTO> findBookmarkedFreelancerBySkill(SkillDTO skillDTO, RecruiterDTO recruiterDTO)
-			throws InvalidBookmarkedFreelancerException {
-		Skill skill = new Skill();
+	public List<BookmarkedFreelancerDTO> findBookmarkedFreelancerBySkill(SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException {
+		Skill skill = skillDTO.toSkill();
 		Recruiter recruiter = new Recruiter();
 
-		skill.setId(skillDTO.getId());
-		skill.setName(skillDTO.getName());
-		skill.setDescription(skillDTO.getDescription());
-		
 		recruiter.setId(recruiterDTO.getId());
 		recruiter.setFirstName(recruiterDTO.getFirstName());
 		recruiter.setLastName(recruiterDTO.getLastName());
@@ -85,16 +74,12 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 		recruiter.setFreelancers(recruiterDTO.getFreelancers());
 		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
 		
-		List<BookmarkedFreelancer> bookmarkedFreelancersBySkill = iBookmarkedFreelancerDao.findBookmarkedFreelancerBySkill(skill, recruiter);
+		List<BookmarkedFreelancer> bookmarkedFreelancersBySkill = iBookmarkedFreelancerDao.findBySkillIdAndBookmarkedById(skillDTO.getId(), recruiterDTO.getId());
 		List<BookmarkedFreelancerDTO> bookmarkedFreelancersDTOBySkill = new ArrayList<>();
 		
 		for(BookmarkedFreelancer bookmarkedFreelancer : bookmarkedFreelancersBySkill) {
-			BookmarkedFreelancerDTO bookmarkedFreelancerDTO = new BookmarkedFreelancerDTO();
-			bookmarkedFreelancerDTO.setId(bookmarkedFreelancer.getId());
-			bookmarkedFreelancerDTO.setBookmarkedBy(bookmarkedFreelancer.getBookmarkedBy());
-			bookmarkedFreelancerDTO.setFreelancer(bookmarkedFreelancer.getFreelancer());
-			bookmarkedFreelancerDTO.setSkill(bookmarkedFreelancer.getSkill());
-			
+			BookmarkedFreelancerDTO bookmarkedFreelancerDTO = bookmarkedFreelancer.toBookmarkedFreelancerDTO();
+						
 			bookmarkedFreelancersDTOBySkill.add(bookmarkedFreelancerDTO);
 		}
 		return bookmarkedFreelancersDTOBySkill;
@@ -102,8 +87,7 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 	}
 
 	@Override
-	public void removeBookmarkedFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO)
-			throws InvalidBookmarkedFreelancerException {
+	public void removeBookmarkedFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException {
 		Freelancer freelancer = new Freelancer();
 		Skill skill = new Skill();
 		Recruiter recruiter = new Recruiter();
@@ -129,13 +113,13 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
 		
 		
-		Integer count = iBookmarkedFreelancerDao.removeBookmarkedFreelancer(freelancer, skill, recruiter);
-		if(count == 0) {
-			throw new InvalidBookmarkedFreelancerException("Service.NOT_FOUND");
-		}
-		else {
-			
-		}
+//		Integer count = iBookmarkedFreelancerDao.removeBookmarkedFreelancer(freelancerDTO.getId(), skillDTO.getId(), recruiterDTO.getId());
+//		if(count == 0) {
+//			throw new InvalidBookmarkedFreelancerException("Service.NOT_FOUND");
+//		}
+//		else {
+//			
+//		}
 		
 	}
 
