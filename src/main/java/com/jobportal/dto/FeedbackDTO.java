@@ -1,5 +1,6 @@
 package com.jobportal.dto;
 
+import com.jobportal.entity.Feedback;
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Recruiter;
 
@@ -61,6 +62,15 @@ public class FeedbackDTO {
 	public String toString() {
 		return "FeedbackDTO [id=" + id + ", rating=" + rating + ", comment=" + comment + ", createdBy=" + createdBy
 				+ ", createdFor=" + createdFor + "]";
+	}
+	public Feedback toFeedback() {
+		Feedback feedback = new Feedback();
+		feedback.setId(this.id);
+		feedback.setRating(this.rating);
+		feedback.setComment(this.comment);
+		feedback.setCreatedBy(this.createdBy);
+		feedback.setCreatedFor(this.createdFor);
+		return feedback;
 	}
 
 }

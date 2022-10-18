@@ -17,7 +17,7 @@ import com.jobportal.dto.AdminDTO;
 import com.jobportal.service.IAdminService;
 
 @RestController
-@RequestMapping("value=/jobportal/admin")
+@RequestMapping(value="/jobportal/admin")
 public class AdminAPI {
 	
 	@Autowired

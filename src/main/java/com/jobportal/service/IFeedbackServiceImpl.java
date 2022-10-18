@@ -74,14 +74,15 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 }
 
 	@Override
-	public List<FeedbackDTO> findFeedbacksByFreelancer(FreelancerDTO freelancerDTO) throws InvalidFeedbackException {
+	public FeedbackDTO findFeedbacksByFreelancer(FreelancerDTO freelancerDTO) throws InvalidFeedbackException {
 		Optional<Freelancer> optional = ifreelancerDao.findById(freelancerDTO.getId());
 		Freelancer freelancer = optional.orElseThrow(()->new InvalidFeedbackException("Service.NO_FEEDBACKS_FOR_THIS_FREELANCER"));
 		freelancer.setId(freelancerDTO.getId());
-		List<Feedback> feedbackByFreelancer = ifeedbackDao.findFeedbacksByFreelancer(freelancer);
-		List<FeedbackDTO> feedbackByFreelancerDTO = new ArrayList<>();
-		for(Feedback feedback : feedbackByFreelancer) {
+		Feedback feedbackByFreelancer = ifeedbackDao.findFeedbacksByFreelancer(freelancer);
+		FeedbackDTO feedbackByFreelancerDTO = new FeedbackDTO();
+		//for(Feedback feedback : feedbackByFreelancer) {
 			FeedbackDTO feedbackDTO = new FeedbackDTO();
+			Feedback feedback = new Feedback();
 			feedbackDTO.setId(feedback.getId());
 			feedbackDTO.setComment(feedback.getComment());
 			feedbackDTO.setCreatedBy(feedback.getCreatedBy());
@@ -89,8 +90,8 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 			feedbackDTO.setRating(feedback.getRating());
 			
 			
-			feedbackByFreelancerDTO.add(feedbackDTO);
-		}
+			//feedbackByFreelancerDTO.add(feedbackDTO);
+		//}
 		return feedbackByFreelancerDTO;
 		
 	}

@@ -14,6 +14,6 @@ import com.jobportal.entity.Skill;
 
 public interface IJobDao extends CrudRepository<Job, Integer>{
 	@Query("SELECT j FROM Job j WHERE j.skill = :skill")
-	List<Job> findJobBySkill(@Param("skill") Skill skill );
+	Job findJobBySkill(@Param("skill") Skill skill );
   
 }

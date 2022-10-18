@@ -18,7 +18,7 @@ import com.jobportal.service.IBookmarkJobService;
 import com.jobportal.service.IFreelancerService;
 
 @RestController
-@RequestMapping("value=/jobportal/bookmarkedjob")
+@RequestMapping(value="/jobportal/bookmarkedjob")
 public class BookmarkedJobAPI 
 {
 	@Autowired

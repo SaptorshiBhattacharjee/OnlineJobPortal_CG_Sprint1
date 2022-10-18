@@ -35,7 +35,7 @@ public class IJobServiceImpl implements IJobService{
 		Recruiter recruit = new Recruiter();
 		recruit.setId(recruiterDTO.getId());
 		JobDTO jobdto = new JobDTO();
-        List<JobApplication> jobApplications = jobdto.getJobApplications();
+        JobApplication jobApplications = jobdto.getJobApplications();
         Freelancer freelancer = new Freelancer();
         Recruiter recruiter = new Recruiter();
         jobdto.setId(jobdto.getId());

@@ -14,7 +14,7 @@ import com.jobportal.exception.InvalidBookmarkedFreelancerException;
 public interface IBookmarkFreelancerService {
 	
 	public BookmarkedFreelancerDTO bookmarkFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException;
-	public List<BookmarkedFreelancerDTO> findBookmarkedFreelancerBySkill(SkillDTO skillDTO, RecruiterDTO recruiterDTO)throws InvalidBookmarkedFreelancerException;
+	public BookmarkedFreelancerDTO findBookmarkedFreelancerBySkill(SkillDTO skillDTO, RecruiterDTO recruiterDTO)throws InvalidBookmarkedFreelancerException;
 	public void removeBookmarkedFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException;
 	public BookmarkedFreelancerDTO findById(int id) throws InvalidBookmarkedFreelancerException;
 }
