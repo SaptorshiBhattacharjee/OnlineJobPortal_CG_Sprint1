@@ -18,7 +18,7 @@ import com.jobportal.dto.RecruiterDTO;
 import com.jobportal.service.IFeedbackService;
 
 @RestController
-@RequestMapping("value=/jobportal/recruiter")
+@RequestMapping(value="/jobportal/recruiter")
 public class FeedbackAPI {
 	
 	@Autowired

@@ -15,7 +15,7 @@ public class JobDTO {
 	private  Recruiter postedBy;
 	private  LocalDate postedDate;
 	private Freelancer awardedTo;
-	private  List<JobApplication> jobApplications;
+	private  JobApplication jobApplications;
 	private Boolean active;
 
     public int getId() {
@@ -57,11 +57,11 @@ public class JobDTO {
 	public void setAwardedTo(Freelancer awardedTo) {
 		this.awardedTo = awardedTo;
 	}
-	public List<JobApplication> getJobApplications() {
+	public JobApplication getJobApplications() {
 		return jobApplications;
 	}
 
-	public void setJobApplications(List<JobApplication> jobApplications) {
+	public void setJobApplications(JobApplication jobApplications) {
 		this.jobApplications = jobApplications;
 	}
 

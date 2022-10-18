@@ -19,7 +19,7 @@ import com.jobportal.exception.JobPortalException;
 import com.jobportal.service.IJobService;
 
 @RestController
-@RequestMapping("value=/jobportal/job")
+@RequestMapping(value="/jobportal/job")
 public class JobAPI {
      @Autowired
 	private IJobService ijobservice;

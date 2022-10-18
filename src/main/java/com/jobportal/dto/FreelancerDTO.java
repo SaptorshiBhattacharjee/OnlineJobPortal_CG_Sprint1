@@ -14,65 +14,18 @@ public class FreelancerDTO
 	private String firstName;
 	private String lastName;
 	private String password;
-	private List<JobApplication> appliedJobs;
-	private List<Feedback> feedbacks;
-	private List<SkillExperience> skills;
-	private List<BookmarkedJob> bookmarkedJobs;
+	private JobApplication appliedJobs;
+	private Feedback feedbacks;
+	private SkillExperience skills;
+	private BookmarkedJob bookmarkedJobs;
 	
 	// defining the getter and setter methods
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public List<JobApplication> getAppliedJobs() {
-		return appliedJobs;
-	}
-	public void setAppliedJobs(List<JobApplication> appliedJobs) {
-		this.appliedJobs = appliedJobs;
-	}
-	public List<Feedback> getFeedbacks() {
-		return feedbacks;
-	}
-	public void setFeedbacks(List<Feedback> feedbacks) {
-		this.feedbacks = feedbacks;
-	}
-	public List<SkillExperience> getSkills() {
-		return skills;
-	}
-	public void setSkills(List<SkillExperience> skills) {
-		this.skills = skills;
-	}
-	public List<BookmarkedJob> getBookmarkedJobs() {
-		return bookmarkedJobs;
-	}
-	public void setBookmarkedJobs(List<BookmarkedJob> bookmarkedJobs) {
-		this.bookmarkedJobs = bookmarkedJobs;
-	}
+	
 	
 	
 	// constructors with parameters
-	public FreelancerDTO(int id, String firstName, String lastName, String password, List<JobApplication> appliedJobs,
-			List<Feedback> feedbacks, List<SkillExperience> skills, List<BookmarkedJob> bookmarkedJobs) {
+	public FreelancerDTO(int id, String firstName, String lastName, String password, JobApplication appliedJobs,
+			Feedback feedbacks, SkillExperience skills, BookmarkedJob bookmarkedJobs) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -84,6 +37,70 @@ public class FreelancerDTO
 		this.bookmarkedJobs = bookmarkedJobs;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public JobApplication getAppliedJobs() {
+		return appliedJobs;
+	}
+
+	public void setAppliedJobs(JobApplication appliedJobs) {
+		this.appliedJobs = appliedJobs;
+	}
+
+	public Feedback getFeedbacks() {
+		return feedbacks;
+	}
+
+	public void setFeedbacks(Feedback feedbacks) {
+		this.feedbacks = feedbacks;
+	}
+
+	public SkillExperience getSkills() {
+		return skills;
+	}
+
+	public void setSkills(SkillExperience skills) {
+		this.skills = skills;
+	}
+
+	public BookmarkedJob getBookmarkedJobs() {
+		return bookmarkedJobs;
+	}
+
+	public void setBookmarkedJobs(BookmarkedJob bookmarkedJobs) {
+		this.bookmarkedJobs = bookmarkedJobs;
+	}
+
 	// default constructor
 	public FreelancerDTO() {
 		super();

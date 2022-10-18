@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -34,9 +35,9 @@ private  LocalDate postedDate;
 @JoinColumn(name = "freelancer_id", unique = true)
 private Freelancer awardedTo;
 
-@OneToMany(cascade = CascadeType.ALL)
+@ManyToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "job_id", unique = true)
-private  List<JobApplication> jobApplications;
+private  JobApplication jobApplications;
 
 private Boolean active;
 
@@ -47,7 +48,7 @@ public Job() {
 
 
 public Job(int id, Skill skill, Recruiter postedBy, LocalDate postedDate, Freelancer awardedTo,
-		List<JobApplication> jobApplications, Boolean active) {
+		JobApplication jobApplications, Boolean active) {
 	super();
 	this.id = id;
 	this.skill = skill;
@@ -99,10 +100,10 @@ public void setAwardedTo(Freelancer awardedTo) {
 }
 
 
-public List<JobApplication> getJobApplications() {
+public JobApplication getJobApplications() {
 	return jobApplications;
 }
-public void setJobApplications(List<JobApplication> jobApplications) {
+public void setJobApplications(JobApplication jobApplications) {
 	this.jobApplications = jobApplications;
 }
 public Boolean getActive() {
