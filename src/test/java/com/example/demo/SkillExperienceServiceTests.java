@@ -33,8 +33,8 @@ public class SkillExperienceServiceTests {
 
 		}
 		
-		@Test
-		void addSkill() throws InvalidSkillExpeirnceException{
+		//@Test
+		//void addSkill() throws InvalidSkillExpeirnceException{
 			
 		}
 	

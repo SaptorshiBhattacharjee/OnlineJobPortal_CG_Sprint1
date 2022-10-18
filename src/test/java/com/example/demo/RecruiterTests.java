@@ -6,12 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-<<<<<<< HEAD
-//import org.junit.Test;
-=======
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -68,15 +64,7 @@ public class RecruiterTests {
 		
 	}
 	
-<<<<<<< HEAD
-	/*@Test
-	void saveRecruiter() {
-		int id=1;
-		Mockito.when(iRecruiterDao.findById((id))).thenReturn((recruiter));
-		RecruiterDTO expectedRecruiterDto = new RecruiterDTO(1,"Sri","Ram",null,null,null);
-		RecruiterDTO actualAppointmentDto = iRecruiterService.save(recruiterDto);
-	}*/
-=======
+
 	@Test
 	void failedFindByIdTest() throws InvalidRecruiterException{
 
@@ -115,6 +103,6 @@ public class RecruiterTests {
 		Assertions.assertEquals("Service.ADMIN_NOT_FOUND", exception.getMessage());
 		
 	}
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+
 
 }
