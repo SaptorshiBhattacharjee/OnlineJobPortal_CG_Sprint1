@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.jobportal.OnlineJobPortalSprint1Application;
+import com.jobportal.dto.JobDTO;
 import com.jobportal.exception.InvalidJobApplicationException;
 import com.jobportal.repository.IJobApplicationDao;
 
@@ -24,6 +25,7 @@ class JobApplicationTests {
 	
 	@Test
 	void applyToJobTest() throws InvalidJobApplicationException{
+		JobDTO jobDTO = new JobDTO();
 		
 	}
 	
