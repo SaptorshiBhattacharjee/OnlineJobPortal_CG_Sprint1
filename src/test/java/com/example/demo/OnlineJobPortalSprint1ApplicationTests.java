@@ -62,11 +62,11 @@ import com.jobportal.service.IRecruiterServiceImpl;
 @SpringBootTest(classes = OnlineJobPortalSprint1Application.class)
 class OnlineJobPortalSprint1ApplicationTests {
 
-	@Mock
-	IRecruiterDao iRecruiterDao;
-	
-	@InjectMocks
-	IRecruiterService iRecruiterService = new IRecruiterServiceImpl();
+//	@Mock
+//	IRecruiterDao iRecruiterDao;
+//	
+//	@InjectMocks
+//	IRecruiterService iRecruiterService = new IRecruiterServiceImpl();
 
 
 	/*@Test
