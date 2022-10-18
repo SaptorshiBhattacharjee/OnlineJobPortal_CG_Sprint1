@@ -6,6 +6,7 @@ import java.util.Objects;
 import com.jobportal.entity.BookmarkedFreelancer;
 import com.jobportal.entity.Feedback;
 import com.jobportal.entity.Job;
+import com.jobportal.entity.Recruiter;
 
 public class RecruiterDTO {
 	
@@ -95,6 +96,8 @@ public class RecruiterDTO {
 				&& Objects.equals(freelancers, other.freelancers) && id == other.id
 				&& Objects.equals(lastName, other.lastName) && Objects.equals(postedJobs, other.postedJobs);
 	}
+
+
 	
 	
 
