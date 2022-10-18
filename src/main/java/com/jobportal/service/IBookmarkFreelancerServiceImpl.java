@@ -113,13 +113,10 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
 		
 		
-//		Integer count = iBookmarkedFreelancerDao.removeBookmarkedFreelancer(freelancerDTO.getId(), skillDTO.getId(), recruiterDTO.getId());
-//		if(count == 0) {
-//			throw new InvalidBookmarkedFreelancerException("Service.NOT_FOUND");
-//		}
-//		else {
-//			
-//		}
+		Integer count = iBookmarkedFreelancerDao.removeByFreelancerIdAndSkillIdAndRecruiterId(freelancerDTO.getId(), skillDTO.getId(), recruiterDTO.getId());
+		if(count == 0) {
+			throw new InvalidBookmarkedFreelancerException("Service.NOT_FOUND");		}
+		
 		
 	}
 

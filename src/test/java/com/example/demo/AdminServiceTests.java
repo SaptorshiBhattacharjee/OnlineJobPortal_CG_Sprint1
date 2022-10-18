@@ -2,38 +2,50 @@ package com.example.demo;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.entity.Admin;
 import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.repository.IAdminDao;
 import com.jobportal.service.IAdminService;
+import com.jobportal.service.IAdminServiceImpl;
 
+
+@SpringBootTest
+@ComponentScan("com.jobportal.service.IAdminService")
 class AdminServiceTests {
 	@InjectMocks
-	private IAdminService iAdminService;
+	private IAdminService iAdminService = new IAdminServiceImpl();
 	
 	@Mock
 	private IAdminDao iAdminDao;
 	
+	/*
 	@BeforeEach
 	void setup() {
+		Admin admin = new Admin();
+		admin.setId(i);
+		admin.setFirstName("john");
+		admin.setLastName("Jack");
+		admin.setPassword("123");
 		
 	}
-	
+	*/
 	
 	@Test
 	void adminAddTest() throws InvalidAdminException{
 		AdminDTO adminDTO = new AdminDTO();
-		
+		adminDTO.setId(1);
 		adminDTO.setFirstName("John");
 		adminDTO.setLastName("Jack");
 		adminDTO.setPassword("123");
