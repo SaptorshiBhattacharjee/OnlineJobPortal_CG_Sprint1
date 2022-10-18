@@ -3,6 +3,7 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -12,8 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.google.common.base.Optional;
 import com.jobportal.OnlineJobPortalSprint1Application;
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.dto.RecruiterDTO;
