@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -16,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.hamcrest.CoreMatchers.notNullValue;
+
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
@@ -59,14 +61,14 @@ import com.jobportal.service.IRecruiterServiceImpl;
 @SpringBootTest(classes = OnlineJobPortalSprint1Application.class)
 class OnlineJobPortalSprint1ApplicationTests {
 
-	@Mock
-	IRecruiterDao iRecruiterDao;
-	
-	@InjectMocks
-	IRecruiterService iRecruiterService = new IRecruiterServiceImpl();
+//	@Mock
+//	IRecruiterDao iRecruiterDao;
+//	
+//	@InjectMocks
+//	IRecruiterService iRecruiterService = new IRecruiterServiceImpl();
+
 
 	/*@Test
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 	void saveRecruiter() throws InvalidRecruiterException{
 		RecruiterDTO recruiterDto = new RecruiterDTO();
 		Feedback feedback1 = new Feedback();
@@ -80,18 +82,22 @@ class OnlineJobPortalSprint1ApplicationTests {
 		
 	}*/
 	
+
 	@Mock
 	IAdminDao iAdminDao;
 	
 
 	@InjectMocks
+
 	IAdminService iAdminService =  new IAdminServiceImpl();
+
 	IJobService ijobservice = new IJobServiceImpl();
 	
 	@BeforeEach
 	void setup1()throws InvalidJobException {
 		Skill skill = new Skill();
 		skill.setId(201);
+		
 		Recruiter recruit = new Recruiter();
 		recruit.setId(301);
 		JobDTO jobdto = new JobDTO();
@@ -137,7 +143,7 @@ class OnlineJobPortalSprint1ApplicationTests {
 		Collections.addAll(jobapplication,jobapplication1,jobapplication2,jobapplication3);
 		job.setJobApplications(jobapplication);
 	}
-	
+
 	@Test
 	public void addNewAdminTest() throws InvalidAdminException {
 		AdminDTO adminDTO  = new AdminDTO();
