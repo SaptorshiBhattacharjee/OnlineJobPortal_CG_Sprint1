@@ -8,6 +8,8 @@ public class SkillDTO {
 	private int id;
 	private String name;
 	private String description;
+	
+
 	public int getId() {
 		return id;
 	}
