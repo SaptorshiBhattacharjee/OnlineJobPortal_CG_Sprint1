@@ -30,13 +30,14 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
 		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
 		recruiter.setFreelancers(recruiterDTO.getFreelancers());
-		if(!(recruiterDTO.getFirstName()==null || recruiterDTO.getLastName()==null ||recruiterDTO.getFeedbacks()==null ||recruiterDTO.getFreelancers()==null || recruiterDTO.getPostedJobs()==null)) {
+		//if(!(recruiterDTO.getFirstName()==null || recruiterDTO.getLastName()==null ||recruiterDTO.getFeedbacks()==null ||recruiterDTO.getFreelancers()==null || recruiterDTO.getPostedJobs()==null || recruiterDTO.getId()==0)) {
 			irecruiterDao.save(recruiter);
 			return recruiterDTO;
-		}
-		else {
-			throw new InvalidRecruiterException("Service.RECRUITER_ALREADY_EXISTS");
-		}
+			
+		//}
+		//else {
+		//	throw new InvalidRecruiterException("Service.RECRUITER_ALREADY_EXISTS");
+		//}
 		
 		
 	}

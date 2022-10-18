@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import com.jobportal.dto.JobApplicationDTO;
 
@@ -26,8 +27,10 @@ public class JobApplication {
 	private int id;
  	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="job_id")
+ 	@NotNull(message="Entering a job is mandatory")
 	private Job job;
 	private LocalDateTime appliedDate;
+	@NotNull(message="Entering a coverletter is mandatory")
 	private String coverLetter;
 	
 	public JobApplication() {
