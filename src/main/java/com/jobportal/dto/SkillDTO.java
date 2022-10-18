@@ -1,6 +1,5 @@
 package com.jobportal.dto;
 
-import com.jobportal.entity.Admin;
 import com.jobportal.entity.Skill;
 
 public class SkillDTO {
