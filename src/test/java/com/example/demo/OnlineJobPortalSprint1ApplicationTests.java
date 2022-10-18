@@ -1,15 +1,11 @@
 package com.example.demo;
 
-<<<<<<< HEAD
-=======
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -20,8 +16,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import com.jobportal.dto.AdminDTO;
@@ -29,8 +25,6 @@ import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.repository.IAdminDao;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IAdminServiceImpl;
-<<<<<<< HEAD
-=======
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,23 +55,16 @@ import com.jobportal.service.IJobService;
 import com.jobportal.service.IJobServiceImpl;
 import com.jobportal.service.IRecruiterService;
 import com.jobportal.service.IRecruiterServiceImpl;
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 
 @SpringBootTest(classes = OnlineJobPortalSprint1Application.class)
 class OnlineJobPortalSprint1ApplicationTests {
-<<<<<<< HEAD
-=======
 
 	@Mock
 	IRecruiterDao iRecruiterDao;
 	
 	@InjectMocks
 	IRecruiterService iRecruiterService = new IRecruiterServiceImpl();
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 
-<<<<<<< HEAD
-
-=======
 	@Test
 	void saveRecruiter() throws InvalidRecruiterException{
 		RecruiterDTO recruiterDto = new RecruiterDTO();
@@ -92,15 +79,13 @@ class OnlineJobPortalSprint1ApplicationTests {
 		
 	}
 	
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 	@Mock
 	IAdminDao iAdminDao;
 	
 
 	@InjectMocks
-<<<<<<< HEAD
+
 	IAdminService iAdminService =  new IAdminServiceImpl();
-=======
 	IJobService ijobservice = new IJobServiceImpl();
 	
 	@BeforeEach
@@ -151,7 +136,7 @@ class OnlineJobPortalSprint1ApplicationTests {
 		List<JobApplication> jobapplication = new ArrayList<>();
 		Collections.addAll(jobapplication,jobapplication1,jobapplication2,jobapplication3);
 		job.setJobApplications(jobapplication);
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+	}
 	
 	@Test
 	public void addNewAdminTest() throws InvalidAdminException {
