@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jobportal.entity.BookmarkedJob;
 import com.jobportal.entity.Feedback;
+import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.JobApplication;
 import com.jobportal.entity.SkillExperience;
 
@@ -94,5 +95,19 @@ public class FreelancerDTO
 		return "FreelancerDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
 				+ password + ", appliedJobs=" + appliedJobs + ", feedbacks=" + feedbacks + ", skills=" + skills
 				+ ", bookmarkedJobs=" + bookmarkedJobs + "]";
+	}
+	public Freelancer toFreelancerEntity()
+	{
+		Freelancer freelancer = new Freelancer();
+		freelancer.setId(this.getId());
+		freelancer.setFirstName(this.getFirstName());
+		freelancer.setLastName(this.getLastName());
+		freelancer.setPassword(this.getPassword());
+		freelancer.setAppliedJobs(this.getAppliedJobs());
+		freelancer.setFeedbacks(this.getFeedbacks());
+		freelancer.setSkills(this.getSkills());
+		freelancer.setBookmarkedJobs(this.getBookmarkedJobs());
+		
+		return(freelancer);
 	}
 }
