@@ -8,6 +8,8 @@ class OnlineJobPortalSprint1ApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
+		
 	}
 
 }
