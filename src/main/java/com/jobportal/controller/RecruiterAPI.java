@@ -41,9 +41,9 @@ public class RecruiterAPI {
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value="/findbyid/{recruiterId}")
-	public ResponseEntity<RecruiterDTO> findById(@PathVariable Integer recruiterId, @RequestBody RecruiterDTO recruiterDTO) throws Exception{
-		RecruiterDTO recruiter = iRecruiterService.findById(recruiterId);
+	@GetMapping(value="/findbyid/{id}")
+	public ResponseEntity<RecruiterDTO> findById(@PathVariable Integer id) throws Exception{
+		RecruiterDTO recruiter = iRecruiterService.findById(id);
 		return new ResponseEntity<>(recruiter, HttpStatus.OK);
 	}
 	

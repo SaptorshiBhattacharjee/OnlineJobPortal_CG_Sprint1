@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.jobportal.OnlineJobPortalSprint1Application;
 import com.jobportal.dto.SkillDTO;
 import com.jobportal.entity.Skill;
 import com.jobportal.exception.InvalidSkillException;
@@ -20,7 +21,7 @@ import com.jobportal.service.ISkillService;
 import com.jobportal.service.ISkillServiceImpl;
 
 
-@SpringBootTest
+@SpringBootTest(classes=OnlineJobPortalSprint1Application.class)
 @ComponentScan("com.jobportal.service.ISkillService")
 @AutoConfigureMockMvc
 

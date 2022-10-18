@@ -1,33 +1,32 @@
 package com.example.demo;
 
-import java.util.ArrayList;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
+
+
+//import org.junit.Test;
+
 
 import org.junit.jupiter.api.Assertions;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.jobportal.OnlineJobPortalSprint1Application;
-import com.jobportal.dto.AdminDTO;
 import com.jobportal.dto.RecruiterDTO;
-import com.jobportal.entity.Admin;
-import com.jobportal.entity.Feedback;
 import com.jobportal.entity.Recruiter;
-import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.exception.InvalidRecruiterException;
 import com.jobportal.repository.IRecruiterDao;
 import com.jobportal.service.IRecruiterService;
 import com.jobportal.service.IRecruiterServiceImpl;
 
 @SpringBootTest(classes = OnlineJobPortalSprint1Application.class)
+
 public class RecruiterTests {
 	
 	@Mock
@@ -74,8 +73,16 @@ public class RecruiterTests {
 		
 	}
 	
+
+//	@Test
+//	void saveRecruiter() {
+//		int id=1;
+//		Mockito.when(iRecruiterDao.findById((id)).thenReturn(Optional.of(recruiter)));
+//		RecruiterDTO expectedRecruiterDto = new RecruiterDTO(1,"Sri","Ram",null,null,null);
+//		RecruiterDTO actualAppointmentDto = iRecruiterService.save(recruiterDto);
+
 	@Test
-	void adminUpdateTest() throws InvalidRecruiterException{
+	void recruiterUpdateTest() throws InvalidRecruiterException{
 		RecruiterDTO recruiterDTO = new RecruiterDTO();
 		recruiterDTO.setId(1);
 		recruiterDTO.setFirstName("Sri");
@@ -90,9 +97,10 @@ public class RecruiterTests {
 		RecruiterDTO actual = iRecruiterService.update(recruiterDTO);
 		Assertions.assertEquals(recruiterDTO, actual);
 		
+
 	}
 	@Test
-	void failedAdminUpdateTest() throws InvalidRecruiterException{
+	void failedRecruiterUpdateTest() throws InvalidRecruiterException{
 		RecruiterDTO recruiterDTO = new RecruiterDTO();
 		recruiterDTO.setId(1);
 		recruiterDTO.setFirstName("Sri");
@@ -103,6 +111,5 @@ public class RecruiterTests {
 		Assertions.assertEquals("Service.ADMIN_NOT_FOUND", exception.getMessage());
 		
 	}
-
 
 }

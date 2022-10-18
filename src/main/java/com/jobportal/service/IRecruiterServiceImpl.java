@@ -42,7 +42,7 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 		
 	}
 	@Override
-	public RecruiterDTO findById(Integer id) throws InvalidRecruiterException{
+	public RecruiterDTO findById(int id) throws InvalidRecruiterException{
 		Optional<Recruiter> optional = irecruiterDao.findById(id);
 		Recruiter recruiter = optional.orElseThrow(() -> new InvalidRecruiterException("Service.RECRUITER_NOT_FOUND_WITH_ID"));
 		RecruiterDTO recruiterDTO = new RecruiterDTO();
@@ -52,6 +52,7 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 		recruiterDTO.setFeedbacks(recruiter.getFeedbacks());
 		recruiterDTO.setFreelancers(recruiter.getFreelancers());
 		recruiterDTO.setPostedJobs(recruiter.getPostedJobs());
+		
 		return recruiterDTO;
 		
 	}

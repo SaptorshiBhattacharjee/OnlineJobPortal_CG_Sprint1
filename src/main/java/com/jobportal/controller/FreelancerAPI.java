@@ -42,7 +42,7 @@ public class FreelancerAPI
 	}
 	
 	@GetMapping(value="/findbyid/{freelancerId}")
-	public ResponseEntity<FreelancerDTO> findById(@PathVariable Integer freelancerId, @RequestBody FreelancerDTO freelancerDTO) throws Exception
+	public ResponseEntity<FreelancerDTO> findById(@PathVariable Integer freelancerId) throws Exception
 	{
 		FreelancerDTO freelancer = ifreelancerService.findById(freelancerId);
 		return new ResponseEntity<>(freelancer, HttpStatus.OK);
