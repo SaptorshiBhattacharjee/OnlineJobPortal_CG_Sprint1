@@ -41,7 +41,7 @@ public class AdminAPI {
 	}
 	
 	@GetMapping(value="/findbyid/{adminId}")
-	public ResponseEntity<AdminDTO> findById(@PathVariable Integer adminId, @RequestBody AdminDTO adminDTO) throws Exception{
+	public ResponseEntity<AdminDTO> findById(@PathVariable Integer adminId) throws Exception{
 		AdminDTO admin = iAdminService.findById(adminId);
 	//	String successMessage = environment.getProperty("API.FOUND_ADMIN")
 		return new ResponseEntity<>(admin, HttpStatus.OK);

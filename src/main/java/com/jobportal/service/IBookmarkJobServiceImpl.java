@@ -94,4 +94,5 @@ public class IBookmarkJobServiceImpl implements IBookmarkJobService
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
+
 }
