@@ -36,7 +36,6 @@ public class IJobServiceImpl implements IJobService{
 		recruit.setId(recruiterDTO.getId());
 		JobDTO jobdto = new JobDTO();
         List<JobApplication> jobApplications = jobdto.getJobApplications();
-        
         Freelancer freelancer = new Freelancer();
         Recruiter recruiter = new Recruiter();
         jobdto.setId(jobdto.getId());
@@ -46,7 +45,9 @@ public class IJobServiceImpl implements IJobService{
         jobdto.setAwardedTo(freelancer);
         jobdto.setActive(true);
         jobdto.setJobApplications(jobApplications);
-        
+        Job j = jobdto.toJob();
+        Job job2= iJobDao.save(j);
+       
         return jobdto;
     }
 
@@ -63,6 +64,7 @@ public class IJobServiceImpl implements IJobService{
 		jobDto.setPostedDate(job.getPostedDate());
 		jobDto.setJobApplications(job.getJobApplications());
 		jobDto.setPostedBy(jobDto.getPostedBy());
+		
 		return jobDto;
 		
 	}
@@ -73,13 +75,14 @@ public class IJobServiceImpl implements IJobService{
 		skill.setId(skillDTO.getId());
 		skill.setName(skillDTO.getName());
 		skill.setDescription(skillDTO.getDescription());
+		
 		List<Job> JobBySkill = iJobDao.findJobBySkill(skill);
 		List<JobDTO> JobDTOBySkill = new ArrayList<>();
 		
-		for(Job job : JobBySkill) {
+		for(Job job : JobBySkill) { // list job nunchi oka okati list of job dto  
 			JobDTO jobDTO = new JobDTO();
 			jobDTO.setId(job.getId());
-			//jobDTO.setAwardedTo(job.getAwardedTo());
+			jobDTO.setAwardedTo(job.getAwardedTo());
 			jobDTO.setJobApplications(job.getJobApplications());
 			jobDTO.setPostedBy(job.getPostedBy()); 
 			jobDTO.setPostedDate(job.getPostedDate());

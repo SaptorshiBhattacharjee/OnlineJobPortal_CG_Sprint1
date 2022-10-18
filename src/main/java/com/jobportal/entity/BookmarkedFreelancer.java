@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import com.jobportal.dto.BookmarkedFreelancerDTO;
 
@@ -15,13 +16,15 @@ public class BookmarkedFreelancer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@NotNull(message="Entering a skill is mandatory")
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "skill_id", unique = true)
 	private Skill skill;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "freelancer_id", unique = true)
+	@NotNull(message="Entering a freelancer is mandatory")
 	private Freelancer freelancer;
-	//Is there any relation to be add here?
+	@NotNull(message="Entering a skill is mandatory")
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "recruiter_id", unique = true)
 	private Recruiter bookmarkedBy;
@@ -62,7 +65,7 @@ public class BookmarkedFreelancer {
 		this.bookmarkedBy = bookmarkedBy;
 	}
 	
-	public BookmarkedFreelancerDTO toBookmarkedFreelancer() {
+	public BookmarkedFreelancerDTO toBookmarkedFreelancerDTO() {
 		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = new BookmarkedFreelancerDTO();
 		bookmarkedFreelancerDTO.setId(this.getId());
 		bookmarkedFreelancerDTO.setBookmarkedBy(this.bookmarkedBy);
