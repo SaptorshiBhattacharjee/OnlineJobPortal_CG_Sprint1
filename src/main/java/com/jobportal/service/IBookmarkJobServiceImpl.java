@@ -88,10 +88,4 @@ public class IBookmarkJobServiceImpl implements IBookmarkJobService
 		
 		return bookmarkedJobDTO;
 	}
-
-	@Override
-	public BookmarkedJob findById(Long id) throws JobPortalException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
