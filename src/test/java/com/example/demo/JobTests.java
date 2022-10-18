@@ -67,7 +67,8 @@ public class JobTests {
         jobdto.setJobApplications(jobApplications);
         
            when(ijobdao.save(jobdto.toJob())).thenReturn(jobdto.toJob());
-		 assertEquals(jobdto,ijobservice.postjob(skillDTO, recruiterdto));
+           JobDTO actual = ijobservice.postjob(skillDTO, recruiterdto);
+		 assertEquals(actual,jobdto);
 		
 		
 		
