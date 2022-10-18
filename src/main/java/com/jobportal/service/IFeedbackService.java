@@ -12,6 +12,6 @@ public interface IFeedbackService {
 	
 	public FeedbackDTO createFeedback(RecruiterDTO recruiterDTO,FreelancerDTO freelancerDTO,int rating,String review) throws InvalidFeedbackException;
 	public int averageRating(FreelancerDTO freelancerDTO) throws InvalidFeedbackException;
-	public List<FeedbackDTO> findFeedbacksByFreelancer(FreelancerDTO freelancerDTO) throws InvalidFeedbackException;
+	public FeedbackDTO findFeedbacksByFreelancer(FreelancerDTO freelancerDTO) throws InvalidFeedbackException;
 
 }
