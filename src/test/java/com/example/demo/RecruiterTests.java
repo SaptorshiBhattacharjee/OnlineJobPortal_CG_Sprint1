@@ -1,70 +1,15 @@
 package com.example.demo;
-
-
-<<<<<<< HEAD
 import java.util.Optional;
-
-
-<<<<<<< HEAD
-//import org.junit.Test;
-
-
 import org.junit.jupiter.api.Assertions;
-
-=======
-=======
-=======
-import java.util.Optional;
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
-
-<<<<<<< HEAD
-
-<<<<<<< HEAD
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
-
-<<<<<<< HEAD
-import org.junit.jupiter.api.BeforeEach;
+//import java.util.Optional;
+//import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-=======
-=======
-=======
-//import org.junit.Test;
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
-//import org.junit.Test;
-<<<<<<< HEAD
-
-
-import org.junit.jupiter.api.Assertions;
-
-=======
-<<<<<<< HEAD
-import org.junit.Test;
-=======
-import org.junit.jupiter.api.Assertions;
-
-//import org.junit.Test;
-//import org.junit.Test;
-
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
-import org.junit.jupiter.api.Assertions;
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
-
-import org.junit.jupiter.api.BeforeEach;
-<<<<<<< HEAD
-import org.junit.jupiter.api.Test;
-
-
-=======
-<<<<<<< HEAD
-=======
-import org.junit.jupiter.api.Test;
-
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+//import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -112,41 +57,8 @@ public class RecruiterTests {
 		Mockito.when(iRecruiterDao.findById(1)).thenReturn(optional);
 		RecruiterDTO actual = iRecruiterService.update(recruiterDTO);
 		Assertions.assertEquals(actual, recruiterDTO);
-		
-<<<<<<< HEAD
 	}
-	
-=======
-<<<<<<< HEAD
-	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 
-<<<<<<< HEAD
-=======
-=======
-	}
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
-	/*@Test
-	void saveRecruiter() {
-		int id=1;
-		Mockito.when(iRecruiterDao.findById((id))).thenReturn((recruiter));
-		RecruiterDTO expectedRecruiterDto = new RecruiterDTO(1,"Sri","Ram",null,null,null);
-		RecruiterDTO actualAppointmentDto = iRecruiterService.save(recruiterDto);
-<<<<<<< HEAD
-	}*/
-=======
-<<<<<<< HEAD
-	}*/
-=======
-<<<<<<< HEAD
-	}*/
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 
 	@Test
 	void failedFindByIdTest() throws InvalidRecruiterException{
@@ -193,19 +105,8 @@ public class RecruiterTests {
 		RecruiterDTO actual = iRecruiterService.update(recruiterDTO);
 		InvalidRecruiterException exception = Assertions.assertThrows(InvalidRecruiterException.class,() -> iRecruiterService.update(recruiterDTO));
 		Assertions.assertEquals("Service.ADMIN_NOT_FOUND", exception.getMessage());
-<<<<<<< HEAD
-		
-	}
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
-=======
-=======
 		
 	}
 }
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+
 
