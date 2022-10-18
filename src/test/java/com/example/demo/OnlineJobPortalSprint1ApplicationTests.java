@@ -1,7 +1,6 @@
 package com.example.demo;
 
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
@@ -18,8 +17,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import com.jobportal.dto.AdminDTO;
@@ -27,7 +26,6 @@ import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.repository.IAdminDao;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IAdminServiceImpl;
-
 
 import java.util.ArrayList;
 import java.util.Collections;

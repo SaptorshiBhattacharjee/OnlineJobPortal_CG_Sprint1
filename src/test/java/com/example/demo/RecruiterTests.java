@@ -3,6 +3,7 @@ package com.example.demo;
 
 import java.util.Optional;
 
+//import org.junit.Test;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.InjectMocks;
@@ -55,6 +56,13 @@ public class RecruiterTests {
 		
 	}
 	
+	/*@Test
+	void saveRecruiter() {
+		int id=1;
+		Mockito.when(iRecruiterDao.findById((id))).thenReturn((recruiter));
+		RecruiterDTO expectedRecruiterDto = new RecruiterDTO(1,"Sri","Ram",null,null,null);
+		RecruiterDTO actualAppointmentDto = iRecruiterService.save(recruiterDto);
+	}*/
 	@Test
 	void failedFindByIdTest() throws InvalidRecruiterException{
 

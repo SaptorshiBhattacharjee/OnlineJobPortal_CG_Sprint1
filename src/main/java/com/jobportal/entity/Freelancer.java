@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.jobportal.dto.FreelancerDTO;
+
 @Entity
 public class Freelancer 
 {
@@ -132,5 +134,20 @@ public class Freelancer
 		return "Freelancer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
 				+ ", appliedJobs=" + appliedJobs + ", feedbacks=" + feedbacks + ", skills=" + skills
 				+ ", bookmarkedJobs=" + bookmarkedJobs + "]";
+	}
+	
+	public FreelancerDTO toFreelancerDto()
+	{
+		FreelancerDTO freelancerDto = new FreelancerDTO();
+		freelancerDto.setId(this.getId());
+		freelancerDto.setFirstName(this.getFirstName());
+		freelancerDto.setLastName(this.getLastName());
+		freelancerDto.setPassword(this.getPassword());
+		freelancerDto.setAppliedJobs(this.getAppliedJobs());
+		freelancerDto.setFeedbacks(this.getFeedbacks());
+		freelancerDto.setSkills(this.getSkills());
+		freelancerDto.setBookmarkedJobs(this.getBookmarkedJobs());
+		
+		return(freelancerDto);
 	}
 }

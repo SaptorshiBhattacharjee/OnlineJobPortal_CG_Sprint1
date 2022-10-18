@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.jobportal.dto.BookmarkedJobDTO;
+
 @Entity
 public class BookmarkedJob 
 {
@@ -91,5 +93,16 @@ public class BookmarkedJob
 	@Override
 	public String toString() {
 		return "BookmarkedJob [id=" + id + ", skill=" + skill + ", job=" + job + ", freelancer=" + freelancer + "]";
+	}
+	
+	public BookmarkedJobDTO toBookmarkedJobDto()
+	{
+		BookmarkedJobDTO bookmarkedJobDto = new BookmarkedJobDTO();
+		bookmarkedJobDto.setId(this.getId());
+		bookmarkedJobDto.setSkill(this.getSkill());
+		bookmarkedJobDto.setJob(this.getJob());
+		bookmarkedJobDto.setFreelancer(this.getFreelancer());
+		
+		return(bookmarkedJobDto);
 	}
 }
