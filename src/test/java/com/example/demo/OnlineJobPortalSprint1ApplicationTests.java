@@ -1,6 +1,5 @@
 package com.example.demo;
 
-<<<<<<< HEAD
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -9,22 +8,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-=======
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 
-<<<<<<< HEAD
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.repository.IAdminDao;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IAdminServiceImpl;
 
-@SpringBootTest
-=======
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,11 +42,9 @@ import com.jobportal.service.IRecruiterService;
 import com.jobportal.service.IRecruiterServiceImpl;
 
 @SpringBootTest(classes = OnlineJobPortalSprint1Application.class)
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 class OnlineJobPortalSprint1ApplicationTests {
 
-<<<<<<< HEAD
-=======
+
 	@Mock
 	IRecruiterDao iRecruiterDao;
 
@@ -87,6 +79,5 @@ class OnlineJobPortalSprint1ApplicationTests {
 	 * }
 	 */
 	
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 
 }
