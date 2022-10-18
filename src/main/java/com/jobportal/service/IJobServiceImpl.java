@@ -54,7 +54,7 @@ public class IJobServiceImpl implements IJobService{
 	@Override
 	public JobDTO findById(int id) throws InvalidJobException {
 		Optional<Job> optional = iJobDao.findById(id);
-		Job job = optional.orElseThrow(() -> new InvalidJobException("Service.NO_SUCH_JOB"));
+		Job job = optional.orElseThrow(() -> new InvalidJobException("Service.NO_JOB_FOUND"));
 		
 		JobDTO jobDto = new JobDTO();
 		jobDto.setId(job.getId());
@@ -79,7 +79,7 @@ public class IJobServiceImpl implements IJobService{
 		List<Job> JobBySkill = iJobDao.findJobBySkill(skill);
 		List<JobDTO> JobDTOBySkill = new ArrayList<>();
 		
-		for(Job job : JobBySkill) { // list job nunchi oka okati list of job dto  
+		for(Job job : JobBySkill) {  
 			JobDTO jobDTO = new JobDTO();
 			jobDTO.setId(job.getId());
 			jobDTO.setAwardedTo(job.getAwardedTo());
@@ -93,6 +93,16 @@ public class IJobServiceImpl implements IJobService{
 		return JobDTOBySkill;
 	
 	}
+//	@Override
+//	public void close(Long id) {
+//		if (jobdao.existsById(id)) {
+//			Job job = jobdao.findById(id).get();
+//			job.setActive(false);
+//			jobdao.save(job);
+//		} else {
+//			throw new InvalidJobException();
+//		}
+//	}
 
 	@Override
 	public void close(JobDTO jobDTO) throws InvalidJobException {

@@ -4,16 +4,30 @@ package com.example.demo;
 <<<<<<< HEAD
 import java.util.Optional;
 
+<<<<<<< HEAD
+
+=======
 =======
 import java.util.Optional;
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
+
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
 =======
+=======
 //import org.junit.Test;
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 //import org.junit.Test;
+<<<<<<< HEAD
+
+
+import org.junit.jupiter.api.Assertions;
+
+=======
 <<<<<<< HEAD
 import org.junit.Test;
 =======
@@ -24,13 +38,20 @@ import org.junit.jupiter.api.Assertions;
 
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 import org.junit.jupiter.api.Assertions;
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 
 import org.junit.jupiter.api.BeforeEach;
+<<<<<<< HEAD
+import org.junit.jupiter.api.Test;
+
+
+=======
 <<<<<<< HEAD
 =======
 import org.junit.jupiter.api.Test;
 
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -81,11 +102,17 @@ public class RecruiterTests {
 		
 <<<<<<< HEAD
 	}
+<<<<<<< HEAD
+=======
 	
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 
+<<<<<<< HEAD
+=======
 =======
 	}
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 	/*@Test
 	void saveRecruiter() {
 		int id=1;
@@ -97,7 +124,11 @@ public class RecruiterTests {
 =======
 <<<<<<< HEAD
 	}*/
+=======
+<<<<<<< HEAD
+	}*/
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 
 	@Test
 	void failedFindByIdTest() throws InvalidRecruiterException{
@@ -148,9 +179,12 @@ public class RecruiterTests {
 		
 	}
 
+<<<<<<< HEAD
+=======
 =======
 		
 	}
 }
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 

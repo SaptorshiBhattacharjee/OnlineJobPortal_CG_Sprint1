@@ -44,7 +44,7 @@ public class JobAPI {
     	 return new ResponseEntity<>(ijobservice.findJobsBySkill(skillDTO), HttpStatus.OK);
      }
      @GetMapping(value="/close")
-    public ResponseEntity<Object> close(@PathVariable JobDTO jobDTO)throws JobPortalException{
+    public ResponseEntity<Object> close(@RequestBody JobDTO jobDTO)throws JobPortalException{
     	 try {
  			ijobservice.close(jobDTO);
  		} catch (InvalidJobException exception) {
