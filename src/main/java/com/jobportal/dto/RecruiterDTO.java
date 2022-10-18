@@ -96,6 +96,15 @@ public class RecruiterDTO {
 				&& Objects.equals(freelancers, other.freelancers) && id == other.id
 				&& Objects.equals(lastName, other.lastName) && Objects.equals(postedJobs, other.postedJobs);
 	}
+	public Recruiter toRecruiter() {
+		Recruiter recruiter = new Recruiter();
+		recruiter.setFirstName(this.firstName);
+		recruiter.setLastName(this.lastName);
+		recruiter.setFeedbacks(this.Feedbacks);
+		recruiter.setFreelancers(this.freelancers);
+		recruiter.setPostedJobs(this.postedJobs);
+		return recruiter;
+	}
 
 
 	

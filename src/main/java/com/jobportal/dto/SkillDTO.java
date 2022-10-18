@@ -1,6 +1,5 @@
 package com.jobportal.dto;
 
-import com.jobportal.entity.Admin;
 import com.jobportal.entity.Skill;
 
 public class SkillDTO {
@@ -8,6 +7,8 @@ public class SkillDTO {
 	private int id;
 	private String name;
 	private String description;
+	
+
 	public int getId() {
 		return id;
 	}
