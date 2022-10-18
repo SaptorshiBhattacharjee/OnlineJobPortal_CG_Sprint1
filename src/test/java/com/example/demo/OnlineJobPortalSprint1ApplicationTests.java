@@ -1,8 +1,6 @@
 package com.example.demo;
 
 
-
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
@@ -36,9 +34,12 @@ import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.repository.IAdminDao;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IAdminServiceImpl;
+<<<<<<< HEAD
 
 
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+=======
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,21 +78,23 @@ import com.jobportal.service.IRecruiterServiceImpl;
 @SpringBootTest(classes = OnlineJobPortalSprint1Application.class)
 class OnlineJobPortalSprint1ApplicationTests {
 
-	@Mock
-	IRecruiterDao iRecruiterDao;
-	
-	@InjectMocks
-	IRecruiterService iRecruiterService = new IRecruiterServiceImpl();
+//	@Mock
+//	IRecruiterDao iRecruiterDao;
+//	
+//	@InjectMocks
+//	IRecruiterService iRecruiterService = new IRecruiterServiceImpl();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 	@Test
 =======
+=======
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 
 	/*@Test
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 	void saveRecruiter() throws InvalidRecruiterException{
 		RecruiterDTO recruiterDto = new RecruiterDTO();
 		Feedback feedback1 = new Feedback();
@@ -115,6 +118,7 @@ class OnlineJobPortalSprint1ApplicationTests {
 
 	@InjectMocks
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	IAdminService iAdminService =  new IAdminServiceImpl();
 
@@ -123,6 +127,8 @@ class OnlineJobPortalSprint1ApplicationTests {
 
 =======
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+=======
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 	IAdminService iAdminService =  new IAdminServiceImpl();
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 	IJobService ijobservice = new IJobServiceImpl();
@@ -181,10 +187,7 @@ class OnlineJobPortalSprint1ApplicationTests {
 	}
 =======
 	}
-<<<<<<< HEAD
-=======
 	
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 	
 >>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 	@Test
