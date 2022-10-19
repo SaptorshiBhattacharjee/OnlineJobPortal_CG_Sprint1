@@ -25,7 +25,7 @@ public class JobApplication {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
- 	@ManyToOne(cascade=CascadeType.ALL)
+ 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="job_id")
  	@NotNull(message="Entering a job is mandatory")
 	private Job job;
