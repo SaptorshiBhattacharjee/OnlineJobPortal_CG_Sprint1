@@ -52,7 +52,9 @@ public class JobApplicationAPI {
 	}
 
 	@PutMapping(value="/updatejobapplication")
-	public ResponseEntity<String> updateJobApplication(@RequestBody JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
+	public ResponseEntity<String> updateJobApplicatio(@RequestBody int jobId, String coverLetter, int freelancerId) throws InvalidJobApplicationException, JobPortalException{
+		JobDTO jobDTO = iJobService.findById(jobId);
+		FreelancerDTO freelancerDTO = iFreelancerService.findById(freelancerId);
 		JobApplicationDTO updateTo = iJobApplicationService.updateJobApplication(jobDTO, coverLetter, freelancerDTO);
 		String successMessage = environment.getProperty("API.UPDATED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
@@ -60,7 +62,9 @@ public class JobApplicationAPI {
 	
 	@DeleteMapping(value="/delete")
 
-	public ResponseEntity<String> remove(@RequestBody JobDTO jobDTO, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
+	public ResponseEntity<String> remove(@RequestBody int jobId, int freelancerId) throws InvalidJobApplicationException, JobPortalException{
+		JobDTO jobDTO = iJobService.findById(jobId);
+		FreelancerDTO freelancerDTO = iFreelancerService.findById(freelancerId);
 		iJobApplicationService.remove(jobDTO, freelancerDTO);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);

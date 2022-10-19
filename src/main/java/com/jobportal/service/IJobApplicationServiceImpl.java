@@ -1,4 +1,3 @@
-
 package com.jobportal.service;
 
 import java.time.LocalDateTime;
@@ -133,12 +132,11 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 	@Override
 	public JobApplicationDTO findById(int id) throws InvalidJobApplicationException {
 		Optional<JobApplication> optional = iJobApplicationDao.findById(id);
-		JobApplication jobApplication = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NOT_APPLIED"));
+		JobApplication jobApplication = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NOTAPPLIED"));
 		
 		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
 		return jobApplicationDTO;
 		
 	}
 }
-
 
