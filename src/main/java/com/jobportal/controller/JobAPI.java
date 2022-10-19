@@ -43,10 +43,10 @@ public class JobAPI {
      public ResponseEntity<Object>findJobsBySkill(SkillDTO skillDTO)throws JobPortalException{
     	 return new ResponseEntity<>(ijobservice.findJobsBySkill(skillDTO), HttpStatus.OK);
      }
-     @GetMapping(value="/close")
-    public ResponseEntity<Object> close(@RequestBody JobDTO jobDTO)throws JobPortalException{
+     @GetMapping(value="/close/{id}")
+    public ResponseEntity<Object> close(@PathVariable Integer id)throws JobPortalException{
     	 try {
- 			ijobservice.close(jobDTO);
+ 			ijobservice.close(id);
  		} catch (InvalidJobException exception) {
  			throw new InvalidJobException("Job with given id not found");
  		}

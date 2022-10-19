@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.jobportal.dto.FreelancerDTO;
@@ -25,29 +24,29 @@ public class Freelancer
 	private String lastName;
 	private String password;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="jobapplication_id")
-	private JobApplication appliedJobs;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="freelancer_id")
+	private List<JobApplication> appliedJobs;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="feedback_id")
-	private Feedback feedbacks;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="freelancer_id")
+	private List<Feedback> feedbacks;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="skillexperience_id")
-	private SkillExperience skills;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="freelancer_id")
+	private List<SkillExperience> skills;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="boomarkedjobs_id")
-	private BookmarkedJob bookmarkedJobs;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="freelancer_id")
+	private List<BookmarkedJob> bookmarkedJobs;
 	
 	// defining default and parameterized constructors
 	public Freelancer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Freelancer(int id, String firstName, String lastName, String password, JobApplication appliedJobs,
-			Feedback feedbacks, SkillExperience skills, BookmarkedJob bookmarkedJobs) {
+	public Freelancer(int id, String firstName, String lastName, String password, List<JobApplication> appliedJobs,
+			List<Feedback> feedbacks, List<SkillExperience> skills, List<BookmarkedJob> bookmarkedJobs) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -60,17 +59,10 @@ public class Freelancer
 	}
 
 	// defining the getter and setter methods
-	
-	
-	// defining hashcode and equals method
-	@Override
-	public int hashCode() {
-		return Objects.hash(appliedJobs, bookmarkedJobs, feedbacks, firstName, id, lastName, password, skills);
-	}
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getFirstName() {
@@ -91,29 +83,35 @@ public class Freelancer
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public JobApplication getAppliedJobs() {
+	public List<JobApplication> getAppliedJobs() {
 		return appliedJobs;
 	}
-	public void setAppliedJobs(JobApplication appliedJobs) {
+	public void setAppliedJobs(List<JobApplication> appliedJobs) {
 		this.appliedJobs = appliedJobs;
 	}
-	public Feedback getFeedbacks() {
+	public List<Feedback> getFeedbacks() {
 		return feedbacks;
 	}
-	public void setFeedbacks(Feedback feedbacks) {
+	public void setFeedbacks(List<Feedback> feedbacks) {
 		this.feedbacks = feedbacks;
 	}
-	public SkillExperience getSkills() {
+	public List<SkillExperience> getSkills() {
 		return skills;
 	}
-	public void setSkills(SkillExperience skills) {
+	public void setSkills(List<SkillExperience> skills) {
 		this.skills = skills;
 	}
-	public BookmarkedJob getBookmarkedJobs() {
+	public List<BookmarkedJob> getBookmarkedJobs() {
 		return bookmarkedJobs;
 	}
-	public void setBookmarkedJobs(BookmarkedJob bookmarkedJobs) {
+	public void setBookmarkedJobs(List<BookmarkedJob> bookmarkedJobs) {
 		this.bookmarkedJobs = bookmarkedJobs;
+	}
+	
+	// defining hashcode and equals method
+	@Override
+	public int hashCode() {
+		return Objects.hash(appliedJobs, bookmarkedJobs, feedbacks, firstName, id, lastName, password, skills);
 	}
 	@Override
 	public boolean equals(Object obj) {

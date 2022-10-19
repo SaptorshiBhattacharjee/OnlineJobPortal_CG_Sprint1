@@ -1,4 +1,3 @@
-
 package com.jobportal.dto;
 
 import java.time.LocalDate;
@@ -15,7 +14,7 @@ public class JobDTO {
 	private  Recruiter postedBy;
 	private  LocalDate postedDate;
 	private Freelancer awardedTo;
-	private  JobApplication jobApplications;
+	private  List<JobApplication> jobApplications;
 	private Boolean active;
 
     public int getId() {
@@ -57,11 +56,11 @@ public class JobDTO {
 	public void setAwardedTo(Freelancer awardedTo) {
 		this.awardedTo = awardedTo;
 	}
-	public JobApplication getJobApplications() {
+	public List<JobApplication> getJobApplications() {
 		return jobApplications;
 	}
 
-	public void setJobApplications(JobApplication jobApplications) {
+	public void setJobApplications(List<JobApplication> jobApplications) {
 		this.jobApplications = jobApplications;
 	}
 

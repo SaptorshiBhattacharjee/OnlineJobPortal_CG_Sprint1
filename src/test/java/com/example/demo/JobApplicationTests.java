@@ -89,7 +89,6 @@ class JobApplicationTests {
 //		Assertions.assertEquals(actual, jobApplicationDTO);
 //	}
 	
-<<<<<<< HEAD
 //	@Test
 //	void applyToJobTest() throws InvalidJobApplicationException{
 //		JobApplication jobApplication = new JobApplication(3, job.toJobDTO(), LocalDateTime.now(),"Applicant 4");
@@ -98,7 +97,6 @@ class JobApplicationTests {
 //		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
 //		Assertions.assertEquals(actual, jobApplicationDTO);
 //	}
-=======
 	@Test
 	void applyToJobTest2() throws InvalidJobApplicationException{
 		JobApplication jobApplication = new JobApplication(3, job.toJobDTO(), LocalDateTime.now(),"Applicant 4");
@@ -107,6 +105,5 @@ class JobApplicationTests {
 		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
 		Assertions.assertEquals(actual, jobApplicationDTO);
 	}
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1
 
 }

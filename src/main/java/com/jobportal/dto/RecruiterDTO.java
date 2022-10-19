@@ -13,9 +13,9 @@ public class RecruiterDTO {
 	private int id;
 	private String firstName;
 	private String lastName;
-	private Job postedJobs;
-	private Feedback Feedbacks;
-	private BookmarkedFreelancer freelancers;
+	private List<Job> postedJobs;
+	private List<Feedback> Feedbacks;
+	private List<BookmarkedFreelancer> freelancers;
 	
 	
 	
@@ -24,8 +24,8 @@ public class RecruiterDTO {
 	}
 	
 	
-	public RecruiterDTO(int id, String firstName, String lastName, Job postedJobs, Feedback feedbacks,
-			BookmarkedFreelancer freelancers) {
+	public RecruiterDTO(int id, String firstName, String lastName, List<Job> postedJobs, List<Feedback> feedbacks,
+			List<BookmarkedFreelancer> freelancers) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -36,67 +36,42 @@ public class RecruiterDTO {
 	}
 
 
-	
 	public int getId() {
 		return id;
 	}
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
 	public String getFirstName() {
 		return firstName;
 	}
-
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
-
 	public String getLastName() {
 		return lastName;
 	}
-
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-
-	public Job getPostedJobs() {
+	public List<Job> getPostedJobs() {
 		return postedJobs;
 	}
-
-
-	public void setPostedJobs(Job postedJobs) {
+	public void setPostedJobs(List<Job> postedJobs) {
 		this.postedJobs = postedJobs;
 	}
-
-
-	public Feedback getFeedbacks() {
+	public List<Feedback> getFeedbacks() {
 		return Feedbacks;
 	}
-
-
-	public void setFeedbacks(Feedback feedbacks) {
+	public void setFeedbacks(List<Feedback> feedbacks) {
 		Feedbacks = feedbacks;
 	}
-
-
-	public BookmarkedFreelancer getFreelancers() {
+	public List<BookmarkedFreelancer> getFreelancers() {
 		return freelancers;
 	}
-
-
-	public void setFreelancers(BookmarkedFreelancer freelancers) {
+	public void setFreelancers(List<BookmarkedFreelancer> freelancers) {
 		this.freelancers = freelancers;
 	}
-
-
 	@Override
 	public String toString() {
 		return "RecruiterDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", postedJobs="

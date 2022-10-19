@@ -59,10 +59,10 @@ public class IBookmarkJobServiceImpl implements IBookmarkJobService
 	}
 
 	@Override
-	public BookmarkedJob findBookmarkedJobsBySkill(Skill skill, Freelancer freelancer) throws JobPortalException 
+	public List<BookmarkedJob> findBookmarkedJobsBySkill(Skill skill, Freelancer freelancer) throws JobPortalException 
 	{
 		//freelancer
-		Freelancer freelancer = new Freelancer();
+		List<Freelancer> list = new ArrayList<>();
 		for(int i = 0; i < list.size(); i++)//change here
 		{
 			if(skill.getName().equals(freelancer.getBookmarkedJobs().toString()))
