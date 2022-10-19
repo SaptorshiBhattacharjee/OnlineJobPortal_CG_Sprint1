@@ -90,12 +90,20 @@ class JobApplicationTests {
 	}
 	
 	@Test
-	void applyToJobTest() throws InvalidJobApplicationException{
+	void failedApplyToJobTest() throws InvalidJobApplicationException{
 		JobApplication jobApplication = new JobApplication(3, job.toJobDTO(), LocalDateTime.now(),"Applicant 4");
-		Mockito.when(iJobApplicationDao.save(jobApplication)).thenReturn(jobApplication);
-		JobApplicationDTO actual =iJobApplicationService.applyToJob(job.toJobDTO(), "Applicant 4",freelancer.toFreelancerDTO());
+		Mockito.when(iJobApplicationDao.save(jobApplication1)).thenReturn(jobApplication1);
+		JobApplicationDTO actual =iJobApplicationService.applyToJob(job.toJobDTO(), "Applicant 1",freelancer.toFreelancerDTO());
+		InvalidJobApplication = jobApplication.toJobApplicationDTO();
+		Assertions.assertThrows(actual, jobApplicationDTO);
+	}
+	
+	@Test
+	void updateJobApplicationTest() throws InvalidJobApplicationException{
+		JobApplication jobApplication = new JobApplication(3, job.toJobDTO(), LocalDateTime.now(),"Applicant 4");
+		Mockito.when(iJobApplicationDao.save(jobApplication1)).thenReturn(jobApplication1);
+		JobApplicationDTO actual =iJobApplicationService.applyToJob(job.toJobDTO(), "Applicant 1",freelancer.toFreelancerDTO());
 		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
 		Assertions.assertEquals(actual, jobApplicationDTO);
 	}
-
 }
