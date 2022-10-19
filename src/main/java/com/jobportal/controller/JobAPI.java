@@ -19,7 +19,7 @@ import com.jobportal.exception.JobPortalException;
 import com.jobportal.service.IJobService;
 
 @RestController
-@RequestMapping("value=/jobportal/job")
+@RequestMapping(value="/jobportal/job")
 public class JobAPI {
      @Autowired
 	private IJobService ijobservice;
@@ -34,8 +34,8 @@ public class JobAPI {
     	 return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
      }
      
-     @GetMapping(value="/findbyid/{jobid}")
-     public ResponseEntity <JobDTO>findById(@PathVariable int id) throws JobPortalException{
+     @GetMapping(value="/findbyid/{id}")
+     public ResponseEntity <JobDTO>findById(@PathVariable Integer id) throws JobPortalException{
     	 JobDTO job = ijobservice.findById(id);
     	 return new ResponseEntity<>(job, HttpStatus.OK);
     }
@@ -44,7 +44,7 @@ public class JobAPI {
     	 return new ResponseEntity<>(ijobservice.findJobsBySkill(skillDTO), HttpStatus.OK);
      }
      @GetMapping(value="/close")
-    public ResponseEntity<Object> close(@PathVariable JobDTO jobDTO)throws JobPortalException{
+    public ResponseEntity<Object> close(@RequestBody JobDTO jobDTO)throws JobPortalException{
     	 try {
  			ijobservice.close(jobDTO);
  		} catch (InvalidJobException exception) {

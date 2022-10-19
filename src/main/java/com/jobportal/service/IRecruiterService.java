@@ -7,6 +7,6 @@ public interface IRecruiterService {
 	
 	public RecruiterDTO save(RecruiterDTO recruiterDTO) throws InvalidRecruiterException;
 	public RecruiterDTO update(RecruiterDTO recruiterDTO) throws InvalidRecruiterException;
-	public RecruiterDTO findById(Integer id) throws InvalidRecruiterException;
+	public RecruiterDTO findById(int id) throws InvalidRecruiterException;
 
 }

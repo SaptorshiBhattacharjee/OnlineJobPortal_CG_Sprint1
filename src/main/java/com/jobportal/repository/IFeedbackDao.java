@@ -12,6 +12,6 @@ import com.jobportal.entity.Freelancer;
 
 public interface IFeedbackDao extends CrudRepository<Feedback, Integer>{
 	@Query("SELECT fb FROM Feedback fb WHERE fb.createdFor=:freelancer")
-	List<Feedback> findFeedbacksByFreelancer(@Param("freelancer") Freelancer freelancer);
+	Feedback findFeedbacksByFreelancer(@Param("freelancer") Freelancer freelancer);
 
 }

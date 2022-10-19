@@ -26,7 +26,7 @@ import com.jobportal.service.IJobApplicationService;
 import com.jobportal.service.IJobService;
 
 @RestController
-@RequestMapping("value=/jobportal/jobapplication")
+@RequestMapping(value="/jobportal/jobapplication")
 public class JobApplicationAPI {
 	
 	@Autowired

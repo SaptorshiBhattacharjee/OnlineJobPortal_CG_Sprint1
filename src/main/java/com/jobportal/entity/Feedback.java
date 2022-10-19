@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.jobportal.dto.AdminDTO;
+import com.jobportal.dto.FeedbackDTO;
+
 @Entity
 public class Feedback {
 	@Id
@@ -72,6 +75,16 @@ public class Feedback {
 	public String toString() {
 		return "Feedback [id=" + id + ", rating=" + rating + ", comment=" + comment + ", createdBy=" + createdBy
 				+ ", createdFor=" + createdFor + "]";
+	}
+	
+	public FeedbackDTO toFeedbackDTO() {
+		FeedbackDTO feedbackDTO = new FeedbackDTO();
+		feedbackDTO.setId(this.id);
+		feedbackDTO.setRating(this.rating);
+		feedbackDTO.setComment(this.comment);
+		feedbackDTO.setCreatedBy(this.createdBy);
+		feedbackDTO.setCreatedFor(this.createdFor);
+		return feedbackDTO;
 	}
 
 }
