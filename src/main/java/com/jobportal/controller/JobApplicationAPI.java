@@ -61,7 +61,7 @@ public class JobApplicationAPI {
 	@DeleteMapping(value="/delete/{freelancerId}/{jobId}")
 
 	public ResponseEntity<String> remove(@PathVariable Integer jobId, @PathVariable Integer freelancerId) throws Exception{
-		iJobApplicationService.remove(jobId, freelancerId);
+		boolean removed = iJobApplicationService.remove(jobId, freelancerId);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 		

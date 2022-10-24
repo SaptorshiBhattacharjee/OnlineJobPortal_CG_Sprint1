@@ -26,11 +26,11 @@ public class JobApplication {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
- 	@OneToOne(cascade=CascadeType.ALL)
+ 	@OneToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="job_id")
  	@NotNull(message="{jobApplication.job.absent}")
 	private Job job;
- 	@OneToOne(cascade=CascadeType.ALL)
+ 	@OneToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="freelancer_id")
  	@NotNull(message="{jobApplication.freelancer.absent}")
 	private Freelancer freelancer;
