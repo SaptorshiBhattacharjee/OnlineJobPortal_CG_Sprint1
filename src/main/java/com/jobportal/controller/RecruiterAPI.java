@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.dto.RecruiterDTO;
+import com.jobportal.exception.InvalidRecruiterException;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IRecruiterService;
 
@@ -42,7 +43,7 @@ public class RecruiterAPI {
 	}
 	
 	@GetMapping(value="/findbyid/{id}")
-	public ResponseEntity<RecruiterDTO> findById(@PathVariable Integer id) throws Exception{
+	public ResponseEntity<RecruiterDTO> findById(@PathVariable Integer id) throws InvalidRecruiterException{
 		RecruiterDTO recruiter = iRecruiterService.findById(id);
 		return new ResponseEntity<>(recruiter, HttpStatus.OK);
 	}

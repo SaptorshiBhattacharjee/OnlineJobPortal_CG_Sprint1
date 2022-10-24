@@ -34,16 +34,12 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 	IFreelancerDao ifreelancerDao;
 
 	@Override
-	public FeedbackDTO createFeedback(RecruiterDTO recruiterDTO, FreelancerDTO freelancerDTO, int rating, String review)
+	public FeedbackDTO createFeedback(int rating, String review)
 			throws InvalidFeedbackException {	
 		Feedback feedback = new Feedback();
 		FeedbackDTO feedbackDTO = new FeedbackDTO();
 		Recruiter recruiter = new Recruiter();
 		Freelancer freelancer = new Freelancer();
-		
-		recruiter.setId(recruiterDTO.getId());
-		freelancer.setId(freelancerDTO.getId());
-		
 		feedback.setCreatedBy(recruiter);
 		feedback.setCreatedFor(freelancer);
 		feedback.setComment(review);

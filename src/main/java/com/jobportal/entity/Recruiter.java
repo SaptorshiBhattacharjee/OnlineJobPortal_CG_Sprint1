@@ -17,18 +17,18 @@ import com.jobportal.dto.RecruiterDTO;
 @Entity
 public class Recruiter {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String firstName;
 	private String lastName;
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="recruiter_id")
+	@JoinColumn(name="job_id")
 	private List<Job> postedJobs;
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="recruiter_id")
+	@JoinColumn(name="feedback_id")
 	private List<Feedback> Feedbacks;
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="recruiter_id")
+	@JoinColumn(name="bookmarkedfreelancer_id")
 	private List<BookmarkedFreelancer> freelancers;
 	public int getId() {
 		return id;

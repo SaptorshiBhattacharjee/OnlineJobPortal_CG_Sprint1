@@ -28,9 +28,9 @@ public class FeedbackAPI {
 	Environment environment;
 	
 	@PostMapping(value="/createfeedback")
-	public ResponseEntity<String> applyToJob(@RequestBody RecruiterDTO recruiterDTO, FreelancerDTO freelancerDTO, int rating, String review) throws Exception{
-		FeedbackDTO feedback = iFeedbackService.createFeedback(recruiterDTO,freelancerDTO,rating,review);
-		String successMessage = environment.getProperty("API.FEEDBACK_CREATED_SUCCESSFULLY");
+	public ResponseEntity<String> applyToJob(@RequestBody  int rating, String review) throws Exception{
+		FeedbackDTO feedback = iFeedbackService.createFeedback(rating,review);
+		String successMessage=environment.getProperty("API.FEEDBACK_CREATED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 	
