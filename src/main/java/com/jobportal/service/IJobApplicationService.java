@@ -11,12 +11,12 @@ import com.jobportal.exception.InvalidJobApplicationException;
 
 public interface IJobApplicationService {
 
-	public JobApplicationDTO applyToJob(JobDTO jobDTO, String coverletter, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException;
+	public boolean applyToJob(int jobId, String coverletter, int freelancerId) throws Exception;
 	
-	public JobApplicationDTO updateJobApplication(JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException;
+	public boolean updateJobApplication(int jobDId, String coverLetter, int freelancerId) throws Exception;
 	
-	public void remove(JobDTO jobDTO, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException;
+	public boolean remove(int jobId, int freelancerId) throws Exception;
 
-	public JobApplicationDTO findById(int id) throws InvalidJobApplicationException;
+	public JobApplicationDTO findById(int id) throws Exception;
 }
 

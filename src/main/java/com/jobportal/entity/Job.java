@@ -35,10 +35,11 @@ private  LocalDate postedDate;
 @JoinColumn(name = "freelancer_id", unique = true)
 private Freelancer awardedTo;
 
+/*
 @OneToMany(cascade = CascadeType.ALL)
 @JoinColumn(name = "job_id", unique = true)
 private  List<JobApplication> jobApplications;
-
+*/
 private Boolean active;
 
 public Job() {
@@ -55,7 +56,7 @@ public Job(int id, Skill skill, Recruiter postedBy, LocalDate postedDate, Freela
 	this.postedBy = postedBy;
 	this.postedDate = postedDate;
 	this.awardedTo = awardedTo;
-	this.jobApplications = jobApplications;
+	//this.jobApplications = jobApplications;
 	this.active = active;
 }
 
@@ -99,13 +100,14 @@ public void setAwardedTo(Freelancer awardedTo) {
 	this.awardedTo = awardedTo;
 }
 
-
+/*
 public List<JobApplication> getJobApplications() {
 	return jobApplications;
 }
 public void setJobApplications(List<JobApplication> jobApplications) {
 	this.jobApplications = jobApplications;
 }
+*/
 public Boolean getActive() {
 	return active;
 }
@@ -114,37 +116,14 @@ public void setActive(Boolean active) {
 }
 
 
-@Override
-public String toString() {
-	return "Job [id=" + id + ", skill=" + skill + ", postedBy=" + postedBy + ", postedDate=" + postedDate
-			+ ", awardedTo=" + awardedTo + ", jobApplications=" + jobApplications + ", active=" + active + "]";
-}
 
-@Override
-public int hashCode() {
-	return Objects.hash(active, awardedTo, id, jobApplications, postedBy, postedDate, skill);
-}
-
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Job other = (Job) obj;
-	return Objects.equals(active, other.active) && Objects.equals(awardedTo, other.awardedTo) && id == other.id
-			&& Objects.equals(jobApplications, other.jobApplications) && Objects.equals(postedBy, other.postedBy)
-			&& Objects.equals(postedDate, other.postedDate) && Objects.equals(skill, other.skill);
-}
 
 	public JobDTO toJobDTO() {
 		JobDTO jobdto = new JobDTO();
 	jobdto.setId(this.id);
 	jobdto.setAwardedTo(this.awardedTo);
 	jobdto.setActive(this.active);
-	jobdto.setJobApplications(this.jobApplications);
+//	jobdto.setJobApplications(this.jobApplications);
 	jobdto.setPostedBy(this.postedBy);
 	jobdto.setPostedDate(this.postedDate);
 	jobdto.setSkill(this.skill);

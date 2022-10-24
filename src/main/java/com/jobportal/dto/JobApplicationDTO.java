@@ -1,16 +1,31 @@
 package com.jobportal.dto;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
+import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Job;
 import com.jobportal.entity.JobApplication;
+import com.jobportal.repository.IFreelancerDao;
+import com.jobportal.repository.IJobDao;
 
 public class JobApplicationDTO {
 
+	@Autowired
+	IJobDao iJobDao;
 	
-	private int id;
-	private Job job;
+	@Autowired
+	IFreelancerDao iFreelancerDao;
+	
+	private int jobApplicationId;
+	@NotNull(message="{jobApplication.job.absent}")
+	private int jobId;
+	@NotNull(message="{jobApplication.freelancer.absent}")
+	private int freelancerId;
 	private LocalDateTime appliedDate;
 	private String coverLetter;
 	
@@ -18,24 +33,31 @@ public class JobApplicationDTO {
 		super();
 	}
 	
-	public JobApplicationDTO(int id, Job job, LocalDateTime appliedDate, String coverLetter) {
+	public JobApplicationDTO(int jobApplicationId, int jobId, int freelancerId, LocalDateTime appliedDate, String coverLetter) {
 		super();
-		this.id = id;
-		this.job = job;
+		this.jobApplicationId = jobApplicationId;
+		this.jobId = jobId;
+		this.freelancerId = freelancerId;
 		this.appliedDate = appliedDate;
 		this.coverLetter = coverLetter;
 	}
 	public int getId() {
-		return id;
+		return jobApplicationId;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.jobApplicationId = id;
 	}
-	public Job getJob() {
-		return job;
+	public int getJobId() {
+		return jobId;
 	}
-	public void setJob(Job job) {
-		this.job = job;
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
+	}
+	public int getFreelancerId() {
+		return freelancerId;
+	}
+	public void setFreelancerId(int freelancerId) {
+		this.freelancerId = freelancerId;
 	}
 	public LocalDateTime getAppliedDate() {
 		return appliedDate;
@@ -49,16 +71,17 @@ public class JobApplicationDTO {
 	public void setCoverLetter(String coverLetter) {
 		this.coverLetter = coverLetter;
 	}
-	@Override
-	public String toString() {
-		return "JobApplicationDTO [id=" + id + ", job=" + job + ", appliedDate=" + appliedDate + ", coverLetter="
-				+ coverLetter + "]";
-	}
+	
 	
 	public JobApplication toJobApplication() {
 		JobApplication jobApplication = new JobApplication();
-		jobApplication.setId(this.id);
-		jobApplication.setJob(this.job);
+		jobApplication.setId(this.jobApplicationId);
+		Optional<Job> optional = iJobDao.findById(this.jobId);
+		Job job = optional.orElse(null);
+		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(this.freelancerId);
+		Freelancer freelancer = optionalFreelancer.orElse(null);
+		jobApplication.setJob(job);
+		jobApplication.setFreelancer(freelancer);
 		jobApplication.setAppliedDate(this.appliedDate);
 		jobApplication.setCoverLetter(this.coverLetter);
 		return jobApplication;
