@@ -87,4 +87,13 @@ public class JobApplicationDTO {
 		return jobApplication;
 	}
 
+	@Override
+	public String toString() {
+		return "JobApplicationDTO [iJobDao=" + iJobDao + ", iFreelancerDao=" + iFreelancerDao + ", jobApplicationId="
+				+ jobApplicationId + ", jobId=" + jobId + ", freelancerId=" + freelancerId + ", appliedDate="
+				+ appliedDate + ", coverLetter=" + coverLetter + "]";
+	}
+	
+	
+
 }

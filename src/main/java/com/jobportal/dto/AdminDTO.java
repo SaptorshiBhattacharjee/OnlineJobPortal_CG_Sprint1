@@ -1,6 +1,8 @@
 
 package com.jobportal.dto;
 
+import java.util.Objects;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -25,6 +27,9 @@ public class AdminDTO {
 	}
 	
 	
+	
+
+
 	public AdminDTO(String firstName, String lastName, String userName, String password) {
 		super();
 		this.firstName = firstName;
@@ -69,11 +74,23 @@ public class AdminDTO {
 	
 	public Admin toAdmin() {
 		Admin admin = new Admin();
+		admin.setId(this.getId());
 		admin.setFirstName(this.firstName);
 		admin.setLastName(this.lastName);
 		admin.setUserName(this.userName);
 		admin.setPassword(this.password);
 		return admin;
 	}
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "AdminDTO [id=" + id + ", adminId=" + adminId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", password=" + password + "]";
+	}
+	
 	
 }

@@ -26,7 +26,7 @@ public class IAdminServiceImpl implements IAdminService{
 	
 	
 	@Override
-	public boolean save(AdminDTO adminDTO) throws InvalidAdminException {
+	public String save(AdminDTO adminDTO) throws InvalidAdminException {
 		Optional<Admin> optional = iAdminDao.findByUserName(adminDTO.getUserName());
 		if(optional.isPresent())
 			throw new InvalidAdminException("Service.USERNAME_ALREADY_EXISTS");
@@ -37,11 +37,11 @@ public class IAdminServiceImpl implements IAdminService{
 			throw new InvalidAdminException("Service.COULD_NOT_ADD_ADMIN");
 		}
 		
-		return true;
+		return "SUCCESS";
 	}
 
 	@Override
-	public boolean update(AdminDTO adminDTO) throws InvalidAdminException{
+	public String update(AdminDTO adminDTO) throws InvalidAdminException{
 		Optional<Admin> optional = iAdminDao.findById(adminDTO.getId());
 		Admin admin1 = optional.orElseThrow(() -> new InvalidAdminException("Service.ADMIN_NOT_FOUND"));
 		admin1.setFirstName(adminDTO.getFirstName());
@@ -56,9 +56,9 @@ public class IAdminServiceImpl implements IAdminService{
 		Optional<Admin> optional2 = iAdminDao.findById(adminDTO.getId());
 		Admin admin2 = optional2.orElseThrow(() -> new InvalidAdminException("Service.ADMIN_NOT_FOUND"));
 		if(admin2.getFirstName() == adminDTO.getFirstName() && admin2.getLastName() == adminDTO.getLastName() && admin2.getUserName() == adminDTO.getUserName() && admin2.getPassword() == adminDTO.getPassword()) {
-			return true;
+			return "SUCCESS";
 		}
-		return false;
+		return "FAILED";
 	}
 
 	@Override

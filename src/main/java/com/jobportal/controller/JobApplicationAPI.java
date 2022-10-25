@@ -45,7 +45,7 @@ public class JobApplicationAPI {
 	@PostMapping(value="/applytojob/{freelancerId}/{jobId}")
 	public ResponseEntity<String> applyToJob(@PathVariable Integer jobId, @PathVariable Integer freelancerId, @RequestBody String coverLetter) throws Exception{
 		
-		boolean Applied = iJobApplicationService.applyToJob(jobId, coverLetter, freelancerId);
+		String status = iJobApplicationService.applyToJob(jobId, coverLetter, freelancerId);
 		String successMessage = environment.getProperty("API.APPLIED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
@@ -53,7 +53,7 @@ public class JobApplicationAPI {
 	@PutMapping(value="/updatejobapplication/{freelancerId}/{jobId}")
 	public ResponseEntity<String> updateJobApplicatio(@PathVariable Integer jobId, @PathVariable Integer freelancerId, @RequestBody String coverLetter) throws Exception{
 		
-		boolean updateTo = iJobApplicationService.updateJobApplication(jobId, coverLetter, freelancerId);
+		String status = iJobApplicationService.updateJobApplication(jobId, coverLetter, freelancerId);
 		String successMessage = environment.getProperty("API.UPDATED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
@@ -61,7 +61,7 @@ public class JobApplicationAPI {
 	@DeleteMapping(value="/delete/{freelancerId}/{jobId}")
 
 	public ResponseEntity<String> remove(@PathVariable Integer jobId, @PathVariable Integer freelancerId) throws Exception{
-		boolean removed = iJobApplicationService.remove(jobId, freelancerId);
+		String status = iJobApplicationService.remove(jobId, freelancerId);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 		

@@ -33,16 +33,16 @@ public class AdminAPI {
 	@PostMapping(value="/save")
 	public ResponseEntity<String> save(@Valid @RequestBody AdminDTO adminDTO) throws Exception{
 		//AdminDTO adminDTO = new AdminDTO(firstName, lastName, userName, password);
-		boolean inserted = iAdminService.save(adminDTO);
+		String inserted = iAdminService.save(adminDTO);
 		String successMessage = environment.getProperty("API.INSERT_SUCCESS");
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 
 	@PutMapping(value="/update")
 	public ResponseEntity<String> update(@RequestBody AdminDTO adminDTO) throws Exception{
-		boolean updated = iAdminService.update(adminDTO);
+		String status = iAdminService.update(adminDTO);
 		String successMessage = environment.getProperty("API.UPDATE_SUCCESS");
-		if(updated)
+		if(status.equals("SUCCESS"))
 			return new ResponseEntity<>(successMessage, HttpStatus.OK);
 		else 
 			throw new InvalidAdminException("API.UPDATE_FAILED");

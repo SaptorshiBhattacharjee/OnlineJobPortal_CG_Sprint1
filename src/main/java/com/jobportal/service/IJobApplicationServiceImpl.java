@@ -38,7 +38,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 	IRecruiterDao iRecruiterDao;
 	
 	@Override
-	public boolean applyToJob(int jobId, String coverletter, int freelancerId) throws Exception{
+	public String applyToJob(int jobId, String coverletter, int freelancerId) throws Exception{
 		Optional<Job> optionalJob = iJobDao.findById(jobId);
 		Job job = optionalJob.orElseThrow(() -> new InvalidJobException("Service.NO_SUCH_JOB"));
 		
@@ -66,7 +66,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		
 		Optional<JobApplication> optional1 = iJobApplicationDao.findByJobIdAndFreelancerId(jobId, freelancerId);
 		if(optional1.isPresent()) {
-			return true;
+			return "SUCCESS";
 		}
 		else
 			throw new InvalidJobApplicationException("Service.APPLICATION_FAILED");
@@ -76,7 +76,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 	}
 
 	@Override
-	public boolean updateJobApplication(int jobId, String coverLetter, int freelancerId) throws Exception{
+	public String updateJobApplication(int jobId, String coverLetter, int freelancerId) throws Exception{
 		Optional<Job> optionalJob = iJobDao.findById(jobId);
 		Job job = optionalJob.orElseThrow(() -> new InvalidJobException("Service.NO_SUCH_JOB"));
 		
@@ -88,16 +88,16 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		jobApplication.setCoverLetter(coverLetter);
 		
 		Optional<JobApplication> optional1 = iJobApplicationDao.findById(jobApplication.getId());
-		JobApplication jobApp = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NOT_APPLIED"));
+		JobApplication jobApp = optional1.orElseThrow(() -> new InvalidJobApplicationException("Service.NOT_APPLIED"));
 		if(jobApp.getCoverLetter().equals(coverLetter))
-			return true;
+			return "SUCCESS";
 		else
 			throw new InvalidJobApplicationException("Service.UPDATE_FAILED");
 		
 	}
 
 	@Override
-	public boolean remove(int jobId, int freelancerId) throws Exception{
+	public String remove(int jobId, int freelancerId) throws Exception{
 		Optional<Job> optionalJob = iJobDao.findById(jobId);
 		Job job = optionalJob.orElseThrow(() -> new InvalidJobException("Service.NO_SUCH_JOB"));
 		
@@ -113,7 +113,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 			throw new InvalidJobApplicationException("Service.DELETE_FAILED");
 		
 		}
-		return true;
+		return "SUCCESS";
 	}
 	
 	@Override
