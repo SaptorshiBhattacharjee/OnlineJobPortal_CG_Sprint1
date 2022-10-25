@@ -30,7 +30,7 @@ public class Freelancer
 	@JsonManagedReference
 	private List<JobApplication> appliedJobs;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="createdFor")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="freelancer")
 	//@JoinColumn(name="freelancer_id")
 	@JsonManagedReference
 	private List<Feedback> feedbacks;

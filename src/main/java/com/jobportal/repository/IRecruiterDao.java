@@ -9,4 +9,5 @@ import com.jobportal.entity.Recruiter;
 
 public interface IRecruiterDao extends CrudRepository<Recruiter, Integer>{
 	Optional<Recruiter> findByFirstNameAndLastName (String firstName,String lastName);
+	Optional<Recruiter> findByUserName(String userName);
 }

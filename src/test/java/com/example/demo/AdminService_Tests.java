@@ -40,12 +40,7 @@ class AdminService_Tests {
 	@Mock
 	private IAdminDao iAdminDao;
 	
-	@Mock
-	IRecruiterDao iRecruiterDao;
-	private Recruiter recruiter;
 	
-	@InjectMocks
-	IRecruiterService iRecruiterService = new IRecruiterServiceImpl();
 	
 	
 	@Test
@@ -54,29 +49,47 @@ class AdminService_Tests {
 		adminDTO.setId(1);
 		adminDTO.setFirstName("John");
 		adminDTO.setLastName("Jack");
+		adminDTO.setUserName("JJuser");
 		adminDTO.setPassword("123");
 		Mockito.when(iAdminDao.save(adminDTO.toAdmin())).thenReturn(adminDTO.toAdmin());
-		AdminDTO actual = iAdminService.save(adminDTO);
-		Assertions.assertEquals(actual, adminDTO);
+		String status = iAdminService.save(adminDTO);
+		Assertions.assertEquals(status, "SUCCESS");
 		
 	}
+	
+	@Test
+	void failedAdminAddTest() throws InvalidAdminException{
+		AdminDTO adminDTO = new AdminDTO();
+		adminDTO.setId(1);
+		adminDTO.setFirstName("John");
+		adminDTO.setLastName("Jack");
+		adminDTO.setUserName("JJuser");
+		adminDTO.setPassword("123");
+		Mockito.when(iAdminDao.findByUserName(adminDTO.getUserName())).thenReturn(Optional.of((adminDTO.toAdmin())));
+		InvalidAdminException exception = Assertions.assertThrows(InvalidAdminException.class,() -> iAdminService.save(adminDTO));
+		Assertions.assertEquals("Service.USERNAME_ALREADY_EXISTS", exception.getMessage());
+		
+	}
+	
 	@Test
 	void adminUpdateTest() throws InvalidAdminException{
 		AdminDTO adminDTO = new AdminDTO();
 		adminDTO.setId(1);
 		adminDTO.setFirstName("John");
 		adminDTO.setLastName("Jack");
+		adminDTO.setUserName("JJuser");
 		adminDTO.setPassword("123");
 		
 		AdminDTO returnedAdminDTO = new AdminDTO() ;
 		returnedAdminDTO.setId(1);
 		returnedAdminDTO.setFirstName("John");
 		returnedAdminDTO.setLastName("Jack");
+		returnedAdminDTO.setUserName("JJuser");
 		returnedAdminDTO.setPassword("2345");
 		Optional <Admin> optional = Optional.of(returnedAdminDTO.toAdmin());
 		Mockito.when(iAdminDao.findById(adminDTO.getId())).thenReturn(optional);
-		AdminDTO actual = iAdminService.update(adminDTO);
-		Assertions.assertEquals(adminDTO, actual);
+		String status = iAdminService.update(adminDTO);
+		Assertions.assertEquals(status, "SUCCESS");
 		
 	}
 	
@@ -86,10 +99,10 @@ class AdminService_Tests {
 		adminDTO.setId(1);
 		adminDTO.setFirstName("John");
 		adminDTO.setLastName("Jack");
+		adminDTO.setUserName("JJuser");
 		adminDTO.setPassword("123");
-		Optional <Admin> optional = Optional.of(adminDTO.toAdmin());
-		Mockito.when(iAdminDao.findById(adminDTO.getId())).thenReturn(optional);
-		AdminDTO actual = iAdminService.update(adminDTO);
+		Optional <Admin> optional = Optional.empty();
+		Mockito.when(iAdminDao.findById(1)).thenReturn(optional);
 		InvalidAdminException exception = Assertions.assertThrows(InvalidAdminException.class,() -> iAdminService.update(adminDTO));
 		Assertions.assertEquals("Service.ADMIN_NOT_FOUND", exception.getMessage());
 		
@@ -101,104 +114,21 @@ class AdminService_Tests {
 		adminDTO.setId(1);
 		adminDTO.setFirstName("John");
 		adminDTO.setLastName("Jack");
+		adminDTO.setUserName("JJuser");
 		adminDTO.setPassword("123");
-		Optional <Admin> optional = Optional.of(adminDTO.toAdmin());
-		Mockito.when(iAdminDao.findById(1)).thenReturn(optional);
-		AdminDTO actual = iAdminService.update(adminDTO);
-		Assertions.assertEquals(actual, adminDTO);
+		Mockito.when(iAdminDao.findById(1)).thenReturn(Optional.of(adminDTO.toAdmin()));
+		AdminDTO actual = iAdminService.findById(1);
+		Assertions.assertEquals(adminDTO.toString(), actual.toString());
 		
 	}
 	
 	@Test
 	void failedFindByIdTest() throws InvalidAdminException{
-
-		Mockito.when(iAdminDao.findById(1)).thenReturn(null);
+		Optional<Admin> optional = Optional.empty();
+		Mockito.when(iAdminDao.findById(1)).thenReturn(optional);
 		InvalidAdminException exception = Assertions.assertThrows(InvalidAdminException.class,() -> iAdminService.findById(1));
 		Assertions.assertEquals("Service.ADMIN_NOT_FOUND", exception.getMessage());
 		
 	}
-	@Test
-	void saveRecruiter() throws InvalidRecruiterException {
-		//int id=1;
-		RecruiterDTO recruiterDto = new RecruiterDTO();
-		recruiterDto.setId(1);
-		recruiterDto.setFirstName("Sri");
-		recruiterDto.setLastName("Ram");
-		Feedback feedback1 = new Feedback();
-		Feedback feedback2 = new Feedback();
-		Feedback feedback3 = new Feedback();
-		List<Feedback> feedbacks= new ArrayList<>();
-		Collections.addAll(feedbacks,feedback1,feedback2,feedback3);
-		
-		Job job1 = new Job();
-		Job job2 = new Job();
-		Job job3 = new Job();
-		List<Job> jobs= new ArrayList<>();
-		Collections.addAll(jobs,job1,job2,job3);
-		
-		BookmarkedFreelancer bm1 = new BookmarkedFreelancer();
-		BookmarkedFreelancer bm2 = new BookmarkedFreelancer();
-		BookmarkedFreelancer bm3 = new BookmarkedFreelancer();
-		List<BookmarkedFreelancer> bms= new ArrayList<>();
-		Collections.addAll(bms,bm1,bm2,bm3);
-		recruiterDto.setPostedJobs(jobs);
-		recruiterDto.setFeedbacks(feedbacks);
-		recruiterDto.setPostedJobs(jobs);
-
-		Mockito.when(iRecruiterDao.save(recruiterDto.toRecruiter())).thenReturn(recruiterDto.toRecruiter());
-		RecruiterDTO actual = iRecruiterService.save(recruiterDto);
-		Assertions.assertEquals(recruiterDto, actual);
-	}
 	
-	@Test
-	void findByIdTestR() throws InvalidRecruiterException{
-		RecruiterDTO recruiterDTO = new RecruiterDTO();
-		recruiterDTO.setId(1);
-		recruiterDTO.setFirstName("Sri");
-		recruiterDTO.setLastName("Ram");
-		Optional<Recruiter> optional = Optional.of(recruiterDTO.toRecruiter());
-		Mockito.when(iRecruiterDao.findById(1)).thenReturn(optional);
-		RecruiterDTO actual = iRecruiterService.update(recruiterDTO);
-		Assertions.assertEquals(actual, recruiterDTO);
-		
-	}
-	
-	@Test
-	void failedFindByIdTestR() throws InvalidRecruiterException{
-		Mockito.when(iRecruiterDao.findById(1)).thenReturn(null);
-		InvalidRecruiterException exception = Assertions.assertThrows(InvalidRecruiterException.class,() -> iRecruiterService.findById(1));
-		Assertions.assertEquals("Service.RECRUITER_NOT_FOUND", exception.getMessage());
-		
-	}
-	
-	@Test
-	void adminUpdateTestR() throws InvalidRecruiterException{
-		RecruiterDTO recruiterDTO = new RecruiterDTO();
-		recruiterDTO.setId(1);
-		recruiterDTO.setFirstName("Sri");
-		recruiterDTO.setLastName("Ram");
-		RecruiterDTO returnedRecruiterDTO = new RecruiterDTO() ;
-		returnedRecruiterDTO.setId(1);
-		returnedRecruiterDTO.setFirstName("Sri");
-		returnedRecruiterDTO.setLastName("Krishna");
-		Optional <Recruiter> optional = Optional.of(returnedRecruiterDTO.toRecruiter());
-		Mockito.when(iRecruiterDao.findById(recruiterDTO.getId())).thenReturn(optional);
-		RecruiterDTO actual = iRecruiterService.update(recruiterDTO);
-		Assertions.assertEquals(recruiterDTO, actual);
-		
-	}
-	@Test
-	void failedAdminUpdateTestR() throws InvalidRecruiterException{
-		RecruiterDTO recruiterDTO = new RecruiterDTO();
-		recruiterDTO.setId(1);
-		recruiterDTO.setFirstName("Sri");
-		recruiterDTO.setLastName("Ram");
-		Optional <Recruiter> optional = Optional.of(recruiterDTO.toRecruiter());
-		Mockito.when(iRecruiterDao.findById(recruiterDTO.getId())).thenReturn(optional);
-		RecruiterDTO actual = iRecruiterService.update(recruiterDTO);
-		InvalidRecruiterException exception = Assertions.assertThrows(InvalidRecruiterException.class,() -> iRecruiterService.update(recruiterDTO));
-		Assertions.assertEquals("Service.RECRUITER_NOT_FOUND", exception.getMessage());
-		
-	}
-
 }

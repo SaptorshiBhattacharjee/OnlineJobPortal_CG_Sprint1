@@ -7,87 +7,85 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.jobportal.dto.AdminDTO;
 import com.jobportal.dto.FeedbackDTO;
 
 @Entity
 public class Feedback {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int feedbackId;
 	private Integer rating;
 	private String comment;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "recruiter_id", unique = true)
+	@JoinColumn(name = "recruiter_id", unique = false)
 	@JsonBackReference
-	private Recruiter createdBy;
+	private Recruiter recruiter;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "freelancer_id", unique = true)
+	@JoinColumn(name = "freelancer_id", unique = false)
 	@JsonBackReference
-	private Freelancer createdFor;
-	
-	public Feedback(int feedbackId, Integer rating, String comment, Recruiter createdBy, Freelancer createdFor) {
+	private Freelancer freelancer;
+
+	public Feedback(int feedbackId, Integer rating, String comment, Recruiter recruiter, Freelancer freelancer) {
 		super();
 		this.feedbackId = feedbackId;
 		this.rating = rating;
 		this.comment = comment;
-		this.createdBy = createdBy;
-		this.createdFor = createdFor;
+		this.recruiter = recruiter;
+		this.freelancer = freelancer;
 	}
-	
-	
+
 	public Feedback() {
 		super();
 	}
 
-
 	public int getId() {
 		return feedbackId;
 	}
+
 	public void setId(int id) {
 		this.feedbackId = id;
 	}
+
 	public Integer getRating() {
 		return rating;
 	}
+
 	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
+
 	public String getComment() {
 		return comment;
 	}
+
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public Recruiter getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(Recruiter createdBy) {
-		this.createdBy = createdBy;
-	}
-	public Freelancer getCreatedFor() {
-		return createdFor;
-	}
-	public void setCreatedFor(Freelancer createdFor) {
-		this.createdFor = createdFor;
+
+	public Recruiter getRecruiter() {
+		return recruiter;
 	}
 
-	@Override
-	public String toString() {
-		return "Feedback [id=" + feedbackId + ", rating=" + rating + ", comment=" + comment + ", createdBy=" + createdBy
-				+ ", createdFor=" + createdFor + "]";
+	public void setRecruiter(Recruiter recruiter) {
+		this.recruiter = recruiter;
 	}
-	
+
+	public Freelancer getFreelancer() {
+		return freelancer;
+	}
+
+	public void setFreelancer(Freelancer freelancer) {
+		this.freelancer = freelancer;
+	}
+
 	public FeedbackDTO toFeedbackDTO() {
 		FeedbackDTO feedbackDTO = new FeedbackDTO();
 		feedbackDTO.setId(this.feedbackId);
 		feedbackDTO.setRating(this.rating);
 		feedbackDTO.setComment(this.comment);
-		feedbackDTO.setCreatedBy(this.createdBy);
-		feedbackDTO.setCreatedFor(this.createdFor);
+		feedbackDTO.setRecruiterId(this.recruiter.getId());
+		feedbackDTO.setFreelancerId(this.freelancer.getId());
 		return feedbackDTO;
 	}
 

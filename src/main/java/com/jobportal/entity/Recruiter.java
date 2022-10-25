@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -22,15 +24,21 @@ public class Recruiter {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@NotNull(message = "{recruiter.firstName.absent}")
+	@Pattern(regexp="[A-Za-z]+( [A-Za-z]+)*", message="{recruiter.firstName.invalid}")
 	private String firstName;
+	@NotNull(message = "{recruiter.lastName.absent}")
+	@Pattern(regexp="[A-Za-z]+( [A-Za-z]+)*", message="{recruiter.lastName.invalid}")
 	private String lastName;
+	@NotNull(message ="recruiter.userName.absent")
 	private String userName;
+	@NotNull(message ="recruiter.password.absent")
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "postedBy")
 	// @JoinColumn(name="job_id")
 	@JsonManagedReference
 	private List<Job> postedJobs;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "createdBy")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recruiter")
 	// @JoinColumn(name="feedback_id")
 	@JsonManagedReference
 	private List<Feedback> feedbacks;

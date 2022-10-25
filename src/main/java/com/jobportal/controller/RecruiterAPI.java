@@ -30,10 +30,10 @@ public class RecruiterAPI {
 	Environment environment;
 	
 	@PostMapping(value="/save")
-	public ResponseEntity<String> save(@RequestParam String firstName,@RequestParam String lastName) throws Exception{
-		String updatesRecruiter = iRecruiterService.save(firstName,lastName);
+	public ResponseEntity<String> save(@RequestParam String firstName,@RequestParam String lastName,@RequestParam String userName,@RequestParam String password) throws Exception{
+		String addedRecruiter = iRecruiterService.save(firstName,lastName,userName,password);
 		String successMessage = environment.getProperty("API.INSERT_SUCCESS");
-		if(updatesRecruiter.equals("SUCCESS")){
+		if(addedRecruiter.equals("SUCCESS")){
 			return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 		}
 		else {
@@ -41,11 +41,16 @@ public class RecruiterAPI {
 		}
 	}
 	
-	@PutMapping(value="/update")
-	public ResponseEntity<String> update(@RequestBody RecruiterDTO recruiterDTO) throws Exception{
-		RecruiterDTO addedRecruiter = iRecruiterService.update(recruiterDTO);
+	@PutMapping(value="/update/{id}")
+	public ResponseEntity<String> update(@PathVariable Integer id,@RequestParam String firstName,@RequestParam String lastName,@RequestParam String userName,@RequestParam String password) throws Exception{
+		String updateRecruiter = iRecruiterService.update(id,firstName,lastName,userName,password);
 		String successMessage = environment.getProperty("API.UPDATE_SUCCESS");
-		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
+		if(updateRecruiter.equals("SUCCESS")){
+			return new ResponseEntity<>(successMessage, HttpStatus.OK);
+		}
+		else {
+			throw new InvalidRecruiterException("API.UPDATE_FAILED");
+		}
 	}
 	
 	@GetMapping(value="/findbyid/{id}")

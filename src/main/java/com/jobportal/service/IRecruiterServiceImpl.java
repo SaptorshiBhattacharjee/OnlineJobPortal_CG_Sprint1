@@ -11,12 +11,14 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.jobportal.dto.RecruiterDTO;
+import com.jobportal.entity.Admin;
 import com.jobportal.entity.BookmarkedFreelancer;
 import com.jobportal.entity.Feedback;
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Job;
 import com.jobportal.entity.JobApplication;
 import com.jobportal.entity.Recruiter;
+import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.exception.InvalidFeedbackException;
 import com.jobportal.exception.InvalidFreelancerException;
 import com.jobportal.exception.InvalidJobApplicationException;
@@ -85,13 +87,25 @@ public class IRecruiterServiceImpl implements IRecruiterService{
 		
 	}
 	@Override
-	public String update(String firstName,String lastName,String userName,String password) throws InvalidRecruiterException{
-		Optional<Recruiter> optional1 = irecruiterDao.findByFirstNameAndLastName(firstName,lastName);
-		if(optional1.isPresent()) {
-			Recruiter recruiter = optional1.orElseThrow(()->new InvalidRecruiterException("Service.RECRUITER_NOT_FOUND"));
+	public String update(int id,String firstName,String lastName,String userName,String password) throws InvalidRecruiterException{
+		Optional<Recruiter> optional1 = irecruiterDao.findById(id);
+		Recruiter recruiter = optional1.orElseThrow(()-> new InvalidRecruiterException("Service.RECRUITER_NOT_FOUND"));
 			recruiter.setUserName(userName);
 			recruiter.setPassword(password);
+			recruiter.setFirstName(firstName);
+			recruiter.setLastName(lastName);
+		
+		Optional<Recruiter> optional2 = irecruiterDao.findByUserName(userName);
+		if((optional2.isPresent()) && !((recruiter.getUserName()).equals(userName)))
+			throw new InvalidRecruiterException("Service.USERNAME_ALREADY_EXISTS");
+		recruiter.setUserName(userName);
+		
+		Optional<Recruiter> optional3 = irecruiterDao.findById(id);
+		Recruiter recruiter2 = optional3.orElseThrow(() -> new InvalidRecruiterException("Service.RECRUITER_NOT_FOUND"));
+		if(recruiter2.getFirstName() == firstName && recruiter2.getLastName() == lastName && recruiter2.getUserName() == userName && recruiter2.getPassword() == password) {
+			return "SUCCESS";
 		}
+		return "FAILED";
 		
 	}
 

@@ -7,8 +7,8 @@ import com.jobportal.exception.InvalidAdminException;
 
 public interface IAdminService {
 	
-	public boolean save (AdminDTO adminDTO) throws InvalidAdminException;
-	public boolean update (AdminDTO adminDTO) throws InvalidAdminException;
+	public String save (AdminDTO adminDTO) throws InvalidAdminException;
+	public String update (AdminDTO adminDTO) throws InvalidAdminException;
 	public AdminDTO findById(int Id) throws InvalidAdminException;
 	
 	

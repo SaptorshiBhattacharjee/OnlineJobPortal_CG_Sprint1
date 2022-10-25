@@ -14,8 +14,14 @@ import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.RecruiterDTO;
 import com.jobportal.entity.Feedback;
 import com.jobportal.entity.Freelancer;
+import com.jobportal.entity.Job;
+import com.jobportal.entity.JobApplication;
 import com.jobportal.entity.Recruiter;
 import com.jobportal.exception.InvalidFeedbackException;
+import com.jobportal.exception.InvalidFreelancerException;
+import com.jobportal.exception.InvalidJobApplicationException;
+import com.jobportal.exception.InvalidJobException;
+import com.jobportal.exception.InvalidRecruiterException;
 import com.jobportal.exception.JobPortalException;
 import com.jobportal.repository.IFeedbackDao;
 import com.jobportal.repository.IFreelancerDao;
@@ -34,62 +40,54 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 	IFreelancerDao ifreelancerDao;
 
 	@Override
-	public FeedbackDTO createFeedback(int rating, String review)
-			throws InvalidFeedbackException {	
+	public String createFeedback(int rating, String review,int recruiterId,int freelancerId)throws Exception {	
+		Optional<Recruiter> optionalRecruiter = irecruiterDao.findById(recruiterId);
+		Recruiter recruiter = optionalRecruiter.orElseThrow(() -> new InvalidRecruiterException("Service.RECRUITER_NOT_FOUND"));
+		
+		Optional<Freelancer> optionalFreelancer = ifreelancerDao.findById(freelancerId);
+		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidFreelancerException("Service.FREELANCER_NOT_FOUND"));
+		
+		Optional<Feedback> optional = ifeedbackDao.findByRecruiterIdAndFreelancerId(recruiterId, freelancerId);
+		if(optional.isPresent()) {
+			throw new InvalidFeedbackException("Service.ALREADY_GIVEN");
+		}
+
 		Feedback feedback = new Feedback();
-		FeedbackDTO feedbackDTO = new FeedbackDTO();
-		Recruiter recruiter = new Recruiter();
-		Freelancer freelancer = new Freelancer();
-		feedback.setCreatedBy(recruiter);
-		feedback.setCreatedFor(freelancer);
-		feedback.setComment(review);
 		feedback.setRating(rating);
+		feedback.setComment(review);
+		feedback.setFreelancer(freelancer);
+		feedback.setRecruiter(recruiter);
 		ifeedbackDao.save(feedback);
 		
-		feedbackDTO.setCreatedBy(recruiter);
-		feedbackDTO.setCreatedFor(freelancer);
-		feedbackDTO.setComment(review);
-		feedbackDTO.setRating(rating);
-		
-		return feedbackDTO;
+		Optional<Feedback> optional1 = ifeedbackDao.findByRecruiterIdAndFreelancerId(recruiterId, freelancerId);
+		if(optional1.isPresent()) {
+			return "SUCCESS";
+		}
+		else
+			throw new InvalidFeedbackException("Service.GIVING_FEEDBACK_FAILED");	
 		
 	}
 
 	@Override
-	public int averageRating(FreelancerDTO freelancerDTO) throws InvalidFeedbackException {
-		Optional<Feedback> optional = ifeedbackDao.findById(freelancerDTO.getId());
+	public int averageRating(int freelancerId) throws InvalidFeedbackException {
+		Optional<Feedback> optional = ifeedbackDao.findById(freelancerId);
 		List<Integer> ratings= new ArrayList<Integer>();
 		Feedback feedback = optional.orElseThrow(()->new InvalidFeedbackException("Service.NO_RATINGS_AVAILABLE"));
 		ratings.add(feedback.getRating());
-		int sum = 0;
-		for(int i=0;i<ratings.size();i++) {
-			sum=sum+i;
-		}
-		return sum/ratings.size() ;
+		int sum=ratings.stream().mapToInt(Integer::intValue).sum();
+		return sum/ratings.size();
+		
 
 }
 
 	@Override
-	public List<FeedbackDTO> findFeedbacksByFreelancer(FreelancerDTO freelancerDTO) throws InvalidFeedbackException {
-		Optional<Freelancer> optional = ifreelancerDao.findById(freelancerDTO.getId());
-		Freelancer freelancer = optional.orElseThrow(()->new InvalidFeedbackException("Service.NO_FEEDBACKS_FOR_THIS_FREELANCER"));
-		freelancer.setId(freelancerDTO.getId());
-		List<Feedback> feedbackByFreelancer = ifeedbackDao.findFeedbacksByFreelancer(freelancer);
+	public List<FeedbackDTO> findFeedbacksByFreelancer(int freelancerId) throws InvalidFeedbackException {
+		Optional<Feedback> optional = ifeedbackDao.findById(freelancerId);
+		Feedback feedback = optional.orElseThrow(()->new InvalidFeedbackException("Service.NO_FEEDBACKS_FOR_THIS_FREELANCER"));
 		List<FeedbackDTO> feedbackByFreelancerDTO = new ArrayList<>();
-		for(Feedback feedbacks : feedbackByFreelancer) {
-			FeedbackDTO feedbackDTO = new FeedbackDTO();
-			Feedback feedback = new Feedback();
-			feedbackDTO.setId(feedback.getId());
-			feedbackDTO.setComment(feedback.getComment());
-			feedbackDTO.setCreatedBy(feedback.getCreatedBy());
-			feedbackDTO.setCreatedFor(feedback.getCreatedFor());
-			feedbackDTO.setRating(feedback.getRating());
-			
-			
-			feedbackByFreelancerDTO.add(feedbackDTO);
-		}
+		FeedbackDTO feedbackDto = feedback.toFeedbackDTO();
+		feedbackByFreelancerDTO.add(feedback.toFeedbackDTO());
 		return feedbackByFreelancerDTO;
-		
 	}
 
 }
