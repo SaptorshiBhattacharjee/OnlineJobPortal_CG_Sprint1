@@ -1,25 +1,39 @@
 
 package com.jobportal.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.jobportal.entity.Admin;
 
 public class AdminDTO {
 	private Integer id;
+	private int adminId;
+	@NotNull(message = "{admin.firstName.absent}")
+	@Pattern(regexp="[A-Za-z]+( [A-Za-z]+)*", message="{admin.firstName.invalid}")
 	private String firstName;
+	@NotNull(message ="{admin.lastName.absent}")
+	@Pattern(regexp="[A-Za-z]+( [A-Za-z]+)*", message="{admin.lastName.invalid}")
 	private String lastName;
+	@NotNull(message ="admin.userName.absent")
+	private String userName;
+	@NotNull(message ="{admin.password.absent}")
 	private String password;
 	
 	public AdminDTO() {
 		super();
 	}
 	
-	public AdminDTO(Integer id, String firstName, String lastName, String password) {
+	
+	public AdminDTO(String firstName, String lastName, String userName, String password) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.userName = userName;
 		this.password = password;
 	}
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -38,6 +52,12 @@ public class AdminDTO {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String username) {
+		this.userName = username;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -45,16 +65,13 @@ public class AdminDTO {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "AdminDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
-				+ "]";
-	}
+	
 	
 	public Admin toAdmin() {
 		Admin admin = new Admin();
 		admin.setFirstName(this.firstName);
 		admin.setLastName(this.lastName);
+		admin.setUserName(this.userName);
 		admin.setPassword(this.password);
 		return admin;
 	}

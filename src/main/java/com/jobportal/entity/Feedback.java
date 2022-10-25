@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.dto.FeedbackDTO;
 
@@ -15,19 +17,21 @@ import com.jobportal.dto.FeedbackDTO;
 public class Feedback {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private int feedbackId;
 	private Integer rating;
 	private String comment;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "recruiter_id", unique = true)	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "recruiter_id", unique = true)
+	@JsonBackReference
 	private Recruiter createdBy;
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "freelancer_id", unique = true)
+	@JsonBackReference
 	private Freelancer createdFor;
 	
-	public Feedback(long id, Integer rating, String comment, Recruiter createdBy, Freelancer createdFor) {
+	public Feedback(int feedbackId, Integer rating, String comment, Recruiter createdBy, Freelancer createdFor) {
 		super();
-		this.id = id;
+		this.feedbackId = feedbackId;
 		this.rating = rating;
 		this.comment = comment;
 		this.createdBy = createdBy;
@@ -40,11 +44,11 @@ public class Feedback {
 	}
 
 
-	public long getId() {
-		return id;
+	public int getId() {
+		return feedbackId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setId(int id) {
+		this.feedbackId = id;
 	}
 	public Integer getRating() {
 		return rating;
@@ -73,13 +77,13 @@ public class Feedback {
 
 	@Override
 	public String toString() {
-		return "Feedback [id=" + id + ", rating=" + rating + ", comment=" + comment + ", createdBy=" + createdBy
+		return "Feedback [id=" + feedbackId + ", rating=" + rating + ", comment=" + comment + ", createdBy=" + createdBy
 				+ ", createdFor=" + createdFor + "]";
 	}
 	
 	public FeedbackDTO toFeedbackDTO() {
 		FeedbackDTO feedbackDTO = new FeedbackDTO();
-		feedbackDTO.setId(this.id);
+		feedbackDTO.setId(this.feedbackId);
 		feedbackDTO.setRating(this.rating);
 		feedbackDTO.setComment(this.comment);
 		feedbackDTO.setCreatedBy(this.createdBy);

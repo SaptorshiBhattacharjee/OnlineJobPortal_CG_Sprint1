@@ -5,7 +5,7 @@ import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Recruiter;
 
 public class FeedbackDTO {
-	private long id;
+	private int id;
 	private Integer rating;
 	private String comment;
 	private Recruiter createdBy;
@@ -18,7 +18,7 @@ public class FeedbackDTO {
 	}
 	
 	
-	public FeedbackDTO(long id, Integer rating, String comment, Recruiter createdBy, Freelancer createdFor) {
+	public FeedbackDTO(int id, Integer rating, String comment, Recruiter createdBy, Freelancer createdFor) {
 		super();
 		this.id = id;
 		this.rating = rating;
@@ -28,10 +28,10 @@ public class FeedbackDTO {
 	}
 
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public Integer getRating() {

@@ -24,12 +24,10 @@ public class BookmarkedJob
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="skill_id")//one book-mark job is mapped to one skill
-	@JsonBackReference
 	private Skill skill;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="job_id")	//one book-mark job is mapped to one job
-	@JsonBackReference
 	private Job job;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
