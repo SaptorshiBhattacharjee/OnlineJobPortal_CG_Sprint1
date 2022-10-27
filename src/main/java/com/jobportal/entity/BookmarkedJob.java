@@ -18,7 +18,7 @@ public class BookmarkedJob
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Integer id;
+	private Integer bookmarkedJobId;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="skill_id")	//one book-mark job is mapped to one skill
@@ -37,9 +37,9 @@ public class BookmarkedJob
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BookmarkedJob(Integer id, Skill skill, Job job, Freelancer freelancer) {
+	public BookmarkedJob(Integer bookmarkedJobId, Skill skill, Job job, Freelancer freelancer) {
 		super();
-		this.id = id;
+		this.bookmarkedJobId = bookmarkedJobId;
 		this.skill = skill;
 		this.job = job;
 		this.freelancer = freelancer;
@@ -47,10 +47,10 @@ public class BookmarkedJob
 	
 	// defining the getter and setter methods
 	public Integer getId() {
-		return id;
+		return bookmarkedJobId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer bookmarkedJobId) {
+		this.bookmarkedJobId = bookmarkedJobId;
 	}
 	public Skill getSkill() {
 		return skill;
@@ -74,7 +74,7 @@ public class BookmarkedJob
 	// defining hashcode and equals method
 	@Override
 	public int hashCode() {
-		return Objects.hash(freelancer, id, job, skill);
+		return Objects.hash(freelancer, bookmarkedJobId, job, skill);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -85,14 +85,14 @@ public class BookmarkedJob
 		if (getClass() != obj.getClass())
 			return false;
 		BookmarkedJob other = (BookmarkedJob) obj;
-		return Objects.equals(freelancer, other.freelancer) && id == other.id && Objects.equals(job, other.job)
+		return Objects.equals(freelancer, other.freelancer) && bookmarkedJobId == other.bookmarkedJobId && Objects.equals(job, other.job)
 				&& Objects.equals(skill, other.skill);
 	}
 	
 	//defining toString method
 	@Override
 	public String toString() {
-		return "BookmarkedJob [id=" + id + ", skill=" + skill + ", job=" + job + ", freelancer=" + freelancer + "]";
+		return "BookmarkedJob [bookmarkedJobId=" + bookmarkedJobId + ", skill=" + skill + ", job=" + job + ", freelancer=" + freelancer + "]";
 	}
 	
 	public BookmarkedJobDTO toBookmarkedJobDto()

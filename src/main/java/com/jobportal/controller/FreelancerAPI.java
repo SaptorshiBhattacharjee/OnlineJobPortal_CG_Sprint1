@@ -16,7 +16,8 @@ import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.service.IFreelancerService;
 
 @RestController
-@RequestMapping("value=/jobportal/freelancer")
+//@RequestMapping("value=/jobportal/freelancer")
+@RequestMapping(value="/jobportal/freelancer")
 public class FreelancerAPI 
 {
 	@Autowired
@@ -26,7 +27,8 @@ public class FreelancerAPI
 	Environment environment;
 	
 	@PostMapping(value="/save")
-	public ResponseEntity<String> update(@RequestBody FreelancerDTO freelancerDTO) throws Exception
+	//public ResponseEntity<String> update(@RequestBody FreelancerDTO freelancerDTO) throws Exception
+	public ResponseEntity<String> save(@RequestBody FreelancerDTO freelancerDTO) throws Exception
 	{
 		FreelancerDTO updatesFreelancer = ifreelancerService.save(freelancerDTO);
 		String successMessage = environment.getProperty("API.INSERT_SUCCESS");
@@ -34,7 +36,7 @@ public class FreelancerAPI
 	}
 	
 	@PutMapping(value="/update")
-	public ResponseEntity<String> save(@RequestBody FreelancerDTO freelancerDTO) throws Exception
+	public ResponseEntity<String> update(@RequestBody FreelancerDTO freelancerDTO) throws Exception
 	{
 		FreelancerDTO addedFreelancer = ifreelancerService.update(freelancerDTO);
 		String successMessage = environment.getProperty("API.UPDATE_SUCCESS");

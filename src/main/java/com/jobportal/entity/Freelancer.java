@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 //import javax.annotation.processing.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,8 @@ public class Freelancer
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
-	private int id;
+	@Column(name = "freelancer_id")
+	private int freelancerId;
 	private String firstName;
 	private String lastName;
 	private String password;
@@ -45,10 +47,10 @@ public class Freelancer
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Freelancer(int id, String firstName, String lastName, String password, List<JobApplication> appliedJobs,
+	public Freelancer(int freelancerId, String firstName, String lastName, String password, List<JobApplication> appliedJobs,
 			List<Feedback> feedbacks, List<SkillExperience> skills, List<BookmarkedJob> bookmarkedJobs) {
 		super();
-		this.id = id;
+		this.freelancerId = freelancerId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
@@ -60,10 +62,10 @@ public class Freelancer
 
 	// defining the getter and setter methods
 	public int getId() {
-		return id;
+		return freelancerId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer freelancerId) {
+		this.freelancerId = freelancerId;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -111,7 +113,7 @@ public class Freelancer
 	// defining hashcode and equals method
 	@Override
 	public int hashCode() {
-		return Objects.hash(appliedJobs, bookmarkedJobs, feedbacks, firstName, id, lastName, password, skills);
+		return Objects.hash(appliedJobs, bookmarkedJobs, feedbacks, firstName, freelancerId, lastName, password, skills);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -124,14 +126,14 @@ public class Freelancer
 		Freelancer other = (Freelancer) obj;
 		return Objects.equals(appliedJobs, other.appliedJobs) && Objects.equals(bookmarkedJobs, other.bookmarkedJobs)
 				&& Objects.equals(feedbacks, other.feedbacks) && Objects.equals(firstName, other.firstName)
-				&& id == other.id && Objects.equals(lastName, other.lastName)
+				&& freelancerId == other.freelancerId && Objects.equals(lastName, other.lastName)
 				&& Objects.equals(password, other.password) && Objects.equals(skills, other.skills);
 	}
 	
 	//defining toString method
 	@Override
 	public String toString() {
-		return "Freelancer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
+		return "Freelancer [freelancerId=" + freelancerId + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
 				+ ", appliedJobs=" + appliedJobs + ", feedbacks=" + feedbacks + ", skills=" + skills
 				+ ", bookmarkedJobs=" + bookmarkedJobs + "]";
 	}
