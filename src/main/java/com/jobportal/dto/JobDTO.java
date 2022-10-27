@@ -1,4 +1,3 @@
-
 package com.jobportal.dto;
 
 import java.time.LocalDate;
@@ -83,7 +82,7 @@ public class JobDTO {
 	job.setId(this.id);
 	job.setAwardedTo(this.awardedTo);
 	job.setActive(this.active);
-	job.setJobApplications(this.jobApplications);
+//	job.setJobApplications(this.jobApplications);
 	job.setPostedBy(this.postedBy);
 	job.setPostedDate(this.postedDate);
 	job.setSkill(this.skill);

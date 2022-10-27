@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jobportal.dto.FreelancerDTO;
 
 @Entity
@@ -26,20 +27,24 @@ public class Freelancer
 	private String lastName;
 	private String password;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="freelancer_id")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="freelancer")
+	//@JoinColumn(name="freelancer_id")
+	@JsonManagedReference
 	private List<JobApplication> appliedJobs;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="freelancer_id")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="freelancer")
+	//@JoinColumn(name="freelancer_id")
+	@JsonManagedReference
 	private List<Feedback> feedbacks;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="freelancer_id")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="freelancer")
+	//@JoinColumn(name="freelancer_id")	
+	@JsonManagedReference
 	private List<SkillExperience> skills;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="freelancer_id")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="freelancer")
+	//@JoinColumn(name="freelancer_id")
+	@JsonManagedReference
 	private List<BookmarkedJob> bookmarkedJobs;
 	
 	// defining default and parameterized constructors

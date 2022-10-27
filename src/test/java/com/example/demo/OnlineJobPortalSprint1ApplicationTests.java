@@ -20,6 +20,8 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNotNull;
+
+
 import static org.mockito.Mockito.when;
 
 import com.jobportal.dto.AdminDTO;
@@ -27,6 +29,7 @@ import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.repository.IAdminDao;
 import com.jobportal.service.IAdminService;
 import com.jobportal.service.IAdminServiceImpl;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,6 +61,7 @@ import com.jobportal.service.IJobServiceImpl;
 import com.jobportal.service.IRecruiterService;
 import com.jobportal.service.IRecruiterServiceImpl;
 
+
 @SpringBootTest(classes = OnlineJobPortalSprint1Application.class)
 class OnlineJobPortalSprint1ApplicationTests {
 
@@ -66,6 +70,7 @@ class OnlineJobPortalSprint1ApplicationTests {
 //	
 //	@InjectMocks
 //	IRecruiterService iRecruiterService = new IRecruiterServiceImpl();
+
 
 
 	/*@Test
@@ -81,15 +86,18 @@ class OnlineJobPortalSprint1ApplicationTests {
 		recruiterDto.setFeedbacks(feedbacks);
 		
 	}*/
-	
 
 	@Mock
 	IAdminDao iAdminDao;
 	
 
 	@InjectMocks
-
 	IAdminService iAdminService =  new IAdminServiceImpl();
+
+
+
+
+	
 
 	IJobService ijobservice = new IJobServiceImpl();
 	
@@ -142,7 +150,15 @@ class OnlineJobPortalSprint1ApplicationTests {
 		List<JobApplication> jobapplication = new ArrayList<>();
 		Collections.addAll(jobapplication,jobapplication1,jobapplication2,jobapplication3);
 		job.setJobApplications(jobapplication);
+
 	}
+
+	
+
+	
+	
+	
+
 
 	@Test
 	public void addNewAdminTest() throws InvalidAdminException {

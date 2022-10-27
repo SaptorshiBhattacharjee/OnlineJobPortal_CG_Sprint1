@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.jobportal.dto.SkillExperienceDTO;
 
 @Entity
@@ -21,8 +23,9 @@ public class SkillExperience {
 	@JoinColumn(name = "skill_id", unique = true)
 	private Skill skill;
 	private Integer years;
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "freelancer_id", unique = true)
+	@JsonBackReference
 	private Freelancer freelancer;
 	
 	public SkillExperience () {

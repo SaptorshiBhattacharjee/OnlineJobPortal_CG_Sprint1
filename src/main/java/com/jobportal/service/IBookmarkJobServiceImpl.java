@@ -63,7 +63,7 @@ public class IBookmarkJobServiceImpl implements IBookmarkJobService
 	{
 		//freelancer
 		List<Freelancer> list = new ArrayList<>();
-		for(int i = 0; i < list.size(); i++)
+		for(int i = 0; i < list.size(); i++)//change here
 		{
 			if(skill.getName().equals(freelancer.getBookmarkedJobs().toString()))
 			{

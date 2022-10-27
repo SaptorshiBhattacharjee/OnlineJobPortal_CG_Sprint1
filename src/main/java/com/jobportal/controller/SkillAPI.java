@@ -17,7 +17,7 @@ import com.jobportal.service.ISkillService;
 
 
 @RestController
-@RequestMapping("value=/skill")
+@RequestMapping(value="/skill")
 @CrossOrigin(origins = "*")
 public class SkillAPI {
 	

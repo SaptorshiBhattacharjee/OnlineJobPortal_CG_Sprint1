@@ -18,7 +18,7 @@ import com.jobportal.dto.SkillExperienceDTO;
 import com.jobportal.service.ISkillExperienceService;
 
 @RestController
-@RequestMapping("value=/skillexperience")
+@RequestMapping(value="/skillexperience")
 @CrossOrigin(origins = "*")
 public class SkillExperienceAPI {
 	

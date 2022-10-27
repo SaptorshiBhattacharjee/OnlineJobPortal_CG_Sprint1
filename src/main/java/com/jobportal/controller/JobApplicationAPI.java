@@ -1,6 +1,7 @@
 
 package com.jobportal.controller;
 
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -19,45 +20,55 @@ import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobApplicationDTO;
 import com.jobportal.dto.JobDTO;
 import com.jobportal.exception.InvalidJobApplicationException;
+import com.jobportal.exception.JobPortalException;
 import com.jobportal.service.IAdminService;
+import com.jobportal.service.IFreelancerService;
 import com.jobportal.service.IJobApplicationService;
+import com.jobportal.service.IJobService;
 
 @RestController
-@RequestMapping("value=/jobportal/jobapplication")
+@RequestMapping(value="/jobportal/jobapplication")
 public class JobApplicationAPI {
 	
 	@Autowired
 	private IJobApplicationService iJobApplicationService;
 	
 	@Autowired
+	private IFreelancerService iFreelancerService;
+	
+	@Autowired
+	private IJobService iJobService;
+	
+	@Autowired
 	Environment environment;
 	
-	@PostMapping(value="/applytojob")
-
-	public ResponseEntity<String> applyToJob(@RequestBody JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
-		JobApplicationDTO Applied = iJobApplicationService.applyToJob(jobDTO, coverLetter, freelancerDTO);
+	@PostMapping(value="/applytojob/{freelancerId}/{jobId}")
+	public ResponseEntity<String> applyToJob(@PathVariable Integer jobId, @PathVariable Integer freelancerId, @RequestBody String coverLetter) throws Exception{
+		
+		String status = iJobApplicationService.applyToJob(jobId, coverLetter, freelancerId);
 		String successMessage = environment.getProperty("API.APPLIED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 
-	@PutMapping(value="/updatejobapplication")
-	public ResponseEntity<String> updateJobApplication(@RequestBody JobDTO jobDTO, String coverLetter, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
-		JobApplicationDTO updateTo = iJobApplicationService.updateJobApplication(jobDTO, coverLetter, freelancerDTO);
+	@PutMapping(value="/updatejobapplication/{freelancerId}/{jobId}")
+	public ResponseEntity<String> updateJobApplicatio(@PathVariable Integer jobId, @PathVariable Integer freelancerId, @RequestBody String coverLetter) throws Exception{
+		
+		String status = iJobApplicationService.updateJobApplication(jobId, coverLetter, freelancerId);
 		String successMessage = environment.getProperty("API.UPDATED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value="/delete")
+	@DeleteMapping(value="/delete/{freelancerId}/{jobId}")
 
-	public ResponseEntity<String> remove(@RequestBody JobDTO jobDTO, FreelancerDTO freelancerDTO) throws InvalidJobApplicationException{
-		iJobApplicationService.remove(jobDTO, freelancerDTO);
+	public ResponseEntity<String> remove(@PathVariable Integer jobId, @PathVariable Integer freelancerId) throws Exception{
+		String status = iJobApplicationService.remove(jobId, freelancerId);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 		
 	}
 	
 	@GetMapping(value="/findbyid/{jobApplicationId}")
-	public ResponseEntity<JobApplicationDTO> findById(@PathVariable int jobApplicationId) throws InvalidJobApplicationException{
+	public ResponseEntity<JobApplicationDTO> findById(@PathVariable int jobApplicationId) throws Exception{
 		JobApplicationDTO jobApplication = iJobApplicationService.findById(jobApplicationId);
 		return new ResponseEntity<>(jobApplication, HttpStatus.OK);
 	}

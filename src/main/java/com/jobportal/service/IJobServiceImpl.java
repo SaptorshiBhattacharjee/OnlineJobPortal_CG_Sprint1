@@ -30,21 +30,16 @@ public class IJobServiceImpl implements IJobService{
     
 	@Override
 	public JobDTO postjob(SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidJobException {
-		Skill skill = new Skill();
-		skill.setId(skillDTO.getId());
-		Recruiter recruit = new Recruiter();
-		recruit.setId(recruiterDTO.getId());
+		Skill skill = skillDTO.toSkill();
+		Recruiter recruit = recruiterDTO.toRecruiter();
 		JobDTO jobdto = new JobDTO();
-        List<JobApplication> jobApplications = jobdto.getJobApplications();
-        Freelancer freelancer = new Freelancer();
-        Recruiter recruiter = new Recruiter();
-        jobdto.setId(jobdto.getId());
+        jobdto.setId(skill.getId());
         jobdto.setSkill(skill);
-        jobdto.setPostedBy(recruiter);
+        jobdto.setPostedBy(recruit);
 		jobdto.setPostedDate(LocalDate.now());
-        jobdto.setAwardedTo(freelancer);
+        jobdto.setAwardedTo(null);
         jobdto.setActive(true);
-        jobdto.setJobApplications(jobApplications);
+        jobdto.setJobApplications(null);
         Job j = jobdto.toJob();
         Job job2= iJobDao.save(j);
        
@@ -54,7 +49,7 @@ public class IJobServiceImpl implements IJobService{
 	@Override
 	public JobDTO findById(int id) throws InvalidJobException {
 		Optional<Job> optional = iJobDao.findById(id);
-		Job job = optional.orElseThrow(() -> new InvalidJobException("Service.NO_SUCH_JOB"));
+		Job job = optional.orElseThrow(() -> new InvalidJobException("Service.NO_JOB_FOUND"));
 		
 		JobDTO jobDto = new JobDTO();
 		jobDto.setId(job.getId());
@@ -62,7 +57,7 @@ public class IJobServiceImpl implements IJobService{
 		jobDto.setActive(job.getActive());
 		jobDto.setAwardedTo(jobDto.getAwardedTo());
 		jobDto.setPostedDate(job.getPostedDate());
-		jobDto.setJobApplications(job.getJobApplications());
+//		jobDto.setJobApplications(job.getJobApplications());
 		jobDto.setPostedBy(jobDto.getPostedBy());
 		
 		return jobDto;
@@ -71,37 +66,43 @@ public class IJobServiceImpl implements IJobService{
 
 	@Override
 	public List<JobDTO> findJobsBySkill(SkillDTO skillDTO) throws InvalidJobException {
-		Skill skill = new Skill();
-		skill.setId(skillDTO.getId());
-		skill.setName(skillDTO.getName());
-		skill.setDescription(skillDTO.getDescription());
-		
-		List<Job> JobBySkill = iJobDao.findJobBySkill(skill);
 		List<JobDTO> JobDTOBySkill = new ArrayList<>();
-		
-		for(Job job : JobBySkill) { // list job nunchi oka okati list of job dto  
-			JobDTO jobDTO = new JobDTO();
-			jobDTO.setId(job.getId());
-			jobDTO.setAwardedTo(job.getAwardedTo());
-			jobDTO.setJobApplications(job.getJobApplications());
-			jobDTO.setPostedBy(job.getPostedBy()); 
-			jobDTO.setPostedDate(job.getPostedDate());
-			jobDTO.setActive(job.getActive());
-			jobDTO.setSkill(job.getSkill());
-			JobDTOBySkill.add(jobDTO);
+		if(skillDTO==null) {
+			throw new InvalidJobException("Service.ENTER_VALID_SKILL");
 		}
+		else {
+	    Skill skill = skillDTO.toSkill();
+        
+		List<Job> joblist =(List<Job>) iJobDao.findAll();
+		for(Job job : joblist) {
+			Skill skill1 =job.getSkill();
+			 if( skill1.getDescription().equals( skill.getDescription())&&
+				 skill1.getName().equals(skill.getName())) {
+			     JobDTOBySkill.add(job.toJobDTO());
+		     }
+		}
+	}	
 		return JobDTOBySkill;
-	
+		
 	}
+//	@Override
+//	public void close(Long id) {
+//		if (jobdao.existsById(id)) {
+//			Job job = jobdao.findById(id).get();
+//			job.setActive(false);
+//			jobdao.save(job);
+//		} else {
+//			throw new InvalidJobException();
+//		}
+//	}
 
 	@Override
-	public void close(JobDTO jobDTO) throws InvalidJobException {
-		
-		int id =jobDTO.getId();
+	public void close(int id) throws InvalidJobException {
+
 		if (iJobDao.existsById(id)) {
 			Job job = iJobDao.findById(id).get();
 			job.setActive(false);
-			//iJobDao.save(job);
+			iJobDao.save(job);
 		} else {
 			throw new InvalidJobException("Service.NO_SUCH_JOB");
 		}

@@ -20,7 +20,7 @@ public class SwaggerConfig {
     }
  
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Student Service")
+        return new ApiInfoBuilder().title("Online Job portal")
                 .description("Sample Documentation Generateed Using SWAGGER2 for our Book Rest API")
                 .termsOfServiceUrl("https://www.google.co.in")
                 .license("PVT_ltd")

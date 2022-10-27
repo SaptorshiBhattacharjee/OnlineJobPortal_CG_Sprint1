@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jobportal.dto.BookmarkedJobDTO;
 
 @Entity
@@ -21,15 +23,16 @@ public class BookmarkedJob
 	private Integer bookmarkedJobId;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="skill_id")	//one book-mark job is mapped to one skill
+	@JoinColumn(name="skill_id")//one book-mark job is mapped to one skill
 	private Skill skill;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="job_id")	//one book-mark job is mapped to one job
 	private Job job;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="freelancer_id")
+	@JsonBackReference
 	private Freelancer freelancer;
 	
 	// defining default and parameterized constructors 
