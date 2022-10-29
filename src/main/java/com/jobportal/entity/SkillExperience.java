@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import com.jobportal.dto.SkillExperienceDTO;
 
@@ -20,6 +21,7 @@ public class SkillExperience {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "skill_id", unique = true)
 	private Skill skill;
+	@NotNull(message = "Experience Years should not be empty")
 	private Integer years;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "freelancer_id", unique = true)

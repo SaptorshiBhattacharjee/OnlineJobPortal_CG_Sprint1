@@ -1,4 +1,3 @@
-
 package com.jobportal.service;
 
 import java.time.LocalDateTime;
@@ -140,5 +139,4 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		
 	}
 }
-
 

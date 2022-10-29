@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.jobportal.dto.AdminDTO;
@@ -22,17 +21,15 @@ public class Recruiter {
 	private int id;
 	private String firstName;
 	private String lastName;
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="job_id")
-	private Job postedJobs;
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="feedback_id")
-	private Feedback Feedbacks;
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="bookmarkedfreelancer_id")
-	private BookmarkedFreelancer freelancers;
-	
-	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="recruiter_id")
+	private List<Job> postedJobs;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="recruiter_id")
+	private List<Feedback> Feedbacks;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="recruiter_id")
+	private List<BookmarkedFreelancer> freelancers;
 	public int getId() {
 		return id;
 	}
@@ -51,22 +48,22 @@ public class Recruiter {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Job getPostedJobs() {
+	public List<Job> getPostedJobs() {
 		return postedJobs;
 	}
-	public void setPostedJobs(Job postedJobs) {
+	public void setPostedJobs(List<Job> postedJobs) {
 		this.postedJobs = postedJobs;
 	}
-	public Feedback getFeedbacks() {
+	public List<Feedback> getFeedbacks() {
 		return Feedbacks;
 	}
-	public void setFeedbacks(Feedback feedbacks) {
+	public void setFeedbacks(List<Feedback> feedbacks) {
 		Feedbacks = feedbacks;
 	}
-	public BookmarkedFreelancer getFreelancers() {
+	public List<BookmarkedFreelancer> getFreelancers() {
 		return freelancers;
 	}
-	public void setFreelancers(BookmarkedFreelancer freelancers) {
+	public void setFreelancers(List<BookmarkedFreelancer> freelancers) {
 		this.freelancers = freelancers;
 	}
 	@Override

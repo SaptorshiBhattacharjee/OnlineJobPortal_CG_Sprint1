@@ -11,5 +11,5 @@ public interface IJobService {
 	public JobDTO postjob(SkillDTO skillDTO,RecruiterDTO recruiterDTO)throws InvalidJobException;
 	public JobDTO findById(int id) throws InvalidJobException;
 	public List<JobDTO> findJobsBySkill(SkillDTO skillDTO)throws InvalidJobException;
-    public void close(JobDTO jobDTO)throws InvalidJobException;
+    public void close(int id)throws InvalidJobException;
 }

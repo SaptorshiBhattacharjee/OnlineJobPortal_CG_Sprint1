@@ -1,3 +1,4 @@
+
 package com.jobportal.entity;
 import java.time.LocalDate;
 
@@ -9,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -35,9 +35,9 @@ private  LocalDate postedDate;
 @JoinColumn(name = "freelancer_id", unique = true)
 private Freelancer awardedTo;
 
-@ManyToOne(cascade = CascadeType.ALL)
+@OneToMany(cascade = CascadeType.ALL)
 @JoinColumn(name = "job_id", unique = true)
-private  JobApplication jobApplications;
+private  List<JobApplication> jobApplications;
 
 private Boolean active;
 
@@ -48,7 +48,7 @@ public Job() {
 
 
 public Job(int id, Skill skill, Recruiter postedBy, LocalDate postedDate, Freelancer awardedTo,
-		JobApplication jobApplications, Boolean active) {
+		List<JobApplication> jobApplications, Boolean active) {
 	super();
 	this.id = id;
 	this.skill = skill;
@@ -100,10 +100,10 @@ public void setAwardedTo(Freelancer awardedTo) {
 }
 
 
-public JobApplication getJobApplications() {
+public List<JobApplication> getJobApplications() {
 	return jobApplications;
 }
-public void setJobApplications(JobApplication jobApplications) {
+public void setJobApplications(List<JobApplication> jobApplications) {
 	this.jobApplications = jobApplications;
 }
 public Boolean getActive() {
@@ -152,6 +152,3 @@ public boolean equals(Object obj) {
  
     }
 }
-
-
-

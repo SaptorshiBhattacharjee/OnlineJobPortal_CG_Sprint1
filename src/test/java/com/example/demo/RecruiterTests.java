@@ -1,6 +1,25 @@
+
 package com.example.demo;
+
 import java.util.Optional;
+
+
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+import java.util.Optional;
+<<<<<<< HEAD
+=======
+
+
+
+
+
 import org.junit.jupiter.api.Assertions;
+
+
+import org.junit.Test;
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+import org.junit.jupiter.api.Assertions;
+<<<<<<< HEAD
 //import java.util.Optional;
 //import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +29,20 @@ import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.Test;
+=======
+
+//import org.junit.Test;
+//import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+
+import org.junit.jupiter.api.BeforeEach;
+
+
+
+
+
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -57,8 +90,8 @@ public class RecruiterTests {
 		Mockito.when(iRecruiterDao.findById(1)).thenReturn(optional);
 		RecruiterDTO actual = iRecruiterService.update(recruiterDTO);
 		Assertions.assertEquals(actual, recruiterDTO);
-	}
 
+	}
 
 	@Test
 	void failedFindByIdTest() throws InvalidRecruiterException{
@@ -95,6 +128,7 @@ public class RecruiterTests {
 		
 
 	}
+	
 	@Test
 	void failedRecruiterUpdateTest() throws InvalidRecruiterException{
 		RecruiterDTO recruiterDTO = new RecruiterDTO();
@@ -104,9 +138,9 @@ public class RecruiterTests {
 		Mockito.when(iRecruiterDao.findById(recruiterDTO.getId())).thenReturn(null);
 		RecruiterDTO actual = iRecruiterService.update(recruiterDTO);
 		InvalidRecruiterException exception = Assertions.assertThrows(InvalidRecruiterException.class,() -> iRecruiterService.update(recruiterDTO));
-		Assertions.assertEquals("Service.ADMIN_NOT_FOUND", exception.getMessage());
-		
+
 	}
 }
+
 
 
