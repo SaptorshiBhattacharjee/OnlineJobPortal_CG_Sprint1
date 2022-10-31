@@ -45,7 +45,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(freelancerId);
 		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidFreelancerException("Service.FREELANCER_NOT_FOUND"));
 		
-		Optional<JobApplication> optional = iJobApplicationDao.findByJobIdAndFreelancerId(jobId, freelancerId);
+		Optional<JobApplication> optional = iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(jobId, freelancerId);
 		if(optional.isPresent()) {
 			throw new InvalidJobApplicationException("Service.ALREADY_APPLIED");
 		}
@@ -64,7 +64,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		}
 		
 		
-		Optional<JobApplication> optional1 = iJobApplicationDao.findByJobIdAndFreelancerId(jobId, freelancerId);
+		Optional<JobApplication> optional1 = iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(jobId, freelancerId);
 		if(optional1.isPresent()) {
 			return "SUCCESS";
 		}
@@ -83,7 +83,7 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(freelancerId);
 		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidFreelancerException("Service.FREELANCER_NOT_FOUND"));
 		
-		Optional<JobApplication> optional = iJobApplicationDao.findByJobIdAndFreelancerId(jobId, freelancerId);
+		Optional<JobApplication> optional = iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(jobId, freelancerId);
 		JobApplication jobApplication = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NOT_APPLIED"));
 		jobApplication.setCoverLetter(coverLetter);
 		
@@ -104,11 +104,11 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(freelancerId);
 		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidFreelancerException("Service.FREELANCER_NOT_FOUND"));
 		
-		Optional<JobApplication> optional = iJobApplicationDao.findByJobIdAndFreelancerId(jobId, freelancerId);
+		Optional<JobApplication> optional = iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(jobId, freelancerId);
 		JobApplication jobApplication = optional.orElseThrow(() -> new InvalidJobApplicationException("Service.NOT_APPLIED"));	
 		iJobApplicationDao.delete(jobApplication);
 		
-		Optional<JobApplication> optional1 = iJobApplicationDao.findByJobIdAndFreelancerId(jobId, freelancerId);
+		Optional<JobApplication> optional1 = iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(jobId, freelancerId);
 		if(optional1.isPresent()) {
 			throw new InvalidJobApplicationException("Service.DELETE_FAILED");
 		

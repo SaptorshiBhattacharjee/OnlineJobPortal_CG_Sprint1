@@ -16,7 +16,7 @@ public interface IFeedbackDao extends CrudRepository<Feedback, Integer>{
 	@Query("SELECT fb FROM Feedback fb WHERE fb.freelancer=:freelancer")
 	List<Feedback> findFeedbacksByFreelancer(@Param("freelancer") Freelancer freelancer);
 	
-	Optional<Feedback> findByRecruiterIdAndFreelancerId (int recruiterId, int  freelancerId);
+	Optional<Feedback> findByRecruiterIdAndFreelancerFreelancerId (int recruiterId, int  freelancerId);
 
 
 }
