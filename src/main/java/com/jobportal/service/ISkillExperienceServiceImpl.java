@@ -82,7 +82,7 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 		Skill skill = optionalSkill.orElseThrow(() -> new InvalidSkillException("Service.NO_SUCH_SKILL"));
 		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(freelancerId);
 		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidFreelancerException("Service.FREELANCER_NOT_FOUND"));
-		Optional<SkillExperience> optional = iSkillExperienceDao.findBySkillIdAndFreelancerId(skillId, freelancerId);
+		Optional<SkillExperience> optional = iSkillExperienceDao.findBySkillIdAndFreelancerFreelancerId(skillId, freelancerId);
 		if(optional.isPresent()) {
 			throw new InvalidSkillExperienceException("Service.ALREADY_ADDEED");
 		}
@@ -93,7 +93,7 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 		skillExperience.setSkill(skill);
 		iSkillExperienceDao.save(skillExperience);
 		
-		Optional<SkillExperience> optional1 = iSkillExperienceDao.findBySkillIdAndFreelancerId(skillId, freelancerId);
+		Optional<SkillExperience> optional1 = iSkillExperienceDao.findBySkillIdAndFreelancerFreelancerId(skillId, freelancerId);
 		if(optional1.isPresent()) {
 			return "SUCCESS";
 		}

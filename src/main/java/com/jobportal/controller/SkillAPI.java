@@ -45,6 +45,5 @@ public class SkillAPI {
 		iSkillService.remove(skillDTO);
 		String successMessage = environment.getProperty("API.REMOVE_SUCCESS");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
-	}
-		
+	}	
 }

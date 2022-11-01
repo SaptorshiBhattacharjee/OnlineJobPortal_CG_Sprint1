@@ -8,6 +8,6 @@ import com.jobportal.entity.SkillExperience;
 
 public interface ISkillExperienceDao extends CrudRepository<SkillExperience, Integer> {
 
-	Optional<SkillExperience> findBySkillIdAndFreelancerId(int skillId, int freelancerId);
+	Optional<SkillExperience> findBySkillIdAndFreelancerFreelancerId(int skillId, int freelancerId);
 	
 }

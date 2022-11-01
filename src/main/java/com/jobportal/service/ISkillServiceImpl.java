@@ -27,7 +27,7 @@ public class ISkillServiceImpl implements ISkillService{
 	@Override
 	public String save(SkillDTO skillDTO) throws InvalidSkillException {
 		
-		Optional<Skill> optional = iSkillDao.findBySkillName(skillDTO.getName());
+		Optional<Skill> optional = iSkillDao.findByName(skillDTO.getName());
 		if(optional.isPresent())
 			throw new InvalidSkillException("Service.SKILLNAME_ALREADY_EXISTS");
 		Skill skill = new Skill();	
@@ -58,7 +58,7 @@ public class ISkillServiceImpl implements ISkillService{
 		skill.setName(skillDTO.getName());
 		skill.setDescription(skillDTO.getDescription());
 		
-		Optional<Skill> optional1 = iSkillDao.findBySkillName(skillDTO.getName());
+		Optional<Skill> optional1 = iSkillDao.findByName(skillDTO.getName());
 		if((optional1.isPresent()) && !((skill.getName()).equals(skillDTO.getName())))
 			throw new InvalidSkillException("Service.SKILL_ALREADY_EXISTS");
 		skill.setName(skillDTO.getName());
@@ -73,7 +73,7 @@ public class ISkillServiceImpl implements ISkillService{
 
 	
 	@Override
-	public void remove(SkillDTO skillDTO) throws InvalidSkillException{
+	public void remove(SkillDTO skillDTO) throws InvalidSkillException{	
 		Skill skill = new Skill();
 		skill.setId(skill.getId());
 		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
