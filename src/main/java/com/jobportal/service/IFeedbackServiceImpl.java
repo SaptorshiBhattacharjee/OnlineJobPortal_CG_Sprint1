@@ -47,7 +47,7 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 		Optional<Freelancer> optionalFreelancer = ifreelancerDao.findById(freelancerId);
 		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidFreelancerException("Service.FREELANCER_NOT_FOUND"));
 		
-		Optional<Feedback> optional = ifeedbackDao.findByRecruiterIdAndFreelancerId(recruiterId, freelancerId);
+		Optional<Feedback> optional = ifeedbackDao.findByRecruiterIdAndFreelancerFreelancerId(recruiterId, freelancerId);
 		if(optional.isPresent()) {
 			throw new InvalidFeedbackException("Service.ALREADY_GIVEN");
 		}
@@ -59,7 +59,7 @@ public class IFeedbackServiceImpl implements IFeedbackService{
 		feedback.setRecruiter(recruiter);
 		ifeedbackDao.save(feedback);
 		
-		Optional<Feedback> optional1 = ifeedbackDao.findByRecruiterIdAndFreelancerId(recruiterId, freelancerId);
+		Optional<Feedback> optional1 = ifeedbackDao.findByRecruiterIdAndFreelancerFreelancerId(recruiterId, freelancerId);
 		if(optional1.isPresent()) {
 			return "SUCCESS";
 		}
