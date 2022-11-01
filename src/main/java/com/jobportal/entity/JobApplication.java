@@ -9,7 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.jobportal.dto.JobApplicationDTO;
 
 import javax.persistence.CascadeType;
@@ -25,10 +27,15 @@ public class JobApplication {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
- 	@OneToOne(cascade=CascadeType.ALL)
+ 	@OneToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="job_id")
- 	@NotNull(message="Entering a job is mandatory")
+ 	@NotNull(message="{jobApplication.job.absent}")
 	private Job job;
+ 	@ManyToOne(cascade=CascadeType.DETACH)
+	@JoinColumn(name="freelancer_id")
+ 	@NotNull(message="{jobApplication.freelancer.absent}")
+ 	@JsonBackReference
+	private Freelancer freelancer;
 	private LocalDateTime appliedDate;
 	@NotNull(message="Entering a coverletter is mandatory")
 	private String coverLetter;
@@ -37,13 +44,7 @@ public class JobApplication {
 		super();
 	}
 	
-	public JobApplication(int id, Job job, LocalDateTime appliedDate, String coverLetter) {
-		super();
-		this.id = id;
-		this.job = job;
-		this.appliedDate = appliedDate;
-		this.coverLetter = coverLetter;
-	}
+	
 	public int getId() {
 		return id;
 	}
@@ -68,34 +69,20 @@ public class JobApplication {
 	public void setCoverLetter(String coverLetter) {
 		this.coverLetter = coverLetter;
 	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, appliedDate, coverLetter, job);
+	public Freelancer getFreelancer() {
+		return freelancer;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		JobApplication other = (JobApplication) obj;
-		return Objects.equals(id, other.id) && Objects.equals(appliedDate, other.appliedDate)
-				&& Objects.equals(coverLetter, other.coverLetter) && Objects.equals(job, other.job);
-	}
-	@Override
-	public String toString() {
-		return "JobApplication [Id=" + id + ", job=" + job + ", appliedDate=" + appliedDate + ", coverLetter="
-				+ coverLetter + "]";
+	public void setFreelancer(Freelancer freelancer) {
+		this.freelancer = freelancer;
 	}
 	
 	public JobApplicationDTO toJobApplicationDTO() {
 		JobApplicationDTO jobApplicationDTO = new JobApplicationDTO();
 		jobApplicationDTO.setId(this.id);
-		jobApplicationDTO.setJob(this.job);
+		jobApplicationDTO.setJobId(this.job.getId());
 		jobApplicationDTO.setAppliedDate(this.appliedDate);
 		jobApplicationDTO.setCoverLetter(this.coverLetter);
+		jobApplicationDTO.setFreelancerId(this.freelancer.getId());
 		return jobApplicationDTO;
 	}
 	

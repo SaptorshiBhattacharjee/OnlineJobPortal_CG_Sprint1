@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.jobportal.dto.SkillDTO;
 
 @Entity
@@ -15,6 +17,7 @@ public class Skill
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@NotNull(message = "Name should not be empty")
+	@Pattern(regexp="[A-Za-z]+( [A-Za-z]+)*", message="{admin.firstName.invalid}")
 	private String name;
 	@NotNull(message = "Description should not be empty")
 	private String description;

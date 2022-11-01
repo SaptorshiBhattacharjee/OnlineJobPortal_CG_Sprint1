@@ -8,17 +8,17 @@ import com.jobportal.entity.Skill;
 public class BookmarkedJobDTO 
 {
 	
-	private Integer id;
+	private Integer bookmarkedJobDtoId;
 	private Skill skill;
 	private Job job;
 	private Freelancer freelancer;
 	
 	// defining the getter and setter methods
 	public Integer getId() {
-		return id;
+		return bookmarkedJobDtoId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer bookmarkedJobDtoId) {
+		this.bookmarkedJobDtoId = bookmarkedJobDtoId;
 	}
 	public Skill getSkill() {
 		return skill;
@@ -42,7 +42,7 @@ public class BookmarkedJobDTO
 	//defining toString method
 	@Override
 	public String toString() {
-		return "BookmarkedJobDTO [id=" + id + ", skill=" + skill + ", job=" + job + ", freelancer=" + freelancer + "]";
+		return "BookmarkedJobDTO [bookmarkedJobDtoId=" + bookmarkedJobDtoId + ", skill=" + skill + ", job=" + job + ", freelancer=" + freelancer + "]";
 	}
 	
 	public BookmarkedJob toBookmarkedJobEntity()

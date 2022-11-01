@@ -28,14 +28,14 @@ public class SkillAPI {
 	
 	@PostMapping(value="/save")
 	public ResponseEntity<String> save(@RequestBody SkillDTO skillDTO) throws Exception{
-		SkillDTO addedSkill = iSkillService.save(skillDTO);
+		String inserted = iSkillService.save(skillDTO);
 		String successMessage = environment.getProperty("API.INSERT_SUCCESS");
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
-		
+
 	@PutMapping(value="/update")
 	public ResponseEntity<String> update(@RequestBody SkillDTO skillDTO) throws Exception{
-		SkillDTO updatedSkill = iSkillService.update(skillDTO);
+		String updated = iSkillService.update(skillDTO);
 		String successMessage = environment.getProperty("API.UPDATE_SUCCESS");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}

@@ -77,6 +77,9 @@ public class IFreelancerServiceImpl implements IFreelancerService{
 		freelancer.setSkills(freelancerDTO.getSkills());
 		freelancer.setBookmarkedJobs(freelancerDTO.getBookmarkedJobs());
 		
+		// saving the updated employee to the DataBase
+		ifreelancerDao.save(freelancer);
+		
 		return freelancerDTO;
 	}
 }

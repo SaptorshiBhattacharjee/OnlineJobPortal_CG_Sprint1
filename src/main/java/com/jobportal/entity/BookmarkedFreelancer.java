@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jobportal.dto.BookmarkedFreelancerDTO;
 
 @Entity
@@ -25,8 +28,9 @@ public class BookmarkedFreelancer {
 	@NotNull(message="Entering a freelancer is mandatory")
 	private Freelancer freelancer;
 	@NotNull(message="Entering a skill is mandatory")
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "recruiter_id", unique = true)
+	@JsonBackReference
 	private Recruiter bookmarkedBy;
 	
 	public BookmarkedFreelancer() {

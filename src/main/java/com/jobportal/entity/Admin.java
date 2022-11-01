@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.jobportal.dto.AdminDTO;
 
@@ -14,37 +15,28 @@ import com.jobportal.dto.AdminDTO;
 public class Admin {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	@NotNull(message = "Firstname should not be empty")
+	private int adminId;
+	@NotNull(message = "{admin.firstName.absent}")
+	@Pattern(regexp="[A-Za-z]+( [A-Za-z]+)*", message="{admin.firstName.invalid}")
 	private String firstName;
-	@NotNull(message ="Lastname should not be empty")
+	@NotNull(message ="{admin.lastName.absent}")
+	@Pattern(regexp="[A-Za-z]+( [A-Za-z]+)*", message="{admin.lastName.invalid}")
 	private String lastName;
-	@NotNull(message ="Entering password is mandatory")
+	@NotNull(message ="admin.userName.absent")
+	private String userName;
+	@NotNull(message ="{admin.password.absent}")
 	private String password;
 	
+
 	public Admin() {
 		super();
 	}
 	
-	
-	public Admin(int id, String firstName, String lastName, String password) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-	}
-	
-	@Override
-	public String toString() {
-		return "Admin [Id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
-				+ "]";
-	}
 	public int getId() {
-		return id;
+		return adminId;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.adminId = id;
 	}
 	
 	public String getFirstName() {
@@ -59,6 +51,12 @@ public class Admin {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String username) {
+		this.userName = username;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -66,27 +64,13 @@ public class Admin {
 		this.password = password;
 	}
 	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, firstName, lastName, password);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Admin other = (Admin) obj;
-		return Objects.equals(id, other.id) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password);
-	}
+	
 	public AdminDTO toAdminDTO() {
 		AdminDTO adminDTO = new AdminDTO();
-		adminDTO.setId(this.id);
+		adminDTO.setId(this.adminId);
 		adminDTO.setFirstName(this.firstName);
 		adminDTO.setLastName(this.lastName);
+		adminDTO.setUserName(this.userName);
 		adminDTO.setPassword(this.password);
 		return adminDTO;
 	}

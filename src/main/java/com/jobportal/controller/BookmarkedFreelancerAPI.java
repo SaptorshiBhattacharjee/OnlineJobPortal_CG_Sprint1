@@ -28,7 +28,7 @@ import com.jobportal.service.IBookmarkFreelancerService;
 import com.jobportal.service.IJobApplicationService;
 
 @RestController
-@RequestMapping(value="/jobportal/jobapplication")
+@RequestMapping(value="/jobportal/bookmarkedfreelancer")
 public class BookmarkedFreelancerAPI {
 	
 	@Autowired
@@ -65,7 +65,7 @@ public class BookmarkedFreelancerAPI {
 
 	public ResponseEntity<BookmarkedFreelancerDTO> findById(@PathVariable int bookmarkedFreelancerId) throws InvalidBookmarkedFreelancerException{
 		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = iBookmarkFreelancerService.findById(bookmarkedFreelancerId);
-		return new ResponseEntity<BookmarkedFreelancerDTO>(bookmarkedFreelancerDTO, HttpStatus.OK);
+		return new ResponseEntity<>(bookmarkedFreelancerDTO, HttpStatus.OK);
 	}
 	
 }

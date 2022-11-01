@@ -57,7 +57,7 @@ public class IJobServiceImpl implements IJobService{
 		jobDto.setActive(job.getActive());
 		jobDto.setAwardedTo(jobDto.getAwardedTo());
 		jobDto.setPostedDate(job.getPostedDate());
-		jobDto.setJobApplications(job.getJobApplications());
+//		jobDto.setJobApplications(job.getJobApplications());
 		jobDto.setPostedBy(jobDto.getPostedBy());
 		
 		return jobDto;
