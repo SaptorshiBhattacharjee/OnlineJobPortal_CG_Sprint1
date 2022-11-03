@@ -109,7 +109,7 @@ public class ISkillExperienceServiceImpl implements ISkillExperienceService{
 		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(freelancerId);
 		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidFreelancerException("Service.FREELANCER_NOT_FOUND"));
 		
-		Optional<SkillExperience> optional = iSkillExperienceDao.findBySkillIdAndFreelancerId(skillId, freelancerId);
+		Optional<SkillExperience> optional = iSkillExperienceDao.findBySkillIdAndFreelancerFreelancerId(skillId, freelancerId);
 		SkillExperience skillExperience = optional.orElseThrow(() -> new InvalidSkillExperienceException("Service.NOT_APPLIED"));
 		skillExperience.setYears(years);
 		
