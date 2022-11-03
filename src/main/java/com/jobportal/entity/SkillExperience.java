@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.jobportal.dto.SkillExperienceDTO;
 
 @Entity
@@ -19,10 +22,14 @@ public class SkillExperience {
 	private int id;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "skill_id", unique = true)
+	@NotNull(message="{skillExperience.job.absent}")
 	private Skill skill;
+	@NotNull(message = "Experience Years should not be empty")
 	private Integer years;
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "freelancer_id", unique = true)
+	@NotNull(message="{skillExperience.freelancer.absent}")
+	@JsonBackReference
 	private Freelancer freelancer;
 	
 	public SkillExperience () {
@@ -62,23 +69,6 @@ public class SkillExperience {
 	}
 	
 	
-	@Override
-	public int hashCode() {
-		return 31;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SkillExperience other = (SkillExperience) obj;
-		return Objects.equals(id, other.id) && Objects.equals(years, other.years)
-				&& Objects.equals(skill, other.skill) && Objects.equals(freelancer, other.freelancer);
-	}
 	
 @Override
 public String toString() {
@@ -88,9 +78,11 @@ public String toString() {
 
 public SkillExperienceDTO toSkillExperienceDTO() {
 	SkillExperienceDTO skillExperienceDTO = new SkillExperienceDTO();
-	skillExperienceDTO.setSkill(this.skill);
+	skillExperienceDTO.setSkillId(this.skill.getId());
 	skillExperienceDTO.setYears(this.years);
-	skillExperienceDTO.setFreelancer(this.freelancer);
+	skillExperienceDTO.setFreelancerId(this.freelancer.getId());
 	return skillExperienceDTO;
 }
+
+
 }

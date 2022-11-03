@@ -46,9 +46,9 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 		recruiter.setId(recruiterDTO.getId());
 		recruiter.setFirstName(recruiterDTO.getFirstName());
 		recruiter.setLastName(recruiterDTO.getLastName());
-		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
-		recruiter.setFreelancers(recruiterDTO.getFreelancers());
-		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
+//		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
+//		recruiter.setFreelancers(recruiterDTO.getFreelancers());
+//		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
 		
 		bookmarkedFreelancer.setFreelancer(freelancer);
 		bookmarkedFreelancer.setBookmarkedBy(recruiter);
@@ -70,9 +70,9 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 		recruiter.setId(recruiterDTO.getId());
 		recruiter.setFirstName(recruiterDTO.getFirstName());
 		recruiter.setLastName(recruiterDTO.getLastName());
-		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
-		recruiter.setFreelancers(recruiterDTO.getFreelancers());
-		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
+//		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
+//		recruiter.setFreelancers(recruiterDTO.getFreelancers());
+//		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
 		
 		List<BookmarkedFreelancer> bookmarkedFreelancersBySkill = iBookmarkedFreelancerDao.findBySkillIdAndBookmarkedById(skillDTO.getId(), recruiterDTO.getId());
 		List<BookmarkedFreelancerDTO> bookmarkedFreelancersDTOBySkill = new ArrayList<>();
@@ -108,12 +108,12 @@ public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerServic
 		recruiter.setId(recruiterDTO.getId());
 		recruiter.setFirstName(recruiterDTO.getFirstName());
 		recruiter.setLastName(recruiterDTO.getLastName());
-		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
-		recruiter.setFreelancers(recruiterDTO.getFreelancers());
-		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
+//		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
+//		recruiter.setFreelancers(recruiterDTO.getFreelancers());
+//		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
 		
 		
-		Integer count = iBookmarkedFreelancerDao.removeByFreelancerIdAndSkillIdAndBookmarkedById(freelancerDTO.getId(), skillDTO.getId(), recruiterDTO.getId());
+		Integer count = iBookmarkedFreelancerDao.removeByFreelancerFreelancerIdAndSkillIdAndBookmarkedById(freelancerDTO.getId(), skillDTO.getId(), recruiterDTO.getId());
 		if(count == 0) {
 			throw new InvalidBookmarkedFreelancerException("Service.NOT_FOUND");		}
 		

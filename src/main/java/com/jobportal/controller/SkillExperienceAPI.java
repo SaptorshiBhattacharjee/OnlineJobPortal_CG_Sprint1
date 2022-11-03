@@ -29,15 +29,15 @@ public class SkillExperienceAPI {
 	Environment environment;
 	
 	@PostMapping(value="/addskill")
-	public ResponseEntity<String> addSkill(@RequestBody SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception{
-		SkillExperienceDTO Applied = iSkillExperienceService.addSkill(skillDTO, freelancerDTO, ExperienceYears);
+	public ResponseEntity<String> addSkill(@RequestBody int skillId, int freelancerId, Integer years) throws Exception{
+		String status = iSkillExperienceService.addSkill(skillId, freelancerId, years);
 		String successMessage = environment.getProperty("API.APPLIED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 
 	@PutMapping(value="/updateskillyears")
-	public ResponseEntity<String> updateSkillYears(@RequestBody SkillDTO skillDTO, FreelancerDTO freelancerDTO, int ExperienceYears) throws Exception{
-		SkillExperienceDTO updated = iSkillExperienceService.updateSkillYears(skillDTO, freelancerDTO, ExperienceYears);
+	public ResponseEntity<String> updateSkillYears(@RequestBody int skillId, int freelancerId, Integer years) throws Exception{
+		String status = iSkillExperienceService.updateSkillYears(skillId, freelancerId, years);
 		String successMessage = environment.getProperty("API.UPDATED_SUCCESSFULLY");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}

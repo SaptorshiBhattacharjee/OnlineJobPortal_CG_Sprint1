@@ -65,7 +65,7 @@ public class BookmarkedFreelancerAPI {
 
 	public ResponseEntity<BookmarkedFreelancerDTO> findById(@PathVariable int bookmarkedFreelancerId) throws InvalidBookmarkedFreelancerException{
 		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = iBookmarkFreelancerService.findById(bookmarkedFreelancerId);
-		return new ResponseEntity<BookmarkedFreelancerDTO>(bookmarkedFreelancerDTO, HttpStatus.OK);
+		return new ResponseEntity<>(bookmarkedFreelancerDTO, HttpStatus.OK);
 	}
 	
 }

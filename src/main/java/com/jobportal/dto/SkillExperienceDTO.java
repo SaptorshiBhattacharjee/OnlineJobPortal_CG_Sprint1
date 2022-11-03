@@ -1,26 +1,55 @@
 package com.jobportal.dto;
 
+import java.util.Optional;
+
+import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Skill;
 import com.jobportal.entity.SkillExperience;
+import com.jobportal.repository.IFreelancerDao;
+import com.jobportal.repository.ISkillDao;
+
+
 
 public class SkillExperienceDTO {
-	private int id;
-	private Skill skill;
-	private Integer years;
-	private Freelancer freelancer;
 	
-	public int getId() {
-		return id;
+	@Autowired
+	IFreelancerDao iFreelancerDao;
+	@Autowired
+	ISkillDao iSkillDao;
+	
+	private int skillExperienceId;
+	@NotNull(message="{skillExperience.skill.absent}")
+	private int skillId;
+	private Integer years;
+	@NotNull(message="{skillExperience.freelancer.absent}")
+	private int freelancerId;
+	public SkillExperienceDTO() {
+		super();
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public SkillExperienceDTO( Integer years, int skillId, int freelancerId, int skillExperienceId) {
+		super();
+		this.skillExperienceId = skillExperienceId;
+		this.years = years;
+		this.skillId = skillId;
+		this.freelancerId = freelancerId;
 	}
-	public Skill getSkill() {
-		return skill;
+	
+	public int getSkillExperienceId() {
+		return skillExperienceId;
 	}
-	public void setSkill(Skill skill) {
-		this.skill = skill;
+	public void setSkillExperienceId(int id) {
+		this.skillExperienceId = id;
+	}
+	public int getSkillId() {
+		return skillId;
+	}
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
 	}
 	public Integer getYears() {
 		return years;
@@ -28,23 +57,27 @@ public class SkillExperienceDTO {
 	public void setYears(Integer years) {
 		this.years = years;
 	}
-	public Freelancer getFreelancer() {
-		return freelancer;
+	public int getFreelancerId() {
+		return freelancerId;
 	}
-	public void setFreelancer(Freelancer freelancer) {
-		this.freelancer = freelancer;
+	public void setFreelancerId(int freelancerId) {
+		this.freelancerId = freelancerId;
 	}
 	@Override
 	public String toString() {
-		return "SkillExperience [id=" + id + ", skill=" + skill + ", years=" + years + ", freelancer=" + freelancer
+		return "SkillExperience [skillExperienceId=" + skillExperienceId + ", skill=" + skillId + ", years=" + years + ", freelancer=" + freelancerId
 				+ "]";
 	}
 	
 	public SkillExperience toSkillExperience() {
-		SkillExperience skillExperience = new SkillExperience();
-		skillExperience.setSkill(this.skill);
+		SkillExperience skillExperience = new SkillExperience();		
+		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(this.freelancerId);
+		Freelancer freelancer = optionalFreelancer.orElse(null);
+		Optional<Skill> optionalSkill = iSkillDao.findById(this.skillId);
+		Skill skill = optionalSkill.orElse(null);
+		skillExperience.setSkill(skill);
 		skillExperience.setYears(this.years);
-		skillExperience.setFreelancer(this.freelancer);
+		skillExperience.setFreelancer(freelancer);
 		return skillExperience;
 	}
 }

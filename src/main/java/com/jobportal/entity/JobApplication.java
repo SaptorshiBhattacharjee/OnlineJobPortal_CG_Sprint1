@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.jobportal.dto.JobApplicationDTO;
 
 import javax.persistence.CascadeType;
@@ -30,9 +31,10 @@ public class JobApplication {
 	@JoinColumn(name="job_id")
  	@NotNull(message="{jobApplication.job.absent}")
 	private Job job;
- 	@OneToOne(cascade=CascadeType.DETACH)
+ 	@ManyToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="freelancer_id")
  	@NotNull(message="{jobApplication.freelancer.absent}")
+ 	@JsonBackReference
 	private Freelancer freelancer;
 	private LocalDateTime appliedDate;
 	@NotNull(message="Entering a coverletter is mandatory")

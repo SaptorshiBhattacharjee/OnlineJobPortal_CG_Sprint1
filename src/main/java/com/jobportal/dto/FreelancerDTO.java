@@ -10,7 +10,7 @@ import com.jobportal.entity.SkillExperience;
 
 public class FreelancerDTO 
 {
-	private int id;
+	private int freelancerDtoId;
 	private String firstName;
 	private String lastName;
 	private String password;
@@ -21,10 +21,10 @@ public class FreelancerDTO
 	
 	// defining the getter and setter methods
 	public int getId() {
-		return id;
+		return freelancerDtoId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int freelancerDtoId) {
+		this.freelancerDtoId = freelancerDtoId;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -71,10 +71,10 @@ public class FreelancerDTO
 	
 	
 	// constructors with parameters
-	public FreelancerDTO(int id, String firstName, String lastName, String password, List<JobApplication> appliedJobs,
+	public FreelancerDTO(int freelancerDtoId, String firstName, String lastName, String password, List<JobApplication> appliedJobs,
 			List<Feedback> feedbacks, List<SkillExperience> skills, List<BookmarkedJob> bookmarkedJobs) {
 		super();
-		this.id = id;
+		this.freelancerDtoId = freelancerDtoId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
@@ -92,7 +92,7 @@ public class FreelancerDTO
 	//defining toString method
 	@Override
 	public String toString() {
-		return "FreelancerDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
+		return "FreelancerDTO [freelancerDtoId=" + freelancerDtoId + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
 				+ password + ", appliedJobs=" + appliedJobs + ", feedbacks=" + feedbacks + ", skills=" + skills
 				+ ", bookmarkedJobs=" + bookmarkedJobs + "]";
 	}

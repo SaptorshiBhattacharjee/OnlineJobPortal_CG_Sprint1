@@ -10,10 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobDTO;
 @Entity
@@ -24,15 +26,18 @@ public class Job {
 private int id ;
 @OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "skill_id", unique = true)
+@JsonBackReference
 private Skill skill;
-@OneToOne(cascade = CascadeType.ALL)
+@ManyToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "recruiter_id", unique = true)
+@JsonBackReference
 private  Recruiter postedBy;
 
 private  LocalDate postedDate;
 
-@OneToOne(cascade = CascadeType.ALL)
+@ManyToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "freelancer_id", unique = true)
+@JsonBackReference
 private Freelancer awardedTo;
 
 /*
