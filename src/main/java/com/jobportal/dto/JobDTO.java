@@ -7,12 +7,21 @@ import com.jobportal.entity.Job;
 import com.jobportal.entity.Recruiter;
 import com.jobportal.entity.Skill;
 import com.jobportal.entity.JobApplication;
+import org.aspectj.bridge.IMessage;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
 
 public class JobDTO {
 	private int id;
+	@NotNull(message = "Skill should not be empty")
 	private Skill skill;
+	@NotNull(message = "Recruiter details are missing")
 	private  Recruiter postedBy;
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private  LocalDate postedDate;
+	@NotNull(message = "Freelancer details are missing")
 	private Freelancer awardedTo;
 	private  List<JobApplication> jobApplications;
 	private Boolean active;

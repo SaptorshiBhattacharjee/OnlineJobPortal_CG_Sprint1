@@ -6,10 +6,15 @@ import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Recruiter;
 import com.jobportal.entity.Skill;
 
+import javax.validation.constraints.NotNull;
+
 public class BookmarkedFreelancerDTO {
 	private int id;
+	@NotNull(message = "Customer name should not be empty")
 	private Skill skill;
+	@NotNull(message = "Freelancer details are missing")
 	private Freelancer freelancer;
+	@NotNull(message = "Recruiter details are missing")
 	private Recruiter bookmarkedBy;
 	
 	
