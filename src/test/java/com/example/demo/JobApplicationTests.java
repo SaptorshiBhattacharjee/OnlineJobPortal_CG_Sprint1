@@ -78,7 +78,12 @@ class JobApplicationTests {
 		
 		List<JobApplication> applications = new ArrayList<>();
 		freelancer.setAppliedJobs(applications);
+<<<<<<< HEAD
+		
+		JobApplication jobApplication1 = new JobApplication();
+=======
 		jobApplication1 = new JobApplication();
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 		jobApplication1.setAppliedDate(LocalDateTime.now());
 		jobApplication1.setId(1);
 		jobApplication1.setCoverLetter("Applicant 1");
@@ -97,28 +102,17 @@ class JobApplicationTests {
 		jobApplication3.setJob(jobDTO.toJob());
 	}
 	
-//	@Test
-//	void applyToJobTest() throws InvalidJobApplicationException{
-//		JobApplication jobApplication = new JobApplication();
-//		jobApplication.setJob(job);
-//		jobApplication.setAppliedDate(LocalDateTime.now());
-//		jobApplication.setCoverLetter("Applicant 4");
-//		Mockito.when(iJobApplicationDao.save(jobApplication)).thenReturn(jobApplication);
-//		JobApplicationDTO actual =iJobApplicationService.applyToJob(job.toJobDTO(), "Applicant 4",freelancer.toFreelancerDTO());
-//		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
-//		Assertions.assertEquals(actual, jobApplicationDTO);
-//	}
-	
-//	@Test
-//	void applyToJobTest() throws InvalidJobApplicationException{
-//		JobApplication jobApplication = new JobApplication(3, job.toJobDTO(), LocalDateTime.now(),"Applicant 4");
-//		Mockito.when(iJobApplicationDao.save(jobApplication)).thenReturn(jobApplication);
-//		JobApplicationDTO actual =iJobApplicationService.applyToJob(job.toJobDTO(), "Applicant 4",freelancer.toFreelancerDTO());
-//		JobApplicationDTO jobApplicationDTO = jobApplication.toJobApplicationDTO();
-//		Assertions.assertEquals(actual, jobApplicationDTO);
-//	}
+
 	@Test
+<<<<<<< HEAD
+	void failedApplyToJobTest() throws InvalidJobApplicationException{
+=======
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 	void applyToJobTest2() throws InvalidJobApplicationException{
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 		JobApplication jobApplication = new JobApplication(3, job.toJobDTO(), LocalDateTime.now(),"Applicant 4");
 		Mockito.when(iJobApplicationDao.save(jobApplication1)).thenReturn(jobApplication1);
 		JobApplicationDTO actual =iJobApplicationService.applyToJob(job.toJobDTO(), "Applicant 1",freelancer.toFreelancerDTO());
@@ -282,4 +276,8 @@ class JobApplicationTests {
 		InvalidJobApplicationException exception =Assertions.assertThrows(InvalidJobApplicationException.class,() -> iJobApplicationService.findById(1));
 		Assertions.assertEquals("Service.NOT_APPLIED", exception.getMessage());
 	}
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 }

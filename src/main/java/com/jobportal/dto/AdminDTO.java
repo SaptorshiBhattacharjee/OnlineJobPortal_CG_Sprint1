@@ -26,9 +26,6 @@ public class AdminDTO {
 		super();
 	}
 	
-	
-	
-
 
 	public AdminDTO(String firstName, String lastName, String userName, String password) {
 		super();

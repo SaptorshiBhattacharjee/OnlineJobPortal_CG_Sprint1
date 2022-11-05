@@ -31,15 +31,41 @@ public class RecruiterDTO {
 	private int id;
 	private String firstName;
 	private String lastName;
+
+	private Job postedJobs;
+	private Feedback Feedbacks;
+	private BookmarkedFreelancer freelancers;
+	
+	
+	
+	public RecruiterDTO() {
+		super();
+	}
+	
+	
+	public RecruiterDTO(int id, String firstName, String lastName, Job postedJobs, Feedback feedbacks,
+			BookmarkedFreelancer freelancers) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.postedJobs = postedJobs;
+		Feedbacks = feedbacks;
+		this.freelancers = freelancers;
+	}
+
 	private String userName;
 	private String password;
 	private List<Integer> jobIds;
 	private List<Integer> feedbackIds;
 	private List<Integer> freelancerIds;
 
+
+	
 	public int getId() {
 		return id;
 	}
+
 
 	public void setId(int id) {
 		this.id = id;
@@ -61,8 +87,47 @@ public class RecruiterDTO {
 		this.lastName = lastName;
 	}
 
+
+	public Job getPostedJobs() {
+		return postedJobs;
+	}
+
+
+	public void setPostedJobs(Job postedJobs) {
+		this.postedJobs = postedJobs;
+	}
+
+
+	public Feedback getFeedbacks() {
+		return Feedbacks;
+	}
+
+
+	public void setFeedbacks(Feedback feedbacks) {
+		Feedbacks = feedbacks;
+	}
+
+
+	public BookmarkedFreelancer getFreelancers() {
+		return freelancers;
+	}
+
+
+	public void setFreelancers(BookmarkedFreelancer freelancers) {
+		this.freelancers = freelancers;
+	}
+
+
+	@Override
+	public String toString() {
+		return "RecruiterDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", postedJobs="
+				+ postedJobs + ", Feedbacks=" + Feedbacks + ", freelancers=" + freelancers + "]";
+	}
+
+
 	public List<Integer> getJobIds() {
 		return jobIds;
+
 	}
 
 	public void setJobIds(List<Integer> jobIds) {
@@ -129,5 +194,4 @@ public class RecruiterDTO {
 		recruiter.setPostedJobs(jobslist);
 		return recruiter;
 	}
-
 }
