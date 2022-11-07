@@ -36,7 +36,7 @@ public class BookmarkedJob
 	private Freelancer freelancer;
 	
 	// defining default and parameterized constructors 
-	public BookmarkedJob() {
+	/*public BookmarkedJob() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -46,7 +46,7 @@ public class BookmarkedJob
 		this.skill = skill;
 		this.job = job;
 		this.freelancer = freelancer;
-	}
+	}*/
 	
 	// defining the getter and setter methods
 	public Integer getId() {
@@ -75,7 +75,7 @@ public class BookmarkedJob
 	}
 	
 	// defining hashcode and equals method
-	@Override
+	/*@Override
 	public int hashCode() {
 		return Objects.hash(freelancer, bookmarkedJobId, job, skill);
 	}
@@ -97,14 +97,14 @@ public class BookmarkedJob
 	public String toString() {
 		return "BookmarkedJob [bookmarkedJobId=" + bookmarkedJobId + ", skill=" + skill + ", job=" + job + ", freelancer=" + freelancer + "]";
 	}
-	
+	*/
 	public BookmarkedJobDTO toBookmarkedJobDto()
 	{
 		BookmarkedJobDTO bookmarkedJobDto = new BookmarkedJobDTO();
 		bookmarkedJobDto.setId(this.getId());
-		bookmarkedJobDto.setSkill(this.getSkill());
-		bookmarkedJobDto.setJob(this.getJob());
-		bookmarkedJobDto.setFreelancer(this.getFreelancer());
+		bookmarkedJobDto.setSkillId(this.skill.getId());
+		bookmarkedJobDto.setJobId(this.job.getId());
+		bookmarkedJobDto.setFreelancerId(this.freelancer.getId ());
 		
 		return(bookmarkedJobDto);
 	}

@@ -1,5 +1,6 @@
 package com.jobportal.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jobportal.dto.FreelancerDTO;
@@ -48,7 +51,7 @@ public class Freelancer
 	private List<BookmarkedJob> bookmarkedJobs;
 	
 	// defining default and parameterized constructors
-	public Freelancer() {
+	/*public Freelancer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -63,7 +66,7 @@ public class Freelancer
 		this.feedbacks = feedbacks;
 		this.skills = skills;
 		this.bookmarkedJobs = bookmarkedJobs;
-	}
+	}*/
 
 	// defining the getter and setter methods
 	public int getId() {
@@ -116,7 +119,7 @@ public class Freelancer
 	}
 	
 	// defining hashcode and equals method
-	@Override
+	/*@Override
 	public int hashCode() {
 		return Objects.hash(appliedJobs, bookmarkedJobs, feedbacks, firstName, freelancerId, lastName, password, skills);
 	}
@@ -141,7 +144,7 @@ public class Freelancer
 		return "Freelancer [freelancerId=" + freelancerId + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
 				+ ", appliedJobs=" + appliedJobs + ", feedbacks=" + feedbacks + ", skills=" + skills
 				+ ", bookmarkedJobs=" + bookmarkedJobs + "]";
-	}
+	}*/
 	
 	public FreelancerDTO toFreelancerDto()
 	{
@@ -150,10 +153,25 @@ public class Freelancer
 		freelancerDto.setFirstName(this.getFirstName());
 		freelancerDto.setLastName(this.getLastName());
 		freelancerDto.setPassword(this.getPassword());
-		freelancerDto.setAppliedJobs(this.getAppliedJobs());
-		freelancerDto.setFeedbacks(this.getFeedbacks());
-		freelancerDto.setSkills(this.getSkills());
-		freelancerDto.setBookmarkedJobs(this.getBookmarkedJobs());
+		/*List<Integer> feedbackslist = new ArrayList<>();
+		feedbacks.forEach(feedback -> feedbackslist.add(feedback.getId()));
+		recruiterDTO.setFeedbackIds(feedbackslist);*/
+		
+		List<Integer> appliedJobList = new ArrayList<>();
+		appliedJobs.forEach(appliedJob -> appliedJobList.add(appliedJob.getId()));
+		freelancerDto.setAppliedJobIds(appliedJobList);
+		
+		List<Integer> feedbacksList = new ArrayList<>();
+		feedbacks.forEach(feedback -> feedbacksList.add(feedback.getId()));
+		freelancerDto.setFeedbacksIds(feedbacksList);
+		
+		List<Integer> skillsList = new ArrayList<>();
+		skills.forEach(skillList -> skillsList.add(skillList.getId()));
+		freelancerDto.setSkillsIds(skillsList);
+		
+		List<Integer> bookmarkedJobsList = new ArrayList<>();
+		bookmarkedJobs.forEach(bookmarkedJobList -> bookmarkedJobsList.add(bookmarkedJobList.getId()));
+		freelancerDto.setBookmarkedJobsIds(bookmarkedJobsList);
 		
 		return(freelancerDto);
 	}
