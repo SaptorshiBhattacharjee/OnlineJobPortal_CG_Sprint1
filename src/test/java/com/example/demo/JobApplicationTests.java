@@ -1,16 +1,15 @@
 package com.example.demo;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import com.jobportal.OnlineJobPortalSprint1Application;
+import com.jobportal.dto.JobApplicationDTO;
+import com.jobportal.dto.JobDTO;
+import com.jobportal.entity.*;
+import com.jobportal.exception.InvalidJobApplicationException;
+import com.jobportal.repository.IFreelancerDao;
+import com.jobportal.repository.IJobApplicationDao;
+import com.jobportal.repository.IJobDao;
 import com.jobportal.service.IJobApplicationService;
 import com.jobportal.service.IJobApplicationServiceImpl;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,18 +19,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jobportal.OnlineJobPortalSprint1Application;
-import com.jobportal.dto.JobApplicationDTO;
-import com.jobportal.dto.JobDTO;
-import com.jobportal.entity.Freelancer;
-import com.jobportal.entity.Job;
-import com.jobportal.entity.JobApplication;
-import com.jobportal.entity.Recruiter;
-import com.jobportal.entity.Skill;
-import com.jobportal.exception.InvalidJobApplicationException;
-import com.jobportal.repository.IFreelancerDao;
-import com.jobportal.repository.IJobApplicationDao;
-import com.jobportal.repository.IJobDao;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest(classes=OnlineJobPortalSprint1Application.class)
 class JobApplicationTests {
@@ -78,12 +70,12 @@ class JobApplicationTests {
 		
 		List<JobApplication> applications = new ArrayList<>();
 		freelancer.setAppliedJobs(applications);
-<<<<<<< HEAD
+
 		
 		JobApplication jobApplication1 = new JobApplication();
-=======
+
 		jobApplication1 = new JobApplication();
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
+
 		jobApplication1.setAppliedDate(LocalDateTime.now());
 		jobApplication1.setId(1);
 		jobApplication1.setCoverLetter("Applicant 1");
@@ -104,15 +96,8 @@ class JobApplicationTests {
 	
 
 	@Test
-<<<<<<< HEAD
-	void failedApplyToJobTest() throws InvalidJobApplicationException{
-=======
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 	void applyToJobTest2() throws InvalidJobApplicationException{
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 		JobApplication jobApplication = new JobApplication(3, job.toJobDTO(), LocalDateTime.now(),"Applicant 4");
 		Mockito.when(iJobApplicationDao.save(jobApplication1)).thenReturn(jobApplication1);
 		JobApplicationDTO actual =iJobApplicationService.applyToJob(job.toJobDTO(), "Applicant 1",freelancer.toFreelancerDTO());
@@ -122,7 +107,7 @@ class JobApplicationTests {
 	}
 	
 	@Test
-	void applyToJobTest() throws Exception{
+	void applyToJobTest() throws Exception {
 		
 		JobApplication jobApplication = new JobApplication();
 		jobApplication.setId(1);
@@ -132,7 +117,7 @@ class JobApplicationTests {
 		jobApplication.setCoverLetter("Applicant 4");
 		Mockito.when(iJobDao.findById(job.getId())).thenReturn(Optional.of(job));
 		Mockito.when(iFreelancerDao.findById(freelancer.getId())).thenReturn(Optional.of(freelancer));
-		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.empty()).thenReturn(Optional.of(jobApplication));
+		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.empty()).thenReturn(Optional.of(jobApplication));
 		Mockito.when(iJobApplicationDao.save(jobApplication)).thenReturn(jobApplication);
 		String actual =iJobApplicationService.applyToJob(job.getId(), "Applicant 4",freelancer.getId());
 		Assertions.assertEquals("SUCCESS", actual);
@@ -149,7 +134,7 @@ class JobApplicationTests {
 		jobApplication.setCoverLetter("Applicant 4");
 		Mockito.when(iJobDao.findById(job.getId())).thenReturn(Optional.of(job));
 		Mockito.when(iFreelancerDao.findById(freelancer.getId())).thenReturn(Optional.of(freelancer));
-		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication));
+		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication));
 		Mockito.when(iJobApplicationDao.save(jobApplication)).thenReturn(jobApplication);
 		InvalidJobApplicationException exception = Assertions.assertThrows(InvalidJobApplicationException.class, () -> iJobApplicationService.applyToJob(1, "Applicant 4", 1));
 		Assertions.assertEquals("Service.ALREADY_APPLIED", exception.getMessage());
@@ -171,7 +156,7 @@ class JobApplicationTests {
 		updatedJobApplication.setCoverLetter("updated coverletter for Applicant 4");
 		Mockito.when(iJobDao.findById(job.getId())).thenReturn(Optional.of(job));
 		Mockito.when(iFreelancerDao.findById(freelancer.getId())).thenReturn(Optional.of(freelancer));
-		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication));
+		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication));
 		Mockito.when(iJobApplicationDao.findById(1)).thenReturn(Optional.of(updatedJobApplication));
 		String status =iJobApplicationService.updateJobApplication(job.getId(), "updated coverletter for Applicant 4",freelancer.getId());
 		Assertions.assertEquals("SUCCESS", status);
@@ -193,7 +178,7 @@ class JobApplicationTests {
 		jobApplication1.setCoverLetter("Applicant 4");
 		Mockito.when(iJobDao.findById(job.getId())).thenReturn(Optional.of(job));
 		Mockito.when(iFreelancerDao.findById(freelancer.getId())).thenReturn(Optional.of(freelancer));
-		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication));
+		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication));
 		Mockito.when(iJobApplicationDao.findById(1)).thenReturn(Optional.of(jobApplication1));
 		InvalidJobApplicationException exception =Assertions.assertThrows(InvalidJobApplicationException.class,() -> iJobApplicationService.updateJobApplication(job.getId(), "updated coverletter for Applicant 4",freelancer.getId()));
 		Assertions.assertEquals("Service.UPDATE_FAILED", exception.getMessage());
@@ -215,7 +200,7 @@ class JobApplicationTests {
 		jobApplication1.setCoverLetter("Applicant 4");
 		Mockito.when(iJobDao.findById(job.getId())).thenReturn(Optional.of(job));
 		Mockito.when(iFreelancerDao.findById(freelancer.getId())).thenReturn(Optional.of(freelancer));
-		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication)).thenReturn(Optional.empty());
+		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication)).thenReturn(Optional.empty());
 		String status =iJobApplicationService.remove(job.getId(),freelancer.getId());
 		Assertions.assertEquals("SUCCESS", status);
 	}
@@ -236,7 +221,7 @@ class JobApplicationTests {
 		jobApplication1.setCoverLetter("Applicant 4");
 		Mockito.when(iJobDao.findById(job.getId())).thenReturn(Optional.of(job));
 		Mockito.when(iFreelancerDao.findById(freelancer.getId())).thenReturn(Optional.of(freelancer));
-		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication));
+		Mockito.when(iJobApplicationDao.findByJobIdAndFreelancerFreelancerId(job.getId(), freelancer.getId())).thenReturn(Optional.of(jobApplication));
 		InvalidJobApplicationException exception =Assertions.assertThrows(InvalidJobApplicationException.class,() -> iJobApplicationService.remove(job.getId(),freelancer.getId()));
 		Assertions.assertEquals("Service.DELETE_FAILED", exception.getMessage());
 	}
@@ -276,8 +261,4 @@ class JobApplicationTests {
 		InvalidJobApplicationException exception =Assertions.assertThrows(InvalidJobApplicationException.class,() -> iJobApplicationService.findById(1));
 		Assertions.assertEquals("Service.NOT_APPLIED", exception.getMessage());
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
 }
