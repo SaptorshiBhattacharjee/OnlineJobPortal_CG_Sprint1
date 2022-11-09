@@ -1,6 +1,9 @@
 
 package com.jobportal.controller;
 
+import java.util.List;
+
+
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -14,7 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.dto.FreelancerDTO;
 import com.jobportal.dto.JobApplicationDTO;
@@ -27,6 +30,7 @@ import com.jobportal.service.IJobApplicationService;
 import com.jobportal.service.IJobService;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping(value="/jobportal/jobapplication")
 public class JobApplicationAPI {
 	
@@ -41,6 +45,7 @@ public class JobApplicationAPI {
 	
 	@Autowired
 	Environment environment;
+	
 	
 	@PostMapping(value="/applytojob/{freelancerId}/{jobId}")
 	public ResponseEntity<String> applyToJob(@PathVariable Integer jobId, @PathVariable Integer freelancerId, @RequestBody String coverLetter) throws Exception{
@@ -59,7 +64,6 @@ public class JobApplicationAPI {
 	}
 	
 	@DeleteMapping(value="/delete/{freelancerId}/{jobId}")
-
 	public ResponseEntity<String> remove(@PathVariable Integer jobId, @PathVariable Integer freelancerId) throws Exception{
 		String status = iJobApplicationService.remove(jobId, freelancerId);
 		String successMessage = environment.getProperty("API.REMOVED_SUCCESSFULLY");
@@ -71,6 +75,13 @@ public class JobApplicationAPI {
 	public ResponseEntity<JobApplicationDTO> findById(@PathVariable int jobApplicationId) throws Exception{
 		JobApplicationDTO jobApplication = iJobApplicationService.findById(jobApplicationId);
 		return new ResponseEntity<>(jobApplication, HttpStatus.OK);
+	}
+	
+	
+	@GetMapping(value="/findbyfreelancer/{freelancerId}")
+	public ResponseEntity<List<JobApplicationDTO>> findByFreelancer(@PathVariable int freelancerId) throws Exception{
+		List<JobApplicationDTO> jobAppDTOs = iJobApplicationService.findByFreelancer(freelancerId);
+		return new ResponseEntity<>(jobAppDTOs, HttpStatus.OK);
 	}
 	
 }

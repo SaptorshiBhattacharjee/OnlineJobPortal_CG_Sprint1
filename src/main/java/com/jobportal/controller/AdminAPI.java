@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,7 @@ import com.jobportal.exception.InvalidAdminException;
 import com.jobportal.service.IAdminService;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping(value="/jobportal/admin")
 public class AdminAPI {
 	
@@ -54,6 +57,20 @@ public class AdminAPI {
 		AdminDTO admin = iAdminService.findById(adminId);
 		return new ResponseEntity<>(admin, HttpStatus.OK);
 		
+	}
+	
+	@DeleteMapping(value="/deletefreelancerbyid/{freelancerId}")
+	public ResponseEntity<String> deleteFreelancerById(@PathVariable int freelancerId) throws Exception{
+		
+		String status = iAdminService.deleteFreelancerById(freelancerId);
+		return new ResponseEntity<>(status, HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value="/deleterecruiterbyid/{recruiterId}")
+	public ResponseEntity<String> deleteRecruiterById(@PathVariable int recruiterId) throws Exception{
+		
+		String status = iAdminService.deleteRecruiterById(recruiterId);
+		return new ResponseEntity<>(status, HttpStatus.OK);
 	}
 	
 }

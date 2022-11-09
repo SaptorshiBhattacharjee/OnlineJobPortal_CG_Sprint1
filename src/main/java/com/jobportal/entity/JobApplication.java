@@ -29,15 +29,12 @@ public class JobApplication {
 	private int id;
  	@OneToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="job_id")
- 	@NotNull(message="{jobApplication.job.absent}")
 	private Job job;
  	@ManyToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="freelancer_id")
- 	@NotNull(message="{jobApplication.freelancer.absent}")
  	@JsonBackReference
 	private Freelancer freelancer;
 	private LocalDateTime appliedDate;
-	@NotNull(message="Entering a coverletter is mandatory")
 	private String coverLetter;
 	
 	public JobApplication() {
