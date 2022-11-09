@@ -1,16 +1,15 @@
 package com.example.demo;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import com.jobportal.OnlineJobPortalSprint1Application;
+import com.jobportal.dto.JobApplicationDTO;
+import com.jobportal.dto.JobDTO;
+import com.jobportal.entity.*;
+import com.jobportal.exception.InvalidJobApplicationException;
+import com.jobportal.repository.IFreelancerDao;
+import com.jobportal.repository.IJobApplicationDao;
+import com.jobportal.repository.IJobDao;
 import com.jobportal.service.IJobApplicationService;
 import com.jobportal.service.IJobApplicationServiceImpl;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,18 +19,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jobportal.OnlineJobPortalSprint1Application;
-import com.jobportal.dto.JobApplicationDTO;
-import com.jobportal.dto.JobDTO;
-import com.jobportal.entity.Freelancer;
-import com.jobportal.entity.Job;
-import com.jobportal.entity.JobApplication;
-import com.jobportal.entity.Recruiter;
-import com.jobportal.entity.Skill;
-import com.jobportal.exception.InvalidJobApplicationException;
-import com.jobportal.repository.IFreelancerDao;
-import com.jobportal.repository.IJobApplicationDao;
-import com.jobportal.repository.IJobDao;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest(classes=OnlineJobPortalSprint1Application.class)
 class JobApplicationTests {
@@ -78,8 +70,8 @@ class JobApplicationTests {
 		
 		List<JobApplication> applications = new ArrayList<>();
 		freelancer.setAppliedJobs(applications);
+
 		
-		JobApplication jobApplication1 = new JobApplication();
 		jobApplication1 = new JobApplication();
 
 		jobApplication1.setAppliedDate(LocalDateTime.now());
@@ -101,9 +93,9 @@ class JobApplicationTests {
 	}
 	
 
-	
+
 	@Test
-	void applyToJobTest() throws Exception{
+	void applyToJobTest() throws Exception {
 		
 		JobApplication jobApplication = new JobApplication();
 		jobApplication.setId(1);

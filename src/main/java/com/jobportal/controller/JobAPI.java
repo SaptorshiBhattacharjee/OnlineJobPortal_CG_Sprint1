@@ -1,5 +1,6 @@
 package com.jobportal.controller;
 
+import com.jobportal.exception.InvalidBookmarkedFreelancerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -27,22 +28,22 @@ public class JobAPI {
      @Autowired
  	Environment environment;
      
-     @PostMapping(value ="/postjob")
-     public ResponseEntity<String> postjob(@RequestBody SkillDTO skillDTO,RecruiterDTO recruiterDTO)throws JobPortalException{
-    	 JobDTO posted = ijobservice.postjob(skillDTO, recruiterDTO);
-    	 String successMessage = environment.getProperty("API.JOBPOSTED_SUCCESSFULLY");
-    	 return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
-     }
+     @PostMapping(value ="/postjob/{freelancerId}/{recruiterId}/{skillId}")
+	 public ResponseEntity<String> postJob(@PathVariable Integer freelancerId, @PathVariable Integer recruiterId, @PathVariable Integer skillId) throws InvalidJobException, InvalidBookmarkedFreelancerException {
+		 String status = ijobservice.postjob(freelancerId, recruiterId, skillId);
+		 String successMessage = environment.getProperty("API.BOOKMARKED_SUCCESSFULLY");
+		 return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
+	 }
      
      @GetMapping(value="/findbyid/{id}")
      public ResponseEntity <JobDTO>findById(@PathVariable Integer id) throws JobPortalException{
     	 JobDTO job = ijobservice.findById(id);
     	 return new ResponseEntity<>(job, HttpStatus.OK);
     }
-    @GetMapping(value="/findjobsbyskill/{skillDTO}")
-     public ResponseEntity<Object>findJobsBySkill(SkillDTO skillDTO)throws JobPortalException{
-    	 return new ResponseEntity<>(ijobservice.findJobsBySkill(skillDTO), HttpStatus.OK);
-     }
+	@GetMapping(value="/findjobsbyskillName/{name}")
+	public ResponseEntity<Object> findJobsBySkillName(@PathVariable String name)throws JobPortalException{
+		return new ResponseEntity<>(ijobservice.findJobsBySkillName(name), HttpStatus.OK);
+	}
      @GetMapping(value="/close/{id}")
     public ResponseEntity<Object> close(@PathVariable Integer id)throws JobPortalException{
     	 try {

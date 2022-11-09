@@ -1,52 +1,6 @@
 
 package com.example.demo;
 
-import java.util.Optional;
-
-
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
-import java.util.Optional;
-<<<<<<< HEAD
-=======
-
-
-
-
-
-import org.junit.jupiter.api.Assertions;
-
-
-import org.junit.Test;
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
-import org.junit.jupiter.api.Assertions;
-<<<<<<< HEAD
-//import java.util.Optional;
-//import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.Assertions;
-//import org.junit.jupiter.api.Assertions;
-//import org.junit.jupiter.api.Assertions;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.Test;
-=======
-
-//import org.junit.Test;
-//import org.junit.Test;
-
-import org.junit.jupiter.api.Assertions;
-
-import org.junit.jupiter.api.BeforeEach;
-
-
-
-
-
->>>>>>> branch 'main' of https://github.com/SaptorshiBhattacharjee/OnlineJobPortal_CG_Sprint1.git
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
 import com.jobportal.OnlineJobPortalSprint1Application;
 import com.jobportal.dto.RecruiterDTO;
 import com.jobportal.entity.Recruiter;
@@ -54,6 +8,14 @@ import com.jobportal.exception.InvalidRecruiterException;
 import com.jobportal.repository.IRecruiterDao;
 import com.jobportal.service.IRecruiterService;
 import com.jobportal.service.IRecruiterServiceImpl;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
 
 @SpringBootTest(classes = OnlineJobPortalSprint1Application.class)
 
@@ -76,8 +38,8 @@ public class RecruiterTests {
 		recruiterDto.setFirstName("Sri");
 		recruiterDto.setLastName("Ram");
 		Mockito.when(iRecruiterDao.save(recruiterDto.toRecruiter())).thenReturn(recruiterDto.toRecruiter());
-		RecruiterDTO actual = iRecruiterService.save(recruiterDto);
-		Assertions.assertEquals(recruiterDto, actual);
+		String actual = iRecruiterService.save(recruiterDto);
+		Assertions.assertEquals("SUCCESS", actual);
 	}
 	
 	@Test
@@ -125,8 +87,6 @@ public class RecruiterTests {
 		Mockito.when(iRecruiterDao.findById(recruiterDTO.getId())).thenReturn(optional);
 		RecruiterDTO actual = iRecruiterService.update(recruiterDTO);
 		Assertions.assertEquals(recruiterDTO, actual);
-		
-
 	}
 	
 	@Test

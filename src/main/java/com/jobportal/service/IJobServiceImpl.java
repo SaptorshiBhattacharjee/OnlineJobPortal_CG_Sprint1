@@ -8,16 +8,14 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 
+import com.jobportal.entity.*;
+import com.jobportal.exception.InvalidBookmarkedFreelancerException;
+import com.jobportal.repository.IFreelancerDao;
+import com.jobportal.repository.IRecruiterDao;
+import com.jobportal.repository.ISkillDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jobportal.dto.JobDTO;
-import com.jobportal.dto.RecruiterDTO;
-import com.jobportal.dto.SkillDTO;
-import com.jobportal.entity.Freelancer;
-import com.jobportal.entity.Job;
-import com.jobportal.entity.JobApplication;
-import com.jobportal.entity.Recruiter;
-import com.jobportal.entity.Skill;
 import com.jobportal.exception.InvalidJobException;
 import com.jobportal.repository.IJobDao;
 
@@ -26,24 +24,43 @@ import com.jobportal.repository.IJobDao;
 public class IJobServiceImpl implements IJobService{
 	
     @Autowired
-    IJobDao iJobDao;
+    private IJobDao iJobDao;
+
+	@Autowired
+	private IFreelancerDao iFreelancerDao;
+
+	@Autowired
+	private IRecruiterDao iRecruiterDao;
+
+	@Autowired
+	private ISkillDao iSkillDao;
     
 	@Override
-	public JobDTO postjob(SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidJobException {
-		Skill skill = skillDTO.toSkill();
-		Recruiter recruit = recruiterDTO.toRecruiter();
-		JobDTO jobdto = new JobDTO();
-        jobdto.setId(skill.getId());
-        jobdto.setSkill(skill);
-        jobdto.setPostedBy(recruit);
-		jobdto.setPostedDate(LocalDate.now());
-        jobdto.setAwardedTo(null);
-        jobdto.setActive(true);
-        jobdto.setJobApplications(null);
-        Job j = jobdto.toJob();
-        Job job2= iJobDao.save(j);
-       
-        return jobdto;
+	public String postjob(int freelancerId, int recruiterId, int skillId) throws InvalidJobException, InvalidBookmarkedFreelancerException {
+		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(freelancerId);
+		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NO_SUCH_FREELANCER"));
+
+		Optional<Recruiter> optionalBookmarkedBy = iRecruiterDao.findById(recruiterId);
+		Recruiter recruiter = optionalBookmarkedBy.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NO_SUCH_RECRUITER"));
+
+		Optional<Skill> optionalSkill = iSkillDao.findById(skillId);
+		Skill skill = optionalSkill.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NO_SUCH_SKILL"));
+
+		Job job = new Job();
+		job.setActive(true);
+		job.setPostedBy(recruiter);
+		job.setAwardedTo(freelancer);
+		job.setSkill(skill);
+		job.setPostedDate(LocalDate.now());
+
+		iJobDao.save(job);
+		Optional<Job> jobOptional = iJobDao.findById(job.getId());
+		if(jobOptional.isPresent()){
+			return "SUCCESS";
+		}
+		else{
+			throw new InvalidJobException("Service.FAILED_POST_JOB");
+		}
     }
 
 	@Override
@@ -65,25 +82,24 @@ public class IJobServiceImpl implements IJobService{
 	}
 
 	@Override
-	public List<JobDTO> findJobsBySkill(SkillDTO skillDTO) throws InvalidJobException {
+	public List<JobDTO> findJobsBySkillName(String name) throws InvalidJobException {
 		List<JobDTO> JobDTOBySkill = new ArrayList<>();
-		if(skillDTO==null) {
+		if(name == null) {
 			throw new InvalidJobException("Service.ENTER_VALID_SKILL");
 		}
 		else {
-	    Skill skill = skillDTO.toSkill();
-        
-		List<Job> joblist =(List<Job>) iJobDao.findAll();
-		for(Job job : joblist) {
-			Skill skill1 =job.getSkill();
-			 if( skill1.getDescription().equals( skill.getDescription())&&
-				 skill1.getName().equals(skill.getName())) {
-			     JobDTOBySkill.add(job.toJobDTO());
-		     }
+			List<Job> joblist =(List<Job>) iJobDao.findAll();
+			for(Job job : joblist) {
+				Skill skill1 =job.getSkill();
+				if(skill1.getName().equals(name)) {
+					JobDTOBySkill.add(job.toJobDTO());
+				}
+			}
 		}
-	}	
+		if(JobDTOBySkill.size()==0) {
+			throw new InvalidJobException("Service.NOT_PRESENT");
+		}
 		return JobDTOBySkill;
-		
 	}
 //	@Override
 //	public void close(Long id) {

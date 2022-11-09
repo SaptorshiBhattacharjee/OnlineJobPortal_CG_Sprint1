@@ -42,16 +42,6 @@ public class ISkillServiceImpl implements ISkillService{
 		return "SUCCESS";
 	}
 	
-
-//		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
-//		Skill skill1 = optional.orElseThrow(() -> new InvalidSkillException("CANNOT BE UPDATED:INVALID SKILLID"));	
-//		skill1.setId(skillDTO.getId());
-//		skill1.setName(skillDTO.getName());
-//		skill1.setDescription(skillDTO.getDescription());	
-//		iSkillDao.save(skill1);
-//		return skillDTO;
-//	}
-	
 	public String update(SkillDTO skillDTO) throws InvalidSkillException{	
 		Optional<Skill> optional = iSkillDao.findById(skillDTO.getId());
 		Skill skill = optional.orElseThrow(() -> new InvalidSkillException("Service.ADMIN_NOT_FOUND"));

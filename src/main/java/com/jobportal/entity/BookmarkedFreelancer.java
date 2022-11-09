@@ -1,18 +1,10 @@
 package com.jobportal.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jobportal.dto.BookmarkedFreelancerDTO;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class BookmarkedFreelancer {
@@ -21,15 +13,15 @@ public class BookmarkedFreelancer {
 	private int id;
 	@NotNull(message="Entering a skill is mandatory")
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "skill_id", unique = true)
+	@JoinColumn(name = "skill_id")
 	private Skill skill;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "freelancer_id", unique = true)
+	@JoinColumn(name = "freelancer_id")
 	@NotNull(message="Entering a freelancer is mandatory")
 	private Freelancer freelancer;
 	@NotNull(message="Entering a skill is mandatory")
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "recruiter_id", unique = true)
+	@JoinColumn(name = "bookmarkedby_id")
 	@JsonBackReference
 	private Recruiter bookmarkedBy;
 	
@@ -72,9 +64,9 @@ public class BookmarkedFreelancer {
 	public BookmarkedFreelancerDTO toBookmarkedFreelancerDTO() {
 		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = new BookmarkedFreelancerDTO();
 		bookmarkedFreelancerDTO.setId(this.getId());
-		bookmarkedFreelancerDTO.setBookmarkedBy(this.bookmarkedBy);
-		bookmarkedFreelancerDTO.setFreelancer(this.freelancer);
-		bookmarkedFreelancerDTO.setSkill(this.getSkill());
+		bookmarkedFreelancerDTO.setBookmarkedById(this.bookmarkedBy.getId());
+		bookmarkedFreelancerDTO.setFreelancerId(this.freelancer.getId());
+		bookmarkedFreelancerDTO.setSkillId(this.skill.getId());
 		return bookmarkedFreelancerDTO;
 	}
 
