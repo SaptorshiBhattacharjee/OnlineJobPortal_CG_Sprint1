@@ -12,15 +12,15 @@ public class BookmarkedFreelancer {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@NotNull(message="Entering a skill is mandatory")
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "skill_id")
 	private Skill skill;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "freelancer_id")
 	@NotNull(message="Entering a freelancer is mandatory")
 	private Freelancer freelancer;
 	@NotNull(message="Entering a skill is mandatory")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "bookmarkedby_id")
 	@JsonBackReference
 	private Recruiter bookmarkedBy;
