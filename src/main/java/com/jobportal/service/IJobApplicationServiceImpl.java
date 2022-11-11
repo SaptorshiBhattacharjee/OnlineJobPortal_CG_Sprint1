@@ -1,7 +1,7 @@
 package com.jobportal.service;
 
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -125,5 +125,49 @@ public class IJobApplicationServiceImpl implements IJobApplicationService{
 		return jobApplicationDTO;
 		
 	}
-}
+	
+	@Override
+	public List<JobApplicationDTO> findByFreelancer(int freelancerId) throws Exception{
+		List<JobApplication> jobApps = iJobApplicationDao.findByFreelancerFreelancerId(freelancerId);
+		if(jobApps.isEmpty()) 
+			throw new InvalidJobApplicationException("Service.NOT_APPLIED");
+			List<JobApplicationDTO> jobAppDTOs = new ArrayList<>();
+			
+			jobApps.forEach(jobApp -> {
+			JobApplicationDTO jobAppDTO = jobApp.toJobApplicationDTO();
+			jobAppDTOs.add(jobAppDTO);
+			});
+			
+			return jobAppDTOs;
+		}
+
+	@Override
+	public List<JobApplicationDTO> findAll() throws InvalidJobApplicationException {
+		List<JobApplication> jobApplications = (List<JobApplication>) iJobApplicationDao.findAll();
+		if(jobApplications.isEmpty())
+			throw new InvalidJobApplicationException("Service.NOT_FOUND");
+		List<JobApplicationDTO> jobApplicationDTOs = new ArrayList<>();
+
+		jobApplications.forEach(jobApp -> {
+			JobApplicationDTO jobAppDTO = jobApp.toJobApplicationDTO();
+			jobApplicationDTOs.add(jobAppDTO);
+		});
+		return jobApplicationDTOs;
+	}
+//	@Override
+//	public List<JobApplicationDTO> findByRecruiter(int recruiterId) throws Exception{
+//		List<JobApplication> jobApps = iJobApplicationDao.findByJobRecruiterRecruiterId(recruiterId);
+//		if(jobApps.isEmpty())
+//			throw new InvalidJobApplicationException("Service.NOT_FOUND");
+//		List<JobApplicationDTO> jobAppDTOs = new ArrayList<>();
+//
+//		jobApps.forEach(jobApp -> {
+//			JobApplicationDTO jobAppDTO = jobApp.toJobApplicationDTO();
+//			jobAppDTOs.add(jobAppDTO);
+//		});
+//
+//		return jobAppDTOs;
+//	}
+	}
+
 

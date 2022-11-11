@@ -47,6 +47,17 @@ public class Recruiter {
 	@JsonManagedReference
 	private List<BookmarkedFreelancer> bookmarkedfreelancers;
 
+	public Recruiter() {
+	}
+
+	public Recruiter(int id, String firstName, String lastName, String userName, String password) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.password = password;
+	}
+
 	public int getId() {
 		return id;
 	}

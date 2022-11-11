@@ -27,6 +27,7 @@ public class JobApplicationDTO {
 	@NotNull(message="{jobApplication.freelancer.absent}")
 	private int freelancerId;
 	private LocalDateTime appliedDate;
+	@NotNull(message="{jobApplication.coverLetter.absent}")
 	private String coverLetter;
 	
 	public JobApplicationDTO() {

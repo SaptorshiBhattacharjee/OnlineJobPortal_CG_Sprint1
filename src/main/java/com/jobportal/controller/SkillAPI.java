@@ -18,7 +18,7 @@ import com.jobportal.service.ISkillService;
 
 @RestController
 @RequestMapping(value="/skill")
-@CrossOrigin(origins = "*")
+@CrossOrigin("http://localhost:3000")
 public class SkillAPI {
 	
 	@Autowired

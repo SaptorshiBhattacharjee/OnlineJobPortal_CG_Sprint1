@@ -1,135 +1,138 @@
 package com.jobportal.service;
 
-import java.util.ArrayList;
-
-import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.jobportal.dto.BookmarkedFreelancerDTO;
-import com.jobportal.dto.FreelancerDTO;
-import com.jobportal.dto.RecruiterDTO;
-import com.jobportal.dto.SkillDTO;
 import com.jobportal.entity.BookmarkedFreelancer;
 import com.jobportal.entity.Freelancer;
 import com.jobportal.entity.Recruiter;
 import com.jobportal.entity.Skill;
 import com.jobportal.exception.InvalidBookmarkedFreelancerException;
+import com.jobportal.exception.InvalidFreelancerException;
+import com.jobportal.exception.InvalidRecruiterException;
 import com.jobportal.repository.IBookmarkedFreelancerDao;
+import com.jobportal.repository.IFreelancerDao;
+import com.jobportal.repository.IRecruiterDao;
+import com.jobportal.repository.ISkillDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service(value="iBookmarkFreelancerService")
 @Transactional
 public class IBookmarkFreelancerServiceImpl implements IBookmarkFreelancerService {
-	
+
 	@Autowired
 	private IBookmarkedFreelancerDao iBookmarkedFreelancerDao;
-	
+
+	@Autowired
+	IFreelancerDao iFreelancerDao;
+
+	@Autowired
+	IRecruiterDao iRecruiterDao;
+
+	@Autowired
+	ISkillDao iSkillDao;
+
+	// New Edited bookmark functions (Nov - 05)
 	@Override
-	public BookmarkedFreelancerDTO bookmarkFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException {
+	public String bookmarkFreelancer(int freelancerId, int bookmarkedById,int skillId) throws InvalidBookmarkedFreelancerException {
+		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(freelancerId);
+		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NO_SUCH_FREELANCER"));
+
+		Optional<Recruiter> optionalBookmarkedBy = iRecruiterDao.findById(bookmarkedById);
+		Recruiter bookmarkedBy = optionalBookmarkedBy.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NO_SUCH_RECRUITER"));
+
+		Optional<Skill> optionalSkill = iSkillDao.findById(skillId);
+		Skill skill = optionalSkill.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NO_SUCH_SKILL"));
+
 		BookmarkedFreelancer bookmarkedFreelancer = new BookmarkedFreelancer();
-		Freelancer freelancer = new Freelancer();
-		Skill skill = skillDTO.toSkill();
-		Recruiter recruiter = new Recruiter();
-
-		freelancer.setId(freelancerDTO.getId());
-		freelancer.setFirstName(freelancerDTO.getFirstName());
-		freelancer.setLastName(freelancerDTO.getLastName());
-		freelancer.setPassword(freelancer.getPassword());
-		freelancer.setAppliedJobs(freelancerDTO.getAppliedJobs());
-		freelancer.setBookmarkedJobs(freelancerDTO.getBookmarkedJobs());
-		freelancer.setFeedbacks(freelancerDTO.getFeedbacks());
-		freelancer.setSkills(freelancerDTO.getSkills());
-		recruiter.setId(recruiterDTO.getId());
-		recruiter.setFirstName(recruiterDTO.getFirstName());
-		recruiter.setLastName(recruiterDTO.getLastName());
-//		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
-//		recruiter.setFreelancers(recruiterDTO.getFreelancers());
-//		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
-		
 		bookmarkedFreelancer.setFreelancer(freelancer);
-		bookmarkedFreelancer.setBookmarkedBy(recruiter);
+		bookmarkedFreelancer.setBookmarkedBy(bookmarkedBy);
 		bookmarkedFreelancer.setSkill(skill);
+
 		iBookmarkedFreelancerDao.save(bookmarkedFreelancer);
-		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = new BookmarkedFreelancerDTO();
-		bookmarkedFreelancerDTO.setId(bookmarkedFreelancer.getId());
-		bookmarkedFreelancerDTO.setFreelancer(bookmarkedFreelancer.getFreelancer());
-		bookmarkedFreelancerDTO.setBookmarkedBy(bookmarkedFreelancer.getBookmarkedBy());
-		bookmarkedFreelancerDTO.setSkill(bookmarkedFreelancer.getSkill());
-		return bookmarkedFreelancerDTO;
-	}
-
-	@Override
-	public List<BookmarkedFreelancerDTO> findBookmarkedFreelancerBySkill(SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException {
-		Skill skill = skillDTO.toSkill();
-		Recruiter recruiter = new Recruiter();
-
-		recruiter.setId(recruiterDTO.getId());
-		recruiter.setFirstName(recruiterDTO.getFirstName());
-		recruiter.setLastName(recruiterDTO.getLastName());
-//		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
-//		recruiter.setFreelancers(recruiterDTO.getFreelancers());
-//		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
-		
-		List<BookmarkedFreelancer> bookmarkedFreelancersBySkill = iBookmarkedFreelancerDao.findBySkillIdAndBookmarkedById(skillDTO.getId(), recruiterDTO.getId());
-		List<BookmarkedFreelancerDTO> bookmarkedFreelancersDTOBySkill = new ArrayList<>();
-		
-		for(BookmarkedFreelancer bookmarkedFreelancer : bookmarkedFreelancersBySkill) {
-			BookmarkedFreelancerDTO bookmarkedFreelancerDTO = bookmarkedFreelancer.toBookmarkedFreelancerDTO();
-						
-			bookmarkedFreelancersDTOBySkill.add(bookmarkedFreelancerDTO);
+		Optional<BookmarkedFreelancer> bookmarkedFreelancerOptional = iBookmarkedFreelancerDao.findById(bookmarkedFreelancer.getId());
+		if(bookmarkedFreelancerOptional.isPresent()){
+			return "Service.SUCCESS";
 		}
-		return bookmarkedFreelancersDTOBySkill;
-		
+		else{
+			throw new InvalidBookmarkedFreelancerException("Service.FAILED_BOOKMARK_FREELANCER");
+		}
+
+	}
+
+// New Edited findBookmarkedFreelancerBySkill (Nov - 05)
+	@Override
+	public List<BookmarkedFreelancerDTO> findBookmarkedFreelancerBySkillId(int skillId) throws InvalidBookmarkedFreelancerException {
+			List<BookmarkedFreelancer> bookmarkedFreelancerList = iBookmarkedFreelancerDao.findBySkillId(skillId);
+			if(bookmarkedFreelancerList.isEmpty()) {
+				throw new InvalidBookmarkedFreelancerException("Service.EMPTY_BOOKMARK_FREELANCER_LIST");
+			}
+			List<BookmarkedFreelancerDTO> bookmarkedFreelancerDTOList = new ArrayList<>();
+			for(BookmarkedFreelancer bf : bookmarkedFreelancerList) {
+				BookmarkedFreelancerDTO bfDTO = bf.toBookmarkedFreelancerDTO();
+				bookmarkedFreelancerDTOList.add(bfDTO);
+			}
+			return bookmarkedFreelancerDTOList;
 	}
 
 	@Override
-	public void removeBookmarkedFreelancer(FreelancerDTO freelancerDTO, SkillDTO skillDTO, RecruiterDTO recruiterDTO) throws InvalidBookmarkedFreelancerException {
-		Freelancer freelancer = new Freelancer();
-		Skill skill = new Skill();
-		Recruiter recruiter = new Recruiter();
-		
-		freelancer.setId(freelancerDTO.getId());
-		freelancer.setFirstName(freelancerDTO.getFirstName());
-		freelancer.setLastName(freelancerDTO.getLastName());
-		freelancer.setPassword(freelancer.getPassword());
-		freelancer.setAppliedJobs(freelancerDTO.getAppliedJobs());
-		freelancer.setBookmarkedJobs(freelancerDTO.getBookmarkedJobs());
-		freelancer.setFeedbacks(freelancerDTO.getFeedbacks());
-		freelancer.setSkills(freelancerDTO.getSkills());
-		
-		skill.setId(skillDTO.getId());
-		skill.setName(skillDTO.getName());
-		skill.setDescription(skillDTO.getDescription());
-		
-		recruiter.setId(recruiterDTO.getId());
-		recruiter.setFirstName(recruiterDTO.getFirstName());
-		recruiter.setLastName(recruiterDTO.getLastName());
-//		recruiter.setPostedJobs(recruiterDTO.getPostedJobs());
-//		recruiter.setFreelancers(recruiterDTO.getFreelancers());
-//		recruiter.setFeedbacks(recruiterDTO.getFeedbacks());
-		
-		
-		Integer count = iBookmarkedFreelancerDao.removeByFreelancerFreelancerIdAndSkillIdAndBookmarkedById(freelancerDTO.getId(), skillDTO.getId(), recruiterDTO.getId());
-		if(count == 0) {
-			throw new InvalidBookmarkedFreelancerException("Service.NOT_FOUND");		}
-		
-		
+	public List<BookmarkedFreelancerDTO> findBookmarkedFreelancerBySkillName(String skillName) throws InvalidBookmarkedFreelancerException {
+		List<BookmarkedFreelancerDTO> bookmarkedFreelancerDTOList = new ArrayList<>();
+		if(skillName == null) {
+			throw new InvalidBookmarkedFreelancerException("Service.ENTER_VALID_SKILL");
+		}
+		else {
+			List<BookmarkedFreelancer> bookmarkedFreelancerList = iBookmarkedFreelancerDao.findAll();
+			for(BookmarkedFreelancer bookmarkedFreelancer : bookmarkedFreelancerList) {
+				Skill skill = bookmarkedFreelancer.getSkill();
+				if(skill.getName().equals(skillName)){
+					bookmarkedFreelancerDTOList.add(bookmarkedFreelancer.toBookmarkedFreelancerDTO());
+				}
+			}
+		}
+		if(bookmarkedFreelancerDTOList.size() == 0) {
+			throw new InvalidBookmarkedFreelancerException("Service.EMPTY_LIST");
+		}
+		return bookmarkedFreelancerDTOList;
+	}
+
+
+
+	@Override
+	public String removeBookmarkedFreelancer(int freelancerId, int bookmarkedById, int skillId) throws InvalidBookmarkedFreelancerException, InvalidRecruiterException, InvalidFreelancerException {
+		Optional<Freelancer> optionalFreelancer = iFreelancerDao.findById(freelancerId);
+		Freelancer freelancer = optionalFreelancer.orElseThrow(() -> new InvalidFreelancerException("Service.NO_SUCH_FREELANCER"));
+
+		Optional<Recruiter> optionalBookmarkedBy = iRecruiterDao.findById(bookmarkedById);
+		Recruiter bookmarkedBy = optionalBookmarkedBy.orElseThrow(() -> new InvalidRecruiterException("Service.NO_SUCH_RECRUITER"));
+
+		Optional<Skill> optionalSkill = iSkillDao.findById(skillId);
+		Skill skill = optionalSkill.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NO_SUCH_SKILL"));
+
+		Optional<BookmarkedFreelancer> optionalBookmarkedFreelancer = iBookmarkedFreelancerDao.findByFreelancerFreelancerIdAndBookmarkedByIdAndSkillId(freelancerId, bookmarkedById, skillId);
+		BookmarkedFreelancer bookmarkedFreelancer = optionalBookmarkedFreelancer.orElseThrow(() ->  new InvalidBookmarkedFreelancerException("Service.NO_SUCH_BOOKMARKEDFREELANCER"));
+		iBookmarkedFreelancerDao.delete(bookmarkedFreelancer);
+
+		Optional<BookmarkedFreelancer> optionalBookmarkedFreelancer1 = iBookmarkedFreelancerDao.findByFreelancerFreelancerIdAndBookmarkedByIdAndSkillId(freelancerId, bookmarkedById, skillId);
+		if(optionalBookmarkedFreelancer1.isPresent()) {
+			throw new InvalidBookmarkedFreelancerException("Service.DELETE_BOOKMARKED_FREELANCER_FAILED");
+		}
+		else {
+			return "DELETE_BOOKMARKED_FREELANCER_SUCCESS";
+		}
 	}
 
 	@Override
 	public BookmarkedFreelancerDTO findById(int id) throws InvalidBookmarkedFreelancerException {
-		Optional<BookmarkedFreelancer> optional = iBookmarkedFreelancerDao.findById(id);
-		BookmarkedFreelancer bookmarkedFreelancer = optional.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.NOT_FOUND") );
-		
-		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = new BookmarkedFreelancerDTO();
-		bookmarkedFreelancerDTO.setBookmarkedBy(bookmarkedFreelancerDTO.getBookmarkedBy());
-		bookmarkedFreelancerDTO.setFreelancer(bookmarkedFreelancer.getFreelancer());
-		bookmarkedFreelancerDTO.setId(bookmarkedFreelancer.getId());
-		bookmarkedFreelancerDTO.setSkill(bookmarkedFreelancer.getSkill());
+		Optional<BookmarkedFreelancer> optionalBookmarkedFreelancer = iBookmarkedFreelancerDao.findById(id);
+		BookmarkedFreelancer bookmarkedFreelancer = optionalBookmarkedFreelancer.orElseThrow(() -> new InvalidBookmarkedFreelancerException("Service.BOOKMARKED_FREELANCER_NOT_PRESENT"));
+
+		BookmarkedFreelancerDTO bookmarkedFreelancerDTO = bookmarkedFreelancer.toBookmarkedFreelancerDTO();
+
 		return bookmarkedFreelancerDTO;
 	}
 

@@ -21,7 +21,7 @@ import com.jobportal.service.ISkillExperienceService;
 
 @RestController
 @RequestMapping(value="/skillexperience")
-@CrossOrigin(origins = "*")
+@CrossOrigin("http://localhost:3000")
 public class SkillExperienceAPI {
 	
 	@Autowired

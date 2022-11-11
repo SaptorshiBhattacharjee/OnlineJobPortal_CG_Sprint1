@@ -21,7 +21,7 @@ public class Freelancer
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
-	@Column(name = "freelancer_id")
+
 	private int freelancerId;
 	private String firstName;
 	private String lastName;
@@ -63,6 +63,13 @@ public class Freelancer
 		this.feedbacks = feedbacks;
 		this.skills = skills;
 		this.bookmarkedJobs = bookmarkedJobs;
+	}
+
+	public Freelancer(int freelancerId, String firstName, String lastName, String password) {
+		this.freelancerId = freelancerId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
 	}
 
 	// defining the getter and setter methods
