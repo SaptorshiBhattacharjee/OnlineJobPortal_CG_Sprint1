@@ -12,8 +12,14 @@ import org.springframework.stereotype.Service;
 
 import com.jobportal.dto.AdminDTO;
 import com.jobportal.entity.Admin;
+import com.jobportal.entity.Freelancer;
+import com.jobportal.entity.Recruiter;
 import com.jobportal.exception.InvalidAdminException;
+import com.jobportal.exception.InvalidFreelancerException;
+import com.jobportal.exception.InvalidRecruiterException;
 import com.jobportal.repository.IAdminDao;
+import com.jobportal.repository.IFreelancerDao;
+import com.jobportal.repository.IRecruiterDao;
 
 @Service(value="iAdminService")
 @Transactional
@@ -22,6 +28,12 @@ public class IAdminServiceImpl implements IAdminService{
 	
 	@Autowired
 	IAdminDao iAdminDao;
+	
+	@Autowired
+	IRecruiterDao iRecruiterDao;
+
+	@Autowired
+	IFreelancerDao iFreelancerDao;
 	
 	
 	
@@ -71,5 +83,21 @@ public class IAdminServiceImpl implements IAdminService{
 		
 	}
 	
+	@Override
+	public String deleteFreelancerById(int freelancerId) throws InvalidFreelancerException {
+		Optional<Freelancer> optional = iFreelancerDao.findById(freelancerId);
+		Freelancer freelancer = optional.orElseThrow(() -> new InvalidFreelancerException("Service.FREELANCER_NOT_FOUND"));
+		iFreelancerDao.delete(freelancer);
+		return "SUCCESS";
+	}
+	
+	@Override
+	public String deleteRecruiterById(int recruiterId) throws InvalidRecruiterException {
+		Optional<Recruiter> optional = iRecruiterDao.findById(recruiterId);
+		Recruiter recruiter = optional.orElseThrow(() -> new InvalidRecruiterException("Service.FREELANCER_NOT_FOUND"));
+		iRecruiterDao.delete(recruiter);
+		return "SUCCESS";
+	}
+
 }
 

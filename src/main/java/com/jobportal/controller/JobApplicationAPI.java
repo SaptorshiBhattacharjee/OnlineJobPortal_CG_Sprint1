@@ -94,4 +94,11 @@ public class JobApplicationAPI {
 //		return new ResponseEntity<>(jobAppDTOs, HttpStatus.OK);
 //	}
 	
+	
+	@GetMapping(value="/findbyfreelancer/{freelancerId}")
+	public ResponseEntity<List<JobApplicationDTO>> findByFreelancer(@PathVariable int freelancerId) throws Exception{
+		List<JobApplicationDTO> jobAppDTOs = iJobApplicationService.findByFreelancer(freelancerId);
+		return new ResponseEntity<>(jobAppDTOs, HttpStatus.OK);
+	}
+	
 }

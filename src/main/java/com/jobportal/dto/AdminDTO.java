@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
 import com.jobportal.entity.Admin;
 
 public class AdminDTO {
-	private Integer id;
+	
 	private int adminId;
 	@NotNull(message = "{admin.firstName.absent}")
 	@Pattern(regexp="[A-Za-z]+( [A-Za-z]+)*", message="{admin.firstName.invalid}")
@@ -37,10 +37,10 @@ public class AdminDTO {
 
 
 	public Integer getId() {
-		return id;
+		return adminId;
 	}
 	public void setId(Integer id) {
-		this.id = id;
+		this.adminId = id;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -85,7 +85,7 @@ public class AdminDTO {
 
 	@Override
 	public String toString() {
-		return "AdminDTO [id=" + id + ", adminId=" + adminId + ", firstName=" + firstName + ", lastName=" + lastName
+		return "AdminDTO [id=" + adminId + ", adminId=" + adminId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", userName=" + userName + ", password=" + password + "]";
 	}
 	
